@@ -111,8 +111,13 @@ habitat.slope.plot <- ggplot(data = fit.hab.ggplot.data, aes(x = svl)) +
 ggsave('plots/figure_2_ggplot.png', habitat.slope.plot)
 
 # get species habitats
-hab.sp <- data.sp$habitat_broad[match(rownames(pca.ols$x), data.sp$species)]
-names(hab.sp) <- data.sp$species[match(rownames(pca.ols$x), data.sp$species)]
+# Drop species with less than 5 individuals from the tree
+data.sp <- data.sp %>% 
+  filter(species %in% sp.to.keep)
+rownames(data.sp) <- data.sp$species
+
+hab.sp <- data.sp$habitat_broad
+names(hab.sp) <- data.sp$species
 
 # size model (species data) ----
 # Prepare data 
