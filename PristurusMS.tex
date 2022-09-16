@@ -6,8 +6,8 @@
 ]{article}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -33,13 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={XXX},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \makeatletter
@@ -58,6 +51,29 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \usepackage{setspace}\doublespacing
 \usepackage{lineno}\linenumbers
 \usepackage{booktabs}
@@ -74,29 +90,16 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
-  % set entry spacing
-  \ifnum #2 > 0
-  \setlength{\parskip}{#2\baselineskip}
-  \fi
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={XXX},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{XXX}
 \author{}
@@ -261,24 +264,25 @@ To test the hypothesis\ldots{}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
-\leavevmode\hypertarget{ref-AdamsNistri2010}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-AdamsNistri2010}{}}%
 Adams, D. C., and A. Nistri. 2010. Ontogenetic convergence and evolution
 of foot morphology in european cave salamanders (family:
 plethodontidae). BMC Evolutionary Biology 10:1--10. BioMed Central.
 
-\leavevmode\hypertarget{ref-DrakeKlingenberg2008}{}%
-Drake, A. G., and C. P. Klingenberg. 2008. The pace of morphological
-change: Historical transformation of skull shape in st bernard dogs.
+\leavevmode\vadjust pre{\hypertarget{ref-DrakeKlingenberg2008}{}}%
+Drake, A. G., and C. P. Klingenberg. 2008.
+\href{https://doi.org/10.1098/rspb.2007.1169}{The pace of morphological
+change: Historical transformation of skull shape in st bernard dogs}.
 Proceedings of the Royal Society B: Biological Sciences 275:71--76.
 
-\leavevmode\hypertarget{ref-Tejero-Cicuendez2021}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Tejero-Cicuendez2021}{}}%
 Tejero-Cicuéndez, H., M. Simó-Riudalbas, I. Menéndez, and S. Carranza.
-2021a. Ecological specialization, rather than the island effect,
-explains morphological diversification in an ancient radiation of
-geckos. Proceedings of the Royal Society B: Biological Sciences
-288:20211821.
+2021a. \href{https://doi.org/10.1098/rspb.2021.1821}{Ecological
+specialization, rather than the island effect, explains morphological
+diversification in an ancient radiation of geckos}. Proceedings of the
+Royal Society B: Biological Sciences 288:20211821.
 
-\leavevmode\hypertarget{ref-PristurusData}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-PristurusData}{}}%
 Tejero-Cicuéndez, H., M. Simó-Riudalbas, I. Menéndez, and S. Carranza.
 2021b. Ecological specialization, rather than the island effect,
 explains morphological diversification in an ancient radiation of
