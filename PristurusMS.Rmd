@@ -1,0 +1,147 @@
+---
+title: "TITLE HERE"
+author: ""
+
+output:
+  pdf_document:
+    fig_caption: yes
+    number_sections: no
+    keep_tex: true
+    pandoc_args:
+
+csl: evolution.csl
+bibliography: Pristurus-Refs.bib
+
+header-includes:
+    - \usepackage{setspace}\doublespacing
+    - \usepackage{lineno}\linenumbers
+
+---
+
+```{r setup, include=FALSE}
+  library(knitr)
+  library(kableExtra)
+  library(tidyverse)
+  knitr::opts_chunk$set(echo = TRUE)
+```
+
+\begin{center}
+\textbf{H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,*}$,  Iris Men{\'{e}}ndez$^{2,3}$, Salvador Carranza$^{1}$, and Dean C. Adams$^{4}$} 
+\end{center}
+
+\begin{center}`r format(Sys.time(), '%d %B, %Y')`\end{center}
+
+$^{1}$Institute of Evolutionary Biology (CSIC-Universitat Pompeu Fabra), Passeig Marítim de la Barceloneta 37-49, Barcelona 08002, Spain
+
+$^{2}$Departamento de Geodinámica, Estratigrafía y Paleontología, Facultad de Ciencias Geológicas,
+Universidad Complutense de Madrid, C/José Antonio Novais 12, Madrid 28040, Spain
+
+$^{3}$Departamento de Cambio Medioambiental, Instituto de Geociencias (UCM, CSIC), C/Severo Ochoa 7,
+Madrid 28040, Spain
+
+$^{4}$Department of Ecology, Evolution, and Organismal Biology, Iowa State University, Ames, Iowa, 50010 USA
+
+$^{*}$Correspondence: Héctor Tejero-Cicuéndez cicuendez93@gmail.com
+
+\hfill\break
+**Keywords**: Phenotypic Evolution, Morphospace, Allometry, *Pristurus* geckos  \hfill\break
+
+**Short Title**: XXX \hfill\break
+
+**Author Contributions**:  All authors collaboratively developed the concept and contributed to all portions of this manuscript. HT-C, IM, and DCA performed the analyses. All authors approve of the final product and are willingly accountable for any portion of the content.\hfill\break
+
+**Conflicts of Interests**:  The authors declare no conflicts of interest.\hfill\break
+
+**Data Archiving**: Data are available on DRYAD (doi:10.5061/dryad.xwdbrv1f6 [@PristurusData]). R-scripts are found in the Supplemental Information. \hfill\break
+
+**Acknowledgments**: We thank XYZPDQ... This work was sponsored in part by XXX (to SC) DCA was funded in part by National Science Foundation Grant DEB-2140720, and a Fulbright Senior Scholar Grant. 
+
+\newpage
+
+# Abstract
+
+asdf
+
+\newpage
+
+# Introduction
+
+some general paragraph on the evolution of phenotypic diversity \hfill\break
+
+
+when organisms colonize new and unique habitats, they are subjected to novel ecological selection pressures in those habitats. Often these selective pressures elicit changes in body form, as organisms adapt to their new habitats (examples: some comment on ecomorphs, etc.).  .... leads to so-called ecomorphs, with such well known examples in Anolis lizards, cichlid fishes, etc.  It follows that ... Some comment on the fact that clades living in diverse ecological conditions often display greater diversity in form and function (REFS).
+
+However, while the above patterns have been well documented in a variety of vertebrate taxa, what remains less known is how allometry plays a role in this phenotypic diversification.  We know that XYZPDQ (about allometry).  Then links to diversity.. 
+
+The Afro-Arabian geckos in the genus *Pristurus* afford the opportunity to elucidate the interdigitating effects of allometry and habitat specialization on clade-level patterns of phenotypic diversity. Prior work on this system [@Tejero-Cicuendez2021] has revealed that ... (sentence or 2 about your prior study, getting to diversity and ... Importantly, ... something about habitat.  .... What remains unexamined however, is XYZPDQ...
+
+In this study, we ...
+
+# Materials and Methods
+
+## Data
+
+Phylogenetic, ecological, phenotypic.... (describe briefly). Data from [@Tejero-Cicuendez2021]. 
+
+## Statistical Analyses
+
+To test the hypothesis...
+
+regression scores [sensu @DrakeKlingenberg2008] and predicted lines [sensu @AdamsNistri2010] 
+
+# Results
+
+# Discussion
+
+\newpage
+
+# References {-}
+
+ \setlength{\parindent}{-0.25in}
+ \setlength{\leftskip}{0.25in}
+ \setlength{\parskip}{8pt}
+ \noindent
+ 
+<div id="refs"></div>
+
+\newpage
+
+# Figures
+
+Figure 1. Linear Measures \hfill\break
+
+Figure 2. Plot of regression scores and predicted lines representing the relationship between linear body measurements and size (SVL). Individuals occupying differing habitats are denoted by distinct colors as: rock (beige), ground (dark purple), and tree (magenta).  \hfill\break
+
+Figure 3. Traitgrams showing the evolution of body size (SVL) through time mapped on the phylogenetic tree of *Pristurus*. Colors represent evolutionary mapping of 
+
+colored by (A) mapped by the discrete categories of presence in Socotra or the continent (left) and by ecological specialization (right). \hfill\break
+
+Figure 4. Phylomorphospace
+
+\newpage
+
+```{r, fig.pos="H", echo=FALSE, out.width="100%", fig.cap= "asdf."}
+
+include_graphics("Figs/Fig1.png")
+```
+
+\newpage
+
+```{r, fig.pos="H", echo=FALSE, out.width="100%", fig.cap= "Plot of regression scores and predicted lines representing the relationship body proportions and body size (SVL). Individuals occupying differing habitats are denoted by distinct colors as: rock (beige), ground (dark purple), and tree (magenta)."}
+
+include_graphics("Figs/figure_2_ggplot.png")
+```
+
+\newpage
+
+```{r, echo = FALSE, out.width="100%", fig.cap = "xxx."}
+
+include_graphics("Figs/figure_phenograms.png")
+```
+
+\newpage
+
+```{r, echo = FALSE, out.width="100%", fig.cap = "asdf."}
+
+include_graphics("Figs/phylomorphospace_large_small.png")
+```
