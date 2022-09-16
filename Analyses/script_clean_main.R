@@ -13,7 +13,7 @@ data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';',
                     dec = '.', header = TRUE)
 
 # Drop species with less than 5 individuals
-sp.to.keep <- names(which(table(data0$species) > 5) == TRUE)
+sp.to.keep <- names(which(table(data0$species) >= 5) == TRUE)
 data <- data0[data0$species %in% sp.to.keep, ]
 
 # number of species
