@@ -87,7 +87,14 @@ Phylogenetic, ecological, phenotypic.... (describe briefly). Data from [@Tejero-
 
 To test the hypothesis...
 
-regression scores [sensu @DrakeKlingenberg2008] and predicted lines [sensu @AdamsNistri2010] 
+- Mancova body ~ SVL*hab.gp
+  - PW of slopes, and inspected reg. coefficients to identify biological trends
+  - Visualized multivariate regressions via regression scores [sensu @DrakeKlingenberg2008] and predicted lines [sensu @AdamsNistri2010] 
+- Examine allometry phylogenetically. 
+  - PLS of head vs. SVL and limb vs SVL.  Obtained scores on 1st axis for each.
+  - within-species regressions of Head.sc ~ SVL & limb.sc ~ SVL; obtained regression coefficients (slopes)
+  - mapped slopes on phylogeny under BM and generated traitgrams to identify changes in allometric relationships across the phylogeny
+- Finally, to link allometric patterns with trends in phenotypic diversification we obtained size-standardized species means, following procedures in H TC paper (residuals from phylo-regressions of traits on SVL, residuals). We then performed an ordination to obtain a phylomorphospace, where habitat types and species could be observed. 
 
 # Results
 
