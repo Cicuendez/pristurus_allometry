@@ -13,11 +13,15 @@ data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';',
                     dec = '.', header = TRUE)
 
 # Drop species with less than 5 individuals
-sp.to.keep <- names(which(table(data0$species) >= 5) == TRUE)
+sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
 
-# number of species
-n.sp <- length(table(data$species))
+# number of species, specimens, and specimens per species
+n.sp <- length(which(table(data$species) >= 5)) # number of species
+nrow(data) # number of specimens
+mean(table(data$species)[table(data$species) >= 5])
+min(table(data$species)[table(data$species) >= 5])
+max(table(data$species)[table(data$species) >= 5])
 
 # Phylogeny ----
 tree0 <- read.nexus('data/phylogeny/pristurus_tree_final.nex')
