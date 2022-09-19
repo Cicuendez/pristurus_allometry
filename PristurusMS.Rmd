@@ -115,40 +115,38 @@ To test the hypothesis...
 
 # Figures
 
-Figure 1. Linear Measures \hfill\break
+Figure 1. Linear Measurements used in this study. SVL = snout-vent length, TL = trunk length, HL = head length, HW = head width, HH = head height, Lhu = humerus length, Lun = ulna length, Lfe = femur length, Ltb = tibia length [for details see @Tejero-Cicuendez2021]. \hfill\break
 
-Figure 2. Plot of regression scores and predicted lines representing the relationship between linear body measurements and size (SVL). Individuals occupying differing habitats are denoted by distinct colors as: rock (beige), ground (dark purple), and tree (magenta).  \hfill\break
+Figure 2. Plot of regression scores and predicted lines representing the relationship between linear body measurements and size (SVL). Individuals re colored by habitat use: rock (beige), ground (dark purple), and tree (magenta).  \hfill\break
 
-Figure 3. Traitgrams showing the evolution of body size (SVL) through time mapped on the phylogenetic tree of *Pristurus*. Colors represent evolutionary mapping of 
+Figure 3. Traitgrams showing the evolution of body size (SVL) through time based on the phylogenetic tree of *Pristurus*. Colors represent an evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size (see text for descriptions). Species names are colored by habitat use: rock (beige), ground (dark purple), and tree (magenta). \hfill\break
 
-colored by (A) mapped by the discrete categories of presence in Socotra or the continent (left) and by ecological specialization (right). \hfill\break
-
-Figure 4. Phylomorphospace
+Figure 4. Phylomorphospace of *Pristurus*, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: rock (beige), ground (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace. 
 
 \newpage
 
-```{r, fig.pos="H", echo=FALSE, out.width="100%", fig.cap= "asdf."}
+```{r, fig.align="center", echo=FALSE, out.width="100%", fig.cap= "Linear Measurements used in this study. SVL = snout-vent length, TL = trunk length, HL = head length, HW = head width, HH = head height, Lhu = humerus length, Lun = ulna length, Lfe = femur length, Ltb = tibia length (for details see Tejero-Cicu{\'{e}}ndez et al. 2021a)."}
 
 include_graphics("Figs/Fig1.png")
 ```
 
 \newpage
 
-```{r, fig.pos="H", echo=FALSE, out.width="100%", fig.cap= "Plot of regression scores and predicted lines representing the relationship body proportions and body size (SVL). Individuals occupying differing habitats are denoted by distinct colors as: rock (beige), ground (dark purple), and tree (magenta)."}
+```{r, echo=FALSE, out.width="100%", fig.cap= "Plot of regression scores and predicted lines representing the relationship between linear body measurements and size (SVL). Individuals re colored by habitat use: rock (beige), ground (dark purple), and tree (magenta)."}
 
 include_graphics("Figs/figure_2_ggplot.png")
 ```
 
 \newpage
 
-```{r, echo = FALSE, out.width="100%", fig.cap = "xxx."}
+```{r, echo = FALSE, out.width="100%", fig.cap = "Traitgrams showing the evolution of body size (SVL) through time based on the phylogenetic tree of \\textit{Pristurus}. Colors represent an evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size (see text for descriptions). Species names are colored by habitat use: rock (beige), ground (dark purple), and tree (magenta)."}
 
 include_graphics("Figs/figure_phenograms.png")
 ```
 
 \newpage
 
-```{r, echo = FALSE, out.width="100%", fig.cap = "asdf."}
+```{r, echo = FALSE, out.width="100%", fig.cap = "Phylomorphospace of \\textit{Pristurus}, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: rock (beige), ground (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace."}
 
 include_graphics("Figs/phylomorphospace_large_small.png")
 ```
