@@ -98,7 +98,7 @@ Finally, to link
 - Finally, to link allometric patterns with trends in phenotypic diversification we obtained size-standardized species means, following procedures in H TC paper (residuals from phylo-regressions of traits on SVL, residuals). We then performed an ordination to obtain a phylomorphospace, where habitat types and species could be observed. 
 
 
-All analyses were conducted in R 4.2.1 [@RCT], using `RRPP` version 1.3.1 [@CollyerAdams2018].
+All analyses were conducted in R 4.2.1 [@RCT], using `RRPP` version 1.3.1 [@CollyerAdams2018; @RRPP].
 
 
 # Results
