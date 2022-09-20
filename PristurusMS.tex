@@ -214,41 +214,49 @@ we categorized each species as belonging to one of three ecological
 groups (ground, rock, or tree), based on descriptions in the literature
 (see Tejero-Cicuéndez et al. 2021a). Finally, we obtained a phenotypic
 data set containing body size (snout-vent length: SVL) and eight linear
-measurements that describe overall body proportions: trunk length (TrL),
-head length (HL), head width (HW), head height (HH), humerus length
-(Lhu), ulna length (Lun), femur length (Lfe), and tibia length (Ltb)
-(Tejero-Cicuéndez et al. 2021a). From the original dataset we restricted
-our study to those species represented by five or more individuals;
-resulting in a dataset of 687 individuals from 25 species (\(\mu_N=27\);
-min = 9, max = 56). These species were then matched to the phylogeny,
-which was subsequently pruned to arrive at our final dataset. All
-measurements were log-transformed prior to statistical analyses.
-Additional details regarding data collection and formal descriptions of
-each linear measurement may be found in the original sources (see
-Tejero-Cicuéndez et al. 2021a, 2022). The data are found on DRYAD:
+measurements (\textbf{Figure 1}) that described overall body form: trunk
+length (TrL), head length (HL), head width (HW), head height (HH),
+humerus length (Lhu), ulna length (Lun), femur length (Lfe), and tibia
+length (Ltb) (Tejero-Cicuéndez et al. 2021a). From the original dataset
+we restricted our study to those species represented by five or more
+individuals; resulting in a dataset of 687 individuals from 25 species
+(invidivuals per species: \(\mu=27\); min = 9, max = 56). Species in the
+phenotypic dataset were then matched to the phylogeny, which was
+subsequently pruned to arrive at the final topology. All measurements
+were log-transformed prior to statistical analyses. Additional details
+regarding data collection and formal descriptions of each linear
+measurement may be found in the original sources (see Tejero-Cicuéndez
+et al. 2021a, 2022). The data are found on DRYAD:
 \url{https://doi.org/10.5061/dryad.xwdbrv1f6} (Tejero-Cicuéndez et al.
 2021b).
 
 \hypertarget{statistical-analyses}{%
 \subsection{Statistical Analyses}\label{statistical-analyses}}
 
-To test the hypothesis\ldots{}
+We conducted a series of statistical analyses to interrogate allometric
+trends, and macroevolutionary changes in allometry related to
+diversification in body form. First, to determine whether allometric
+trends in body form differed across habitat groups, we performed a
+multivariate analysis of covariance, with body size (SVL), habitat, and
+SVL*habitat as model effects. Significance was evaluated using 999
+iterations of a permutation procedure, where residuals from a reduced
+model were randomly permuted in each permutation (RRPP), model
+statistics were recalculated, and used to generate empirical null
+sampling distributions to evaluate the observed test statistics
+(following Freedman and Lane 1983; Collyer and Adams 2007; Collyer et
+al. 2015). We then calculated the pairwise differences in angular
+direction in morphospace of the multivariate allometric vectors for the
+three habitat groups, and evaluated these using RRPP (sensu Collyer and
+Adams 2007; Adams and Collyer 2009; Collyer and Adams 2013).
+Additionally, patterns of multivariate allometry were visualized via
+(sensu Drake and Klingenberg 2008) and predicted fitted values (sensu
+Adams and Nistri 2010). \hfill\break
+
+Next we examined changes in allometric trends across the phylogeny by
+\ldots..
 
 \begin{itemize}
 \tightlist
-\item
-  Mancova body \textasciitilde{} SVL*hab.gp
-
-  \begin{itemize}
-  \tightlist
-  \item
-    PW of slopes, and inspected reg. coefficients to identify biological
-    trends
-  \item
-    Visualized multivariate regressions via regression scores (sensu
-    Drake and Klingenberg 2008) and predicted lines (sensu Adams and
-    Nistri 2010)
-  \end{itemize}
 \item
   Examine allometry phylogenetically.
 
@@ -265,13 +273,17 @@ To test the hypothesis\ldots{}
     mapped slopes on phylogeny under BM and generated traitgrams to
     identify changes in allometric relationships across the phylogeny
   \end{itemize}
-\item
-  Finally, to link allometric patterns with trends in phenotypic
-  diversification we obtained size-standardized species means, following
-  procedures in H TC paper (residuals from phylo-regressions of traits
-  on SVL, residuals). We then performed an ordination to obtain a
-  phylomorphospace, where habitat types and species could be observed.
 \end{itemize}
+
+Finally, to link\\
+- Finally, to link allometric patterns with trends in phenotypic
+diversification we obtained size-standardized species means, following
+procedures in H TC paper (residuals from phylo-regressions of traits on
+SVL, residuals). We then performed an ordination to obtain a
+phylomorphospace, where habitat types and species could be observed.
+
+All analyses were conducted in R 4.2.1 (R Core Team 2022), using
+\texttt{RRPP} version 1.3.1 (Collyer and Adams 2018).
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -290,16 +302,51 @@ To test the hypothesis\ldots{}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-AdamsCollyer2009}{}}%
+Adams, D. C., and M. L. Collyer. 2009. A general framework for the
+analysis of phenotypic trajectories in evolutionary studies. Evolution
+63:1143--1154.
+
 \leavevmode\vadjust pre{\hypertarget{ref-AdamsNistri2010}{}}%
 Adams, D. C., and A. Nistri. 2010. Ontogenetic convergence and evolution
 of foot morphology in european cave salamanders (family:
 plethodontidae). BMC Evolutionary Biology 10:1--10. BioMed Central.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2007}{}}%
+Collyer, M. L., and D. C. Adams. 2007. Analysis of two-state
+multivariate phenotypic change in ecological studies. Ecology
+88:683--692.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2013}{}}%
+Collyer, M. L., and D. C. Adams. 2013. Phenotypic trajectory analysis:
+Comparison of shape change patterns in evolution and ecology. Hystrix
+24:75--83.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2018}{}}%
+Collyer, M. L., and D. C. Adams. 2018. RRPP: An r package for fitting
+linear models to high-dimensional data using residual randomization.
+Methods in Ecology and Evolution 9:1772--1779.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Collyer_et_al2015}{}}%
+Collyer, M. L., D. J. Sekora, and D. C. Adams. 2015. A method for
+analysis of phenotypic change for phenotypes described by
+high-dimensional data. Heredity 115:357--365.
 
 \leavevmode\vadjust pre{\hypertarget{ref-DrakeKlingenberg2008}{}}%
 Drake, A. G., and C. P. Klingenberg. 2008.
 \href{https://doi.org/10.1098/rspb.2007.1169}{The pace of morphological
 change: Historical transformation of skull shape in st bernard dogs}.
 Proceedings of the Royal Society B: Biological Sciences 275:71--76.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Freedman1983}{}}%
+Freedman, D., and D. Lane. 1983. A nonstochastic interpretation of
+reported significance levels. Journal of Business {\&} Economic
+Statistics 1:292--298.
+
+\leavevmode\vadjust pre{\hypertarget{ref-RCT}{}}%
+R Core Team. 2022. \href{https://www.R-project.org/}{R: A language and
+environment for statistical computing. Version 4.2.1}. R Foundation for
+Statistical Computing, Vienna, Austria.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Tejero-Cicuendez2022}{}}%
 Tejero-Cicuéndez, H., A. H. Patton, D. S. Caetano, J. Šmíd, L. J.
