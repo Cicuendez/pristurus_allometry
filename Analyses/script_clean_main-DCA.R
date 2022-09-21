@@ -1,55 +1,36 @@
-# Packages ----
-libs <- c('geomorph', 'RRPP', 'phytools', 'geiger', 'tidyverse', 
-          'ggphylomorpho')
+## Script containing primary analyses of manuscript
+
+libs <- c('RRPP', 'phytools', 'geiger', 'tidyverse')
 easypackages::libraries(libs)
 
-# Morpho data ----
-# Both species data and specimen data
-data.sp <- read.table('data/morpho/morpho_sp_final.csv', sep = ';', 
-                      dec = '.', header = TRUE)
-data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';', 
-                    dec = '.', header = TRUE)
-
-# Drop species with less than 5 individuals
-sp.to.keep <- names(which(table(data0$species) >= 5))
+data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';', dec = '.', header = TRUE)
+  sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
-
-# number of species, specimens, and specimens per species
-n.sp <- length(which(table(data$species) >= 5)) # number of species
-nrow(data) # number of specimens
-mean(table(data$species)[table(data$species) >= 5])
-min(table(data$species)[table(data$species) >= 5])
-max(table(data$species)[table(data$species) >= 5])
-
-# Phylogeny ----
 tree0 <- read.nexus('data/phylogeny/pristurus_tree_final.nex')
 
-# Prepare specimen data for analysis ----
+# 1: Comparisons of multivariate allometry
 svl <- log(data$SVL)
 shape <- as.matrix(log(data[, 8:ncol(data)]))
 species.fctr <- as.factor(data$species)
 habitat.fctr <- as.factor(data$habitat_broad)
-
 rdf <- rrpp.data.frame(svl = svl, shape = shape, habitat = habitat.fctr, 
                        species = species.fctr)
 
-# Habitat model ----
-# Get slopes per habitat
-# Multivariate linear model
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
 anova(fit.hab)
-##### regression coefficients
-fit.coef <- fit.hab$LM$coefficients
 
-rbind(fit.coef[1,], fit.coef[2,]) #ground
-rbind(fit.coef[1,]+fit.coef[3,], fit.coef[2,]+fit.coef[5,]) #rock
-rbind(fit.coef[1,]+fit.coef[4,], fit.coef[2,]+fit.coef[6,]) #tree 
+pw.hab <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
+summary(pw.hab, type = 'VC', stat.table = FALSE)
+
+
+## SLOPES.  ADD TEST AGAINST PERMUTATION DISTRIBUTIONS LATER!!!
+fit.coef <- fit.hab$LM$coefficients
+fit.coef[2,] #Ground
+fit.coef[2,]+fit.coef[5,] #rock
+fit.coef[2,]+fit.coef[6,] #tree 
+#################################
 
 # Pairwise differences in the angle ----
-pw.hab <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
-pw.hab_df <- summary(pw.hab, type = 'VC', stat.table = FALSE)
-
-pw.hab_df
 
 # Set habitat colors ----
 hab.colors <- c(ground = "#F1B670", rock = "#683B5E", tree = "#E93F7B")
@@ -111,6 +92,12 @@ habitat.slope.plot <- ggplot(data = fit.hab.ggplot.data, aes(x = svl)) +
   theme(legend.position = 'bottom')
 
 ggsave('plots/figure_2_ggplot.png', habitat.slope.plot)
+
+
+
+#####################################
+data.sp <- read.table('data/morpho/morpho_sp_final.csv', sep = ';', 
+                      dec = '.', header = TRUE)
 
 # get species habitats
 # Drop species with less than 5 individuals from the tree
