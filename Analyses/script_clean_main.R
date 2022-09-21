@@ -14,8 +14,6 @@ data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';',
 sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
 data$species <- droplevels(data$species)
-LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
-sz.mn <- tapply(rdf$svl,rdf$species,mean)
 
 # number of species, specimens, and specimens per species
 n.sp <- length(which(table(data$species) >= 5)) # number of species
@@ -51,8 +49,10 @@ rbind(fit.coef[1,]+fit.coef[4,], fit.coef[2,]+fit.coef[6,]) #tree
 # Pairwise differences in the angle ----
 pw.hab <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
 pw.hab_df <- summary(pw.hab, type = 'VC', stat.table = FALSE)
-
 pw.hab_df
+
+LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
+sz.mn <- tapply(rdf$svl,rdf$species,mean)
 
 # Set habitat colors ----
 hab.colors <- c(ground = "#F1B670", rock = "#683B5E", tree = "#E93F7B")
