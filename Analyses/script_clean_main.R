@@ -13,6 +13,9 @@ data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';',
 # Drop species with less than 5 individuals
 sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
+data$species <- droplevels(data$species)
+LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
+sz.mn <- tapply(rdf$svl,rdf$species,mean)
 
 # number of species, specimens, and specimens per species
 n.sp <- length(which(table(data$species) >= 5)) # number of species
