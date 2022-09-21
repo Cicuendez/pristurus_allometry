@@ -1,4 +1,4 @@
-## Script containing primary analyses of manuscript
+# R-script for primary analyses
 
 libs <- c('RRPP', 'phytools', 'geiger', 'tidyverse')
 easypackages::libraries(libs)
@@ -6,98 +6,53 @@ easypackages::libraries(libs)
 data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';', dec = '.', header = TRUE)
   sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
+  data$species <- as.factor(data$species)
+  data$habitat_broad <- as.factor(data$habitat_broad)  
+  data$SVL <- log(data$SVL)
+shape <- as.matrix(log(data[, 8:ncol(data)]))
+rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad)
 tree0 <- read.nexus('data/phylogeny/pristurus_tree_final.nex')
 
-# 1: Comparisons of multivariate allometry
-svl <- log(data$SVL)
-shape <- as.matrix(log(data[, 8:ncol(data)]))
-species.fctr <- as.factor(data$species)
-habitat.fctr <- as.factor(data$habitat_broad)
-rdf <- rrpp.data.frame(svl = svl, shape = shape, habitat = habitat.fctr, 
-                       species = species.fctr)
-
+# Comparison of multivariate allometry among habitat types
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
-anova(fit.hab)
-
+  anova(fit.hab)
 pw.hab <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
-summary(pw.hab, type = 'VC', stat.table = FALSE)
+  summary(pw.hab, type = 'VC', stat.table = FALSE)
 
-
-## SLOPES.  ADD TEST AGAINST PERMUTATION DISTRIBUTIONS LATER!!!
+#Slopes by habitat
 fit.coef <- fit.hab$LM$coefficients
-fit.coef[2,] #Ground
-fit.coef[2,]+fit.coef[5,] #rock
-fit.coef[2,]+fit.coef[6,] #tree 
-#################################
+ind.coef <- rbind(fit.coef[2,], fit.coef[2,]+fit.coef[5,], fit.coef[2,]+fit.coef[6,])
+rownames(ind.coef) <- c("Ground","Rock", "Tree")
 
-# Pairwise differences in the angle ----
+  # Analysis using species means
+LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
+sz.mn <- tapply(rdf$svl,rdf$species,mean)
+hab.mn <- as.factor(by(rdf$habitat,rdf$species,unique))
+ levels(hab.mn) <- levels(rdf$habitat)
+tree <- treedata(phy = tree0, data = LS.mns)$phy
+C <- vcv.phylo(tree)
 
-# Set habitat colors ----
-hab.colors <- c(ground = "#F1B670", rock = "#683B5E", tree = "#E93F7B")
+#Similar anova
+fit.hab.sp <- lm.rrpp(LS.mns~sz.mn*hab.mn)
+anova(fit.hab.sp)
 
-# Set customized ggplot2 theme ----
-theme.clean <- function(){
-  theme_minimal() +
-    theme(axis.text.x = element_text(size = 10, angle = 0, vjust = 1, hjust = 1),
-          axis.text.y = element_text(size = 10),
-          axis.title.x = element_text(size = 11, face = "plain"),             
-          axis.title.y = element_text(size = 11, face = "plain"),             
-          #          panel.grid.major.x = element_blank(),                                          
-          #          panel.grid.minor.x = element_blank(),
-          #          panel.grid.minor.y = element_blank(),
-          #          panel.grid.major.y = element_blank(),  
-          plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),
-          plot.title = element_text(size = 15, vjust = 1, hjust = 0.5, 
-                                    face = 'bold'),
-          plot.subtitle = element_text(hjust = 0.5), 
-          legend.text = element_text(size = 10, face = "plain"),          
-          legend.position = "right")
-}
+#pw.hab.sp <- pairwise(fit.hab.sp,groups = hab.mn, covariate = sz.mn)
+#summary(pw.hab.sp, type = 'VC', stat.table = FALSE) 
+  #similar pattern: ground vs. rock ***, rock vs. tree NS (also ground vs. tree NS)
+
+### NOTE: when accounting for phylogeny, evol. allometry still present, but not the habitat effect
+fit.hab.sp.phy <- lm.rrpp(LS.mns~sz.mn*hab.mn, Cov = C)
+anova(fit.hab.sp.phy)
 
 
-# plot base ----
-# plot predicted values
-plot.base <- plot(fit.hab, predictor = rdf$svl, type = 'regression', pch = 16, 
-     col = hab.colors[as.numeric(rdf$habitat)])
-legend('topleft', levels(habitat.fctr), pt.bg = hab.colors, pch = 22)
+fit.coef.sp <- fit.hab.sp$LM$coefficients
+sp.coef <- rbind(fit.coef.sp[2,], fit.coef.sp[2,]+fit.coef.sp[5,], fit.coef.sp[2,]+fit.coef.sp[6,])
+rownames(sp.coef) <- c("Ground","Rock", "Tree")
 
-plot(rdf$svl, plot.base$PredLine, col = hab.colors[as.numeric(rdf$habitat)], 
-     pch = 16) # same thing
-# This is like taking the fitted values of the model and doing a PCA; 
-# the predicted line we see is the PC1.
-
-# plot RegScores
-plot(fit.hab, predictor = rdf$svl, type = 'regression', reg.type = 'RegScore', 
-     pch = 16, 
-     col = hab.colors[as.numeric(rdf$habitat)])
-legend('topleft', levels(habitat.fctr), pt.bg = hab.colors, pch = 22)
-
-plot(rdf$svl, plot.base$RegScore, col = hab.colors[as.numeric(rdf$habitat)], 
-     pch = 16) # same thing
-
-# plot ggplot2 ----
-# Figure 2
-# Plot habitat slopes with ggplot2 
-fit.hab.ggplot.data <- data.frame(fitted_PC1 = plot.base$PredLine,
-                                  RegScore = plot.base$RegScore[,1],
-                                  svl = rdf$svl, 
-                                  habitat = rdf$habitat)
-
-habitat.slope.plot <- ggplot(data = fit.hab.ggplot.data, aes(x = svl)) +
-  geom_point(aes(y = RegScore, color = habitat), alpha = 0.2, size = 2) +
-  geom_line(aes(y = fitted_PC1, color = habitat), size = 1) +
-  scale_color_manual(values = hab.colors) +
-  labs(x = 'logSVL', y = 'Regression Scores') +
-  theme.clean() +
-  theme(legend.position = 'bottom')
-
-ggsave('plots/figure_2_ggplot.png', habitat.slope.plot)
-
-
-
-#####################################
-data.sp <- read.table('data/morpho/morpho_sp_final.csv', sep = ';', 
-                      dec = '.', header = TRUE)
+ind.coef
+sp.coef
+plot(fit.hab.sp, type = "regression",predictor = sz.mn)
+##########################################
 
 # get species habitats
 # Drop species with less than 5 individuals from the tree
@@ -113,6 +68,10 @@ names(hab.sp) <- data.sp$species
 # Drop species with less than 5 individuals from the tree
 data.sp <- data.sp %>% 
   filter(species %in% sp.to.keep)
+
+
+tree0 <- read.nexus('data/phylogeny/pristurus_tree_final.nex')
+
 
 dat.tree.morpho <- treedata(phy = tree0, data = data.sp)
 tree <- dat.tree.morpho$phy

@@ -75,15 +75,30 @@ However, while the above patterns have been well documented in a variety of vert
 
 The Afro-Arabian geckos in the genus *Pristurus* afford the opportunity to elucidate the interdigitating effects of allometry and habitat specialization on clade-level patterns of phenotypic diversity. Prior work on this system [@Tejero-Cicuendez2021] has revealed that ... (sentence or 2 about your prior study, getting to diversity and ... Importantly, ... something about habitat.  .... What remains unexamined however, is XYZPDQ...
 
-In this study, we ...
+**last paragraph**
+In this study, we used a combination of multivariate morphometric and phylogenetic comparative analysis to interrogate macroevolutionary patterns of evolutionary allometry in *Pristurus* geckos of Afro-Arabia. Using a combination of phenotypic, phylogenetic, and ecological data, we characterized allometric trends in body form to discern the extent to which those patterns differed across species occupying distinct ecological habitats, and to explore how allometric differences related to overall patterns of phenotypic diversification in the group. 
+
+The independent diversification of both Socotran and continental taxa, the ecological and behavioural diversity and the unique phenotypic dataset compiled in this study, make this group of geckos an attractive model system to investigate keystone dynamics in evolutionary biology such as the island effect and ecological adaptation, and their impact on morphological evolution.
+
+Our findings 
+
+ Overall our work has ... (some implication).
+ 
+ Our results demonstrate that differing tracectories of allometric growth can result in similar adult phenotypes... (Don't like it! We've got adults, yes? )
 
 # Materials and Methods
 
 ## Data
 
-For this study, we combined phenotypic, phylogenetic, and ecological data to evaluate macroevolutionary trends in allometry in *Pristurus* geckos, and to discern the extent to which those patterns differed across species occupying distinct ecological habitats. The data were obtained from our prior work on this system  [@Tejero-Cicuendez2021; @Tejero-Cicuendez2022], and are briefly described here. First we used a time-dated, molecular phylogeny that included all members of the genus *Pristurus*, including several currently undescribed taxa. The tree was estimated in a Bayesian framework, using five mitochondrial markers, six nuclear markers, and 21 calibration points [for details see @Tejero-Cicuendez2022]. Next we categorized each species as belonging to one of three ecological groups (ground, rock, or tree), based on descriptions of habitat use found in the literature [see @Tejero-Cicuendez2021]. Finally, we obtained a phenotypic data set containing body size (snout-vent length: SVL) and eight linear measurements (Figure 1) that described overall body form: trunk length (TrL), head length (HL), head width (HW), head height (HH), humerus length (Lhu), ulna length (Lun), femur length (Lfe), and tibia length (Ltb) [@Tejero-Cicuendez2021]. We restricted our study to those species represented by five or more individuals; resulting in a dataset of 687 individuals from 25 species (invidivuals per species: $\mu=27$; min = 9, max = 56). Species in the phenotypic dataset were then matched to the phylogeny, which was subsequently pruned to arrive at the final topology. All measurements were log-transformed prior to statistical analyses. Additional details regarding data collection and formal descriptions of each linear measurement may be found in the original sources [see @Tejero-Cicuendez2021; @Tejero-Cicuendez2022]. The data are found on DRYAD: https://doi.org/10.5061/dryad.xwdbrv1f6 [@PristurusData]. 
+We used a combination of phenotypic, phylogenetic, and ecological data to characterize and evaluate interspectific allometric trends. The data utilized here were obtained from our prior work on this system  [@Tejero-Cicuendez2021; @Tejero-Cicuendez2022], and are briefly described here. First we used a time-dated, molecular phylogeny that included all members of the genus *Pristurus*, including several currently undescribed taxa. The tree was estimated in a Bayesian framework, using five mitochondrial markers, six nuclear markers, and 21 calibration points [for details see @Tejero-Cicuendez2022]. Next we categorized each species as belonging to one of three ecological groups (ground, rock, or tree), based on descriptions of habitat use found in the literature [see @Tejero-Cicuendez2021]. Finally, we obtained a phenotypic data set containing body size (snout-vent length: SVL) and eight linear measurements (Figure 1) that described overall body form: trunk length (TrL), head length (HL), head width (HW), head height (HH), humerus length (Lhu), ulna length (Lun), femur length (Lfe), and tibia length (Ltb) [@Tejero-Cicuendez2021]. We restricted our study to those species represented by five or more individuals; resulting in a dataset of 687 individuals from 25 species (invidivuals per species: $\mu=27$; min = 9, max = 56). Species in the phenotypic dataset were then matched to the phylogeny, which was subsequently pruned to arrive at the final topology. All measurements were log-transformed prior to statistical analyses. Additional details regarding data collection and formal descriptions of each linear measurement may be found in the original sources [see @Tejero-Cicuendez2021; @Tejero-Cicuendez2022]. The data are found on DRYAD: https://doi.org/10.5061/dryad.xwdbrv1f6 [@PristurusData]. 
 
 ## Statistical and Comparative Analyses
+
+**EVOLUTIONARY ALLOMETRY**  Do just shape ~ size & shape ~size for species | phylogeny
+
+THen mancova....
+
+- compare habitat slopes we found with individuals to those from species means (the 'usual' way of looking at evolutionary allometry)
 
 We conducted a series of analyses to interrogate allometric trends and macroevolutionary changes in allometry, relative to diversification in body form. First, to determine whether allometric trends in body form differed across habitat groups, we performed a multivariate analysis of covariance,  with body size ($SVL$), $habitat$, and $SVL\times habitat$ as model effects. Significance was evaluated using 999 iterations of a permutation procedure, where residuals from a reduced model were randomly permuted in each permutation (RRPP), model statistics were recalculated, and used to generate empirical null sampling distributions to evaluate the observed test statistics [following @Freedman1983; @CollyerAdams2007; @Collyer_et_al2015]. Next we compared the multivariate allometric vectors for each habitat group by calculating pairwise differences in their angular direction in morphospace, and evaluating these relative to empirical sampling distributions obtained through RRPP [@CollyerAdams2007; @AdamsCollyer2009; @CollyerAdams2013]. We then visualized patterns of multivariate allometry relative to body size via regression scores [@DrakeKlingenberg2008] and predicted lines [@AdamsNistri2010], based on the coefficients and fitted values from the linear model described above. \hfill\break
 
@@ -125,14 +140,14 @@ library(RRPP)
 data0 <- read.table('Analyses/data/morpho/morpho_pristurus.csv', sep = ';', dec = '.', header = TRUE)
   sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
-
-svl <- log(data$SVL)
+  data$species <- as.factor(data$species)
+  data$habitat_broad <- as.factor(data$habitat_broad)  
+  data$SVL <- log(data$SVL)
 shape <- as.matrix(log(data[, 8:ncol(data)]))
-species.fctr <- as.factor(data$species)
-habitat.fctr <- as.factor(data$habitat_broad)
-rdf <- rrpp.data.frame(svl = svl, shape = shape, habitat = habitat.fctr, 
-                       species = species.fctr)
+rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad, 
+                       species = data$species)
 
+# Comparison of multivariate allometry among habitat types
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
 tb1 <- anova(fit.hab)$table
 
