@@ -4,8 +4,8 @@
 %
 \documentclass[
 ]{article}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
@@ -41,7 +41,7 @@
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -74,6 +74,29 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \title{XXX}
 \author{}
@@ -86,7 +109,7 @@
 \textbf{ORDER TBD:  H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,*}$,  Iris Men{\'{e}}ndez$^{2,3}$, Salvador Carranza$^{1}$, and Dean C. Adams$^{4}$} 
 \end{center}
 
-\begin{center}22 septiembre, 2022\end{center}
+\begin{center}22 September, 2022\end{center}
 
 \(^{1}\)Institute of Evolutionary Biology (CSIC-Universitat Pompeu
 Fabra), Passeig Marítim de la Barceloneta 37-49, Barcelona 08002, Spain
@@ -142,19 +165,30 @@ asdf
 \section{Introduction}\label{introduction}}
 
 The mechanisms through which phenotypic diversity emerges and evolves
-are an essential topic of study in evolutionary biology. The evolution
-of morphology might be shaped by ecological processes that impose
-certain selective pressures or specific evolutionary trajectories,
-resulting for instance in the adaptation of morphological structures to
-different environments. When organisms colonize new and unique habitats,
-they are subjected to novel ecological dynamics that may impose
-different functional requirements. This often elicits changes in body
-form as organisms adapt to their new habitats, with the emergence of
-ecomorphological relationships that may lead to the so-called ecomorphs,
-with paradigmatic examples in \emph{Anolis} lizards (Losos 2009
-\textbf{add}) or cichlid fishes (REF). In this vein, species or clades
-living in diverse ecological conditions often display greater diversity
-in form and function (REFS). \hfill\break
+are an essential topic of study in evolutionary biology. Such diversity
+is the result of a combination of genetic, developmental, and
+environmental factors that determine the life history of organisms and
+the evolutionary trajectory of species. These factors might impose
+certain constraints or offer opportunities for morphological evolution,
+generating the diversity upon which natural selection acts culminating
+in the adaptation of species to their surrounding environments.
+Consequently, the differences in species' ecological preferences (e.g.,
+the exploitation of different habitats) have the potential to drive
+morphological changes via distinct selective pressures. \hfill\break
+
+Ecological specialization is one of the main sources of phenotypic
+diversity. When organisms colonize new and unique habitats, they are
+subjected to novel ecological dynamics that may impose different
+functional requirements. This ecomorphological relationship may result
+in the repeated evolution of certain phenotypes (i.e., convergence) and
+the appearance of the so-called ecomorphs, when the general
+morphological features of the species within a clade can be tightly
+related to specific ecological contexts. This includes emblematic
+examples of adaptive radiations such as the differential body size and
+shape of Anolis species exploiting different microhabitats (Losos 2009),
+the disparity in beak morphology in Darwin's finches (REFS) and Hawaiian
+honeycreepers (REFS), or the differences in jaw morphology among cichlid
+fishes (REFS). \hfill\break
 
 However, while the patterns of morphological differences among distinct
 ecological contexts have been well documented in a variety of vertebrate
@@ -270,12 +304,12 @@ sampling distributions to evaluate the observed test statistics
 al. 2015). Next we compared the multivariate allometric vectors for each
 habitat group by calculating pairwise differences in their angular
 direction in morphospace, and evaluating these relative to empirical
-sampling distributions obtained through RRPP (Collyer and Adams 2007,
-2013; Adams and Collyer 2009). We then visualized patterns of
-multivariate allometry relative to body size via regression scores
-(Drake and Klingenberg 2008) and predicted lines (Adams and Nistri
-2010), based on the coefficients and fitted values from the linear model
-described above. \hfill\break
+sampling distributions obtained through RRPP (Collyer and Adams 2007;
+Adams and Collyer 2009; Collyer and Adams 2013). We then visualized
+patterns of multivariate allometry relative to body size via regression
+scores (Drake and Klingenberg 2008) and predicted lines (Adams and
+Nistri 2010), based on the coefficients and fitted values from the
+linear model described above. \hfill\break
 
 Second, we examined changes in allometric trends across the phylogeny,
 treating the head dimensions and limb dimensions separately. Because
@@ -298,8 +332,8 @@ phylogenetic regression (see Tejero-Cicuéndez et al. 2021a). Here,
 phenotypic similarities among species, relative to their phylogenetic
 relationships and habitat affiliations, were observed. All analyses were
 conducted in R 4.2.1 (R Core Team 2022), using \texttt{RRPP} version
-1.3.1 (Collyer and Adams 2018, 2022), and scripts written by the authors
-(available at \textbf{XXX}).
+1.3.1 (Collyer and Adams 2018; Collyer and Adams 2022), and scripts
+written by the authors (available at \textbf{XXX}).
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -352,6 +386,7 @@ When viewed in light of phylomorphospace\ldots.
 \setlength{\parskip}{8pt} \noindent
 
 \hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
 \leavevmode\hypertarget{ref-AdamsCollyer2009}{}%
 Adams, D. C., and M. L. Collyer. 2009. A general framework for the
 analysis of phenotypic trajectories in evolutionary studies. Evolution
@@ -360,7 +395,7 @@ analysis of phenotypic trajectories in evolutionary studies. Evolution
 \leavevmode\hypertarget{ref-AdamsNistri2010}{}%
 Adams, D. C., and A. Nistri. 2010. Ontogenetic convergence and evolution
 of foot morphology in european cave salamanders (family:
-Plethodontidae). BMC Evolutionary Biology 10:1--10. BioMed Central.
+plethodontidae). BMC Evolutionary Biology 10:1--10. BioMed Central.
 
 \leavevmode\hypertarget{ref-CollyerAdams2007}{}%
 Collyer, M. L., and D. C. Adams. 2007. Analysis of two-state
@@ -372,15 +407,15 @@ Collyer, M. L., and D. C. Adams. 2013. Phenotypic trajectory analysis:
 Comparison of shape change patterns in evolution and ecology. Hystrix
 24:75--83.
 
-\leavevmode\hypertarget{ref-CollyerAdams2018}{}%
-Collyer, M. L., and D. C. Adams. 2018. RRPP: An r package for fitting
-linear models to high-dimensional data using residual randomization.
-Methods in Ecology and Evolution 9:1772--1779.
-
 \leavevmode\hypertarget{ref-RRPP}{}%
 Collyer, M. L., and D. C. Adams. 2022. R: RRPP: Linear model evaluation
 with randomized residuals in a permutation procedure. Vsn. 1.3.1. R
 Foundation for Statistical Computing, Vienna, Austria.
+
+\leavevmode\hypertarget{ref-CollyerAdams2018}{}%
+Collyer, M. L., and D. C. Adams. 2018. RRPP: An r package for fitting
+linear models to high-dimensional data using residual randomization.
+Methods in Ecology and Evolution 9:1772--1779.
 
 \leavevmode\hypertarget{ref-Collyer_et_al2015}{}%
 Collyer, M. L., D. J. Sekora, and D. C. Adams. 2015. A method for
@@ -394,8 +429,8 @@ Proceedings of the Royal Society B: Biological Sciences 275:71--76.
 
 \leavevmode\hypertarget{ref-Freedman1983}{}%
 Freedman, D., and D. Lane. 1983. A nonstochastic interpretation of
-reported significance levels. Journal of Business \& Economic Statistics
-1:292--298.
+reported significance levels. Journal of Business {\&} Economic
+Statistics 1:292--298.
 
 \leavevmode\hypertarget{ref-RCT}{}%
 R Core Team. 2022. R: A language and environment for statistical
@@ -424,6 +459,8 @@ Tejero-Cicuéndez, H., M. Simó-Riudalbas, I. Menéndez, and S. Carranza.
 2021b. Ecological specialization, rather than the island effect,
 explains morphological diversification in an ancient radiation of
 geckos. Dryad digital repository. (Doi:10.5061/dryad.xwdbrv1f6).
+
+\end{CSLReferences}
 
 \newpage
 
