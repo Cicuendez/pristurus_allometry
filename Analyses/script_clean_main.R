@@ -34,7 +34,7 @@ rdf <- rrpp.data.frame(svl = svl, shape = shape, habitat = habitat.fctr,
 
 #Species means
 LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
-sz.mn <- tapply(rdf$svl,rdf$species,mean)
+sz.mn <- unlist(tapply(rdf$svl,rdf$species,mean, simplify = FALSE))
 hab.mn <- as.factor(by(rdf$habitat,rdf$species,unique))
 levels(hab.mn) <- levels(rdf$habitat)
 tree <- treedata(phy = tree0, data = LS.mns)$phy
