@@ -4,11 +4,10 @@ libs <- c('geomorph', 'RRPP', 'phytools', 'geiger', 'tidyverse')
 easypackages::libraries(libs)
 
 # 0: Data Prep
-data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';', dec = '.', header = TRUE)
+data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';', dec = '.', header = TRUE, stringsAsFactors = TRUE)
   sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
-  data$species <- as.factor(data$species)
-  data$habitat_broad <- as.factor(data$habitat_broad)  
+  data$species <- droplevels(data$species)
   data$SVL <- log(data$SVL)
 shape <- as.matrix(log(data[, 8:ncol(data)]))
 rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad, species = data$species)

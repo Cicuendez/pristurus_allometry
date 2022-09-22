@@ -5,8 +5,6 @@ easypackages::libraries(libs)
 
 # Morpho data ----
 # Both species data and specimen data
-data.sp <- read.table('data/morpho/morpho_sp_final.csv', sep = ';', 
-                      dec = '.', header = TRUE)
 data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';', 
                     dec = '.', header = TRUE)
 
@@ -34,6 +32,14 @@ habitat.fctr <- as.factor(data$habitat_broad)
 rdf <- rrpp.data.frame(svl = svl, shape = shape, habitat = habitat.fctr, 
                        species = species.fctr)
 
+#Species means
+LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
+sz.mn <- tapply(rdf$svl,rdf$species,mean)
+hab.mn <- as.factor(by(rdf$habitat,rdf$species,unique))
+levels(hab.mn) <- levels(rdf$habitat)
+tree <- treedata(phy = tree0, data = LS.mns)$phy
+
+
 # Habitat model ----
 # Get slopes per habitat
 # Multivariate linear model
@@ -50,9 +56,6 @@ rbind(fit.coef[1,]+fit.coef[4,], fit.coef[2,]+fit.coef[6,]) #tree
 pw.hab <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
 pw.hab_df <- summary(pw.hab, type = 'VC', stat.table = FALSE)
 pw.hab_df
-
-LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
-sz.mn <- tapply(rdf$svl,rdf$species,mean)
 
 # Set habitat colors ----
 hab.colors <- c(ground = "#F1B670", rock = "#683B5E", tree = "#E93F7B")
@@ -115,44 +118,17 @@ habitat.slope.plot <- ggplot(data = fit.hab.ggplot.data, aes(x = svl)) +
 
 ggsave('plots/figure_2_ggplot.png', habitat.slope.plot)
 
-# get species habitats
-# Drop species with less than 5 individuals from the tree
-data.sp <- data.sp %>% 
-  filter(species %in% sp.to.keep)
-rownames(data.sp) <- data.sp$species
-
-hab.sp <- data.sp$habitat_broad
-names(hab.sp) <- data.sp$species
 
 # size model (species data) ----
-# Prepare data 
-# Drop species with less than 5 individuals from the tree
-data.sp <- data.sp %>% 
-  filter(species %in% sp.to.keep)
-
-dat.tree.morpho <- treedata(phy = tree0, data = data.sp)
-tree <- dat.tree.morpho$phy
-dat.morpho <- as.data.frame(dat.tree.morpho$data)
-class(dat.morpho$SVL)
-# class is character, let's do it numeric
-dat.num <- dat.morpho[, c(6:ncol(dat.morpho))]
-for (i in 1:ncol(dat.num)){
-  dat.num[,i] <- as.numeric(as.character(dat.num[,i]))
-}
-dat.morpho.num <- cbind(dat.morpho[, 1:5], dat.num)
-svl.sp <- log(dat.morpho.num$SVL)
-names(svl.sp) <- dat.morpho.num$species
 
 # shape~size phylogenetic regression ----
-shape.sp <- as.matrix(log(dat.morpho.num[, 7:ncol(dat.morpho.num)]))
-svl.sp
-identical(names(svl.sp), rownames(shape.sp))
 
 # Prepare data
-rdf.size <- rrpp.data.frame(svl = svl.sp, shape = shape.sp)
+identical(names(sz.mn), rownames(LS.mns))
+rdf.size <- rrpp.data.frame(svl = sz.mn, shape = LS.mns)
 
 # Multivariate linear model
-fit.svl <- lm.rrpp(shape~svl, data = rdf.size, Cov = vcv(tree))
+fit.svl <- lm.rrpp(shape~svl, data = rdf.size, Cov = vcv.phylo(tree))
 anova(fit.svl)
 
 shape.res <- residuals(fit.svl)
@@ -165,16 +141,17 @@ shape.res <- residuals(fit.svl)
 pca.shape.ols <- gm.prcomp(shape.res, phy = tree)
 x <- rownames_to_column(as.data.frame(pca.shape.ols$x), 
                         var = 'species')
-svl.sp
-identical(x$species, names(svl.sp))
 
-x$size <- svl.sp
+identical(x$species, names(sz.mn))
 
-dat.ggphylo <- x %>% left_join(data.sp) %>% 
+x$size <- sz.mn
+dat.ggphylo <- cbind(x, hab.mn)
+
+dat.ggphylo <- dat.ggphylo %>% 
   mutate(PC1 = Comp1) %>% 
   mutate(PC2 = Comp2) %>% 
   mutate(taxon = species) %>%
-  mutate(group = habitat_broad) %>%
+  mutate(group = hab.mn) %>%
   select(taxon, PC1, PC2, group, size)
 
 rownames(dat.ggphylo) <- dat.ggphylo$taxon
@@ -489,19 +466,14 @@ plot(pca.shape.ols, phylo = TRUE, pch = 21, phylo.par = plot.options,
      bg = hab.colors.faded[dat.ggphylo.large$group_large], 
      col = hab.colors.faded[dat.ggphylo.large$group_large], 
      include.axes = FALSE, 
-     cex = svl.sp-2)
+     cex = sz.mn-2)
 
 
 
 
 # shape ~ habitat model (species data) ----
-shape.res
-hab.sp <- dat.morpho.num$habitat_broad
-names(hab.sp) <- rownames(dat.morpho.num)
-identical(names(hab.sp), rownames(shape.res))
-hab.sp.fctr <- as.factor(hab.sp)
 
-rdf.shape.hab <- rrpp.data.frame(shape = shape.res, hab = hab.sp.fctr)
+rdf.shape.hab <- rrpp.data.frame(shape = shape.res, hab = hab.mn)
 
 # Phylogenetic regression
 fit.shape.hab <- lm.rrpp(shape~hab, data = rdf.shape.hab, Cov = vcv(tree))
@@ -513,9 +485,8 @@ pw.shape.hab_df <- summary(pw.shape.hab, type = 'var', stat.table = FALSE)
 ?lm.rrpp
 
 # head ~ habitat model ----
-hab.sp.fctr
 head.res <- shape.res[, 2:4]
-rdf.head.hab <- rrpp.data.frame(head = head.res, hab = hab.sp.fctr)
+rdf.head.hab <- rrpp.data.frame(head = head.res, hab = hab.mn)
 fit.head.hab <- lm.rrpp(head~hab, data = rdf.head.hab, Cov = vcv(tree))
 anova(fit.head.hab)
 pw.head.hab <- pairwise(fit.head.hab, groups = rdf.head.hab$hab)
@@ -523,7 +494,7 @@ pw.head.hab_df <- summary(pw.head.hab, type = 'var', stat.table = FALSE)
 
 # limb ~ habitat model ----
 limb.res <- shape.res[, 5:8]
-rdf.limb.hab <- rrpp.data.frame(limb = limb.res, hab = hab.sp.fctr)
+rdf.limb.hab <- rrpp.data.frame(limb = limb.res, hab = hab.mn)
 fit.limb.hab <- lm.rrpp(limb~hab, data = rdf.limb.hab, Cov = vcv(tree))
 anova(fit.limb.hab)
 pw.limb.hab <- pairwise(fit.limb.hab, groups = rdf.limb.hab$hab)
@@ -597,7 +568,7 @@ dev.off()
 
 # phenograms head and limb slopes ----
 pdf('plots/phenogram_head.pdf')
-phenogram(tree = cm.head$tree, x = svl.sp, 
+phenogram(tree = cm.head$tree, x = sz.mn, 
           colors = cm.head$cols, 
           #          ftype = 'off', 
           ftype = 'i',
@@ -613,7 +584,7 @@ add.color.bar(prompt = FALSE, cols = cm.head$cols, leg = 20,
 dev.off()
 
 pdf('plots/phenogram_limb_reverse.pdf')
-phenogram(tree = cm.limb$tree, x = svl.sp, 
+phenogram(tree = cm.limb$tree, x = sz.mn, 
           colors = cm.limb$cols, 
           #ftype = 'off', 
           ftype = 'i',
