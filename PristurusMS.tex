@@ -4,10 +4,10 @@
 %
 \documentclass[
 ]{article}
-\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -33,8 +33,15 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={XXX},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
-\usepackage{graphicx}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -51,29 +58,6 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
-  \fi
-  % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \usepackage{setspace}\doublespacing
 \usepackage{lineno}\linenumbers
 \usepackage{booktabs}
@@ -90,16 +74,6 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
-\hypersetup{
-  pdftitle={XXX},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
 
 \title{XXX}
 \author{}
@@ -112,7 +86,7 @@
 \textbf{ORDER TBD:  H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,*}$,  Iris Men{\'{e}}ndez$^{2,3}$, Salvador Carranza$^{1}$, and Dean C. Adams$^{4}$} 
 \end{center}
 
-\begin{center}21 September, 2022\end{center}
+\begin{center}22 septiembre, 2022\end{center}
 
 \(^{1}\)Institute of Evolutionary Biology (CSIC-Universitat Pompeu
 Fabra), Passeig Marítim de la Barceloneta 37-49, Barcelona 08002, Spain
@@ -167,30 +141,45 @@ asdf
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-some general paragraph on the evolution of phenotypic diversity
-\hfill\break
+The mechanisms through which phenotypic diversity emerges and evolves
+are an essential topic of study in evolutionary biology. The evolution
+of morphology might be shaped by ecological processes that impose
+certain selective pressures or specific evolutionary trajectories,
+resulting for instance in the adaptation of morphological structures to
+different environments. When organisms colonize new and unique habitats,
+they are subjected to novel ecological dynamics that may impose
+different functional requirements. This often elicits changes in body
+form as organisms adapt to their new habitats, with the emergence of
+ecomorphological relationships that may lead to the so-called ecomorphs,
+with paradigmatic examples in \emph{Anolis} lizards (Losos 2009
+\textbf{add}) or cichlid fishes (REF). In this vein, species or clades
+living in diverse ecological conditions often display greater diversity
+in form and function (REFS). \hfill\break
 
-when organisms colonize new and unique habitats, they are subjected to
-novel ecological selection pressures in those habitats. Often these
-selective pressures elicit changes in body form, as organisms adapt to
-their new habitats (examples: some comment on ecomorphs, etc.). \ldots.
-leads to so-called ecomorphs, with such well known examples in Anolis
-lizards, cichlid fishes, etc. It follows that \ldots{} Some comment on
-the fact that clades living in diverse ecological conditions often
-display greater diversity in form and function (REFS).
-
-However, while the above patterns have been well documented in a variety
-of vertebrate taxa, what remains less known is how allometry plays a
-role in this phenotypic diversification. We know that XYZPDQ (about
-allometry). Then links to diversity..
+However, while the patterns of morphological differences among distinct
+ecological contexts have been well documented in a variety of vertebrate
+taxa, the specific trajectories of morphological evolution are in many
+cases less known. A particularly interesting question is perhaps the
+extent to which evolutionary allometry can describe this phenotypic
+differentiation. ALLOMETRY BLABLABLA. \hfill\break
 
 The Afro-Arabian geckos in the genus \emph{Pristurus} afford the
 opportunity to elucidate the interdigitating effects of allometry and
 habitat specialization on clade-level patterns of phenotypic diversity.
-Prior work on this system (Tejero-Cicuéndez et al. 2021a) has revealed
-that \ldots{} (sentence or 2 about your prior study, getting to
-diversity and \ldots{} Importantly, \ldots{} something about habitat.
-\ldots. What remains unexamined however, is XYZPDQ\ldots{}
+Prior work on this system (Tejero-Cicuéndez et al. 2021a) revealed that
+the colonization of ground habitats has been a trigger of morphological
+change, specifically reflected in an increase in body size and shape
+disparity. Interestingly, some ground-dwelling species are among the
+largest of the genus and also show increased relative head sizes and
+limb proportions, while some other species with this ecological
+specialization have evolved to be among the smallest of the group.
+Additionally, among the species exploiting rocky habitats (the most
+common ecological feature in \emph{Pristurus}), there are also species
+with both considerably large and small body sizes (Tejero-Cicuéndez et
+al. 2021a). What remains unexplored, however, is how the evolution of
+body shape is related to differences in body size and whether habitat
+specialization has an impact in this relationship shape-size. (how this
+relationship shape-size differs among habitats.) \hfill\break
 
 \textbf{last paragraph} In this study, we used a combination of
 multivariate morphometric and phylogenetic comparative analysis to
@@ -255,9 +244,17 @@ found on DRYAD: \url{https://doi.org/10.5061/dryad.xwdbrv1f6}
 \subsection{Statistical and Comparative
 Analyses}\label{statistical-and-comparative-analyses}}
 
-\textbf{EVOLUTIONARY ALLOMETRY} - compare habitat slopes we found with
-individuals to those from species means (the `usual' way of looking at
-evolutionary allometry)
+\textbf{EVOLUTIONARY ALLOMETRY} Do just shape \textasciitilde{} size \&
+shape \textasciitilde size for species \textbar{} phylogeny
+
+THen mancova\ldots.
+
+\begin{itemize}
+\tightlist
+\item
+  compare habitat slopes we found with individuals to those from species
+  means (the `usual' way of looking at evolutionary allometry)
+\end{itemize}
 
 We conducted a series of analyses to interrogate allometric trends and
 macroevolutionary changes in allometry, relative to diversification in
@@ -273,12 +270,12 @@ sampling distributions to evaluate the observed test statistics
 al. 2015). Next we compared the multivariate allometric vectors for each
 habitat group by calculating pairwise differences in their angular
 direction in morphospace, and evaluating these relative to empirical
-sampling distributions obtained through RRPP (Collyer and Adams 2007;
-Adams and Collyer 2009; Collyer and Adams 2013). We then visualized
-patterns of multivariate allometry relative to body size via regression
-scores (Drake and Klingenberg 2008) and predicted lines (Adams and
-Nistri 2010), based on the coefficients and fitted values from the
-linear model described above. \hfill\break
+sampling distributions obtained through RRPP (Collyer and Adams 2007,
+2013; Adams and Collyer 2009). We then visualized patterns of
+multivariate allometry relative to body size via regression scores
+(Drake and Klingenberg 2008) and predicted lines (Adams and Nistri
+2010), based on the coefficients and fitted values from the linear model
+described above. \hfill\break
 
 Second, we examined changes in allometric trends across the phylogeny,
 treating the head dimensions and limb dimensions separately. Because
@@ -301,8 +298,8 @@ phylogenetic regression (see Tejero-Cicuéndez et al. 2021a). Here,
 phenotypic similarities among species, relative to their phylogenetic
 relationships and habitat affiliations, were observed. All analyses were
 conducted in R 4.2.1 (R Core Team 2022), using \texttt{RRPP} version
-1.3.1 (Collyer and Adams 2018; Collyer and Adams 2022), and scripts
-written by the authors (available at \textbf{XXX}).
+1.3.1 (Collyer and Adams 2018, 2022), and scripts written by the authors
+(available at \textbf{XXX}).
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -355,83 +352,78 @@ When viewed in light of phylomorphospace\ldots.
 \setlength{\parskip}{8pt} \noindent
 
 \hypertarget{refs}{}
-\begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-AdamsCollyer2009}{}}%
+\leavevmode\hypertarget{ref-AdamsCollyer2009}{}%
 Adams, D. C., and M. L. Collyer. 2009. A general framework for the
 analysis of phenotypic trajectories in evolutionary studies. Evolution
 63:1143--1154.
 
-\leavevmode\vadjust pre{\hypertarget{ref-AdamsNistri2010}{}}%
+\leavevmode\hypertarget{ref-AdamsNistri2010}{}%
 Adams, D. C., and A. Nistri. 2010. Ontogenetic convergence and evolution
 of foot morphology in european cave salamanders (family:
-plethodontidae). BMC Evolutionary Biology 10:1--10. BioMed Central.
+Plethodontidae). BMC Evolutionary Biology 10:1--10. BioMed Central.
 
-\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2007}{}}%
+\leavevmode\hypertarget{ref-CollyerAdams2007}{}%
 Collyer, M. L., and D. C. Adams. 2007. Analysis of two-state
 multivariate phenotypic change in ecological studies. Ecology
 88:683--692.
 
-\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2013}{}}%
+\leavevmode\hypertarget{ref-CollyerAdams2013}{}%
 Collyer, M. L., and D. C. Adams. 2013. Phenotypic trajectory analysis:
 Comparison of shape change patterns in evolution and ecology. Hystrix
 24:75--83.
 
-\leavevmode\vadjust pre{\hypertarget{ref-RRPP}{}}%
-Collyer, M. L., and D. C. Adams. 2022.
-\href{https://CRAN.R-project.org/package=RRPP}{R: RRPP: Linear model
-evaluation with randomized residuals in a permutation procedure. Vsn.
-1.3.1}. R Foundation for Statistical Computing, Vienna, Austria.
-
-\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2018}{}}%
+\leavevmode\hypertarget{ref-CollyerAdams2018}{}%
 Collyer, M. L., and D. C. Adams. 2018. RRPP: An r package for fitting
 linear models to high-dimensional data using residual randomization.
 Methods in Ecology and Evolution 9:1772--1779.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Collyer_et_al2015}{}}%
+\leavevmode\hypertarget{ref-RRPP}{}%
+Collyer, M. L., and D. C. Adams. 2022. R: RRPP: Linear model evaluation
+with randomized residuals in a permutation procedure. Vsn. 1.3.1. R
+Foundation for Statistical Computing, Vienna, Austria.
+
+\leavevmode\hypertarget{ref-Collyer_et_al2015}{}%
 Collyer, M. L., D. J. Sekora, and D. C. Adams. 2015. A method for
 analysis of phenotypic change for phenotypes described by
 high-dimensional data. Heredity 115:357--365.
 
-\leavevmode\vadjust pre{\hypertarget{ref-DrakeKlingenberg2008}{}}%
-Drake, A. G., and C. P. Klingenberg. 2008.
-\href{https://doi.org/10.1098/rspb.2007.1169}{The pace of morphological
-change: Historical transformation of skull shape in st bernard dogs}.
+\leavevmode\hypertarget{ref-DrakeKlingenberg2008}{}%
+Drake, A. G., and C. P. Klingenberg. 2008. The pace of morphological
+change: Historical transformation of skull shape in st bernard dogs.
 Proceedings of the Royal Society B: Biological Sciences 275:71--76.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Freedman1983}{}}%
+\leavevmode\hypertarget{ref-Freedman1983}{}%
 Freedman, D., and D. Lane. 1983. A nonstochastic interpretation of
-reported significance levels. Journal of Business {\&} Economic
-Statistics 1:292--298.
+reported significance levels. Journal of Business \& Economic Statistics
+1:292--298.
 
-\leavevmode\vadjust pre{\hypertarget{ref-RCT}{}}%
-R Core Team. 2022. \href{https://www.R-project.org/}{R: A language and
-environment for statistical computing. Version 4.2.1}. R Foundation for
-Statistical Computing, Vienna, Austria.
+\leavevmode\hypertarget{ref-RCT}{}%
+R Core Team. 2022. R: A language and environment for statistical
+computing. Version 4.2.1. R Foundation for Statistical Computing,
+Vienna, Austria.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Rohlf2000}{}}%
+\leavevmode\hypertarget{ref-Rohlf2000}{}%
 Rohlf, F. J., and M. Corti. 2000. Use of two-block partial least-squares
 to study covariation in shape. Systematic Biology 49:740--753.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Tejero-Cicuendez2022}{}}%
+\leavevmode\hypertarget{ref-Tejero-Cicuendez2022}{}%
 Tejero-Cicuéndez, H., A. H. Patton, D. S. Caetano, J. Šmíd, L. J.
 Harmon, and S. Carranza. 2022. Reconstructing squamate biogeography in
 afro-arabia reveals the influence of a complex and dynamic geologic
 past. Systematic Biology 71:261--272.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Tejero-Cicuendez2021}{}}%
+\leavevmode\hypertarget{ref-Tejero-Cicuendez2021}{}%
 Tejero-Cicuéndez, H., M. Simó-Riudalbas, I. Menéndez, and S. Carranza.
-2021a. \href{https://doi.org/10.1098/rspb.2021.1821}{Ecological
-specialization, rather than the island effect, explains morphological
-diversification in an ancient radiation of geckos}. Proceedings of the
-Royal Society B: Biological Sciences 288:20211821.
+2021a. Ecological specialization, rather than the island effect,
+explains morphological diversification in an ancient radiation of
+geckos. Proceedings of the Royal Society B: Biological Sciences
+288:20211821.
 
-\leavevmode\vadjust pre{\hypertarget{ref-PristurusData}{}}%
+\leavevmode\hypertarget{ref-PristurusData}{}%
 Tejero-Cicuéndez, H., M. Simó-Riudalbas, I. Menéndez, and S. Carranza.
 2021b. Ecological specialization, rather than the island effect,
 explains morphological diversification in an ancient radiation of
 geckos. Dryad digital repository. (Doi:10.5061/dryad.xwdbrv1f6).
-
-\end{CSLReferences}
 
 \newpage
 
