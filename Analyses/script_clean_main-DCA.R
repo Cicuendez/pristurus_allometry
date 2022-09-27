@@ -55,6 +55,8 @@ limb.slp <- coef.limb[grep('svl', rownames(coef.limb)), ]
   limb.slp[-1] <- limb.slp[-1] + limb.slp[1]
 names(limb.slp) <- names(head.slp) <- levels(rdf$species)
 
+cor(head.slp,limb.slp)
+plot(head.slp,limb.slp)
 
 contMap(tree = tree, x = head.slp, outline = FALSE)
 cm.limb <- contMap(tree = tree, x = limb.slp, outline = FALSE)

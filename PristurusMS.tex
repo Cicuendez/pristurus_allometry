@@ -6,8 +6,8 @@
 ]{article}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -33,13 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={XXX},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \makeatletter
@@ -58,6 +51,29 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \usepackage{setspace}\doublespacing
 \usepackage{lineno}\linenumbers
 \usepackage{booktabs}
@@ -74,29 +90,16 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
-  % set entry spacing
-  \ifnum #2 > 0
-  \setlength{\parskip}{#2\baselineskip}
-  \fi
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={XXX},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{XXX}
 \author{}
@@ -106,10 +109,10 @@
 \maketitle
 
 \begin{center}
-\textbf{ORDER TBD:  H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,*}$,  Iris Men{\'{e}}ndez$^{2,3}$, Salvador Carranza$^{1}$, and Dean C. Adams$^{4}$} 
+\textbf{ORDER TBD:  H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,*}$,  Iris Men{\'{e}}ndez$^{2,3}$, Marc Sim{\'{o}} Riudalbas$^{1}$, Salvador Carranza$^{1}$, and Dean C. Adams$^{4}$} 
 \end{center}
 
-\begin{center}22 September, 2022\end{center}
+\begin{center}27 September, 2022\end{center}
 
 \(^{1}\)Institute of Evolutionary Biology (CSIC-Universitat Pompeu
 Fabra), Passeig Marítim de la Barceloneta 37-49, Barcelona 08002, Spain
@@ -149,8 +152,7 @@ R-scripts are available at \textbf{XXX}. \hfill\break
 
 \textbf{Acknowledgments}: We thank XYZPDQ\ldots{} This work was
 sponsored in part by XXX (to SC) DCA was funded in part by National
-Science Foundation Grant DEB-2140720, and a Fulbright Senior Scholar
-Grant.
+Science Foundation Grant DBI-1902511.
 
 \newpage
 
@@ -247,8 +249,8 @@ adults, yes? )
 \subsection{Data}\label{data}}
 
 We used a combination of phenotypic, phylogenetic, and ecological data
-to characterize and evaluate interspectific allometric trends. The data
-utilized here were obtained from our prior work on this system
+to characterize and evaluate intra- and interspecific allometric trends.
+The data utilized here were obtained from our prior work on this system
 (Tejero-Cicuéndez et al. 2021a, 2022), and are briefly described here.
 First we used a time-dated, molecular phylogeny that included all
 members of the genus \emph{Pristurus}, including several currently
@@ -263,7 +265,7 @@ eight linear measurements (Figure 1) that described overall body form:
 trunk length (TrL), head length (HL), head width (HW), head height (HH),
 humerus length (Lhu), ulna length (Lun), femur length (Lfe), and tibia
 length (Ltb) (Tejero-Cicuéndez et al. 2021a). We restricted our study to
-those species represented by five or more individuals; resulting in a
+those species represented by nine or more individuals; resulting in a
 dataset of 687 individuals from 25 species (invidivuals per species:
 \(\mu=27\); min = 9, max = 56). Species in the phenotypic dataset were
 then matched to the phylogeny, which was subsequently pruned to arrive
@@ -278,52 +280,55 @@ found on DRYAD: \url{https://doi.org/10.5061/dryad.xwdbrv1f6}
 \subsection{Statistical and Comparative
 Analyses}\label{statistical-and-comparative-analyses}}
 
-\textbf{EVOLUTIONARY ALLOMETRY} Do just shape \textasciitilde{} size \&
-shape \textasciitilde size for species \textbar{} phylogeny
-
-THen mancova\ldots.
-
-\begin{itemize}
-\tightlist
-\item
-  compare habitat slopes we found with individuals to those from species
-  means (the `usual' way of looking at evolutionary allometry)
-\end{itemize}
-
 We conducted a series of analyses to interrogate allometric trends and
-macroevolutionary changes in allometry, relative to diversification in
-body form. First, to determine whether allometric trends in body form
-differed across habitat groups, we performed a multivariate analysis of
-covariance, with body size (\(SVL\)), \(habitat\), and
-\(SVL\times habitat\) as model effects. Significance was evaluated using
-999 iterations of a permutation procedure, where residuals from a
-reduced model were randomly permuted in each permutation (RRPP), model
-statistics were recalculated, and used to generate empirical null
-sampling distributions to evaluate the observed test statistics
-(following Freedman and Lane 1983; Collyer and Adams 2007; Collyer et
-al. 2015). Next we compared the multivariate allometric vectors for each
-habitat group by calculating pairwise differences in their angular
-direction in morphospace, and evaluating these relative to empirical
-sampling distributions obtained through RRPP (Collyer and Adams 2007;
-Adams and Collyer 2009; Collyer and Adams 2013). We then visualized
-patterns of multivariate allometry relative to body size via regression
-scores (Drake and Klingenberg 2008) and predicted lines (Adams and
-Nistri 2010), based on the coefficients and fitted values from the
-linear model described above. \hfill\break
+macroevolutionary changes in allometry, relative to differentiation in
+body form. First we characterized evolutionary allometry in the genus by
+performing a phylogenetic multivariate regression of body form on size,
+using the species means as data. We then performed an analogous
+procedure at the individual level, regressing body form on size using
+our entire dataset. From both the species-level (phylogenetic) and the
+individual-level regression models, we obtained the set of regression
+coefficients, and calculated the difference between them to describe the
+extent to which patterns of allometry at the individual level were
+concordant with evolutionary allometric trends across species.
+\hfill\break  
 
-Second, we examined changes in allometric trends across the phylogeny,
-treating the head dimensions and limb dimensions separately. Because
-both the head and limb data were multivariate, we accomplished this by
-first performing a partial least squares analysis (Rohlf and Corti 2000)
-of the head traits versus SVL, and the limb traits versus SVL, and
-retaining the PLS scores for each individual from the first dimension of
-this analysis. Species-specific slopes describing the extent of head and
-limb allometry within each species were then obtained from an analysis
-of covariance modeled as: \(PLS1_{head} \sim SVL*species\) and
-\(PLS1_{limb} \sim SVL*species\) respectively. Species' slopes were then
-mapped on the phylogeny of \emph{Pristurus} using a Brownian motion
-model of evolution, to qualitatively evaluate shifts in allometry across
-species (for a similar approach see Adams and Nistri 2010). \hfill\break
+Next we used the individual dataset to determine whether allometric
+trends in body form differed across habitat groups. This was
+accomplished by performing a multivariate analysis of covariance, with
+body size (\(SVL\)), \(habitat\), and \(SVL\times habitat\) as model
+effects. Significance was evaluated using 999 iterations of a
+permutation procedure, where residuals from a reduced model were
+randomly permuted in each permutation (RRPP), model statistics were
+recalculated, and used to generate empirical null sampling distributions
+to evaluate the observed test statistics (following Freedman and Lane
+1983; Collyer and Adams 2007; Collyer et al. 2015). We then compared the
+multivariate allometric vectors for each habitat group by calculating
+pairwise differences in their angular direction in morphospace, and
+evaluating these relative to empirical sampling distributions obtained
+through RRPP (Collyer and Adams 2007; Adams and Collyer 2009; Collyer
+and Adams 2013). Patterns of multivariate allometry relative to body
+size were visualized via regression scores (Drake and Klingenberg 2008)
+and predicted lines (Adams and Nistri 2010), based on the coefficients
+and fitted values from the linear model described above. \hfill\break
+
+We then examined changes in allometric trends across the phylogeny. Here
+we treated the head dimensions and limb dimensions separately, as
+allometric trends could potentially differ between these body regions
+due to differential functional or selective constraints (Kaliontzopoulou
+et al. 2010). Because both the head and limb data were multivariate, we
+first performed a partial least squares analysis (Rohlf and Corti 2000)
+of the head traits versus SVL, and the limb traits versus SVL, to
+describe the direction of maximal covaration between each body region
+and size. PLS scores from each analysis were obtained, and
+species-specific slopes describing the extent of head and limb allometry
+within each species were extracted from an analysis of covariance
+modeled as: \(PLS1_{head} \sim SVL*species\) and
+\(PLS1_{limb} \sim SVL*species\) respectively. The species-specific
+allometric slopes were then mapped on the phylogeny of \emph{Pristurus}
+using a Brownian motion model of evolution, to qualitatively evaluate
+shifts in allometry across the phylogeny for the group (for a similar
+approach see Adams and Nistri 2010). \hfill\break
 
 Finally, to relate within-species allometric trends with patterns of
 phenotypic diversification in the group we generated a phylomorphospace,
@@ -338,43 +343,111 @@ written by the authors (available at \textbf{XXX}).
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
-Our analyses revealed significant differences in the allometry of body
-form among \emph{Pristurus} that utilized distinct habitats (Table 1).
-Further, comparisons of multivariate allometric vectors identified that
+Using phylogenetic regression, we found significant evolutionary
+allometry in body form across species (\(N_{sp}=25\); \(F = 217.9\);
+\(Z =5.53\); \(P < 0.001\)). Likewise, when allometry in body form was
+examined across individuals, a similar pattern was observed
+(\(N_{ind}=687\); \(F = 7910.8\); \(Z =9.20\); \(P < 0.001\)). Further,
+the vectors of regression coefficients between the two analyses were
+highly correlated (\(\rho = 0.94\)) and were oriented in nearly parallel
+directions in morphospace (\(\theta = 1.49^\circ\)). This revealed that
+the pattern of multivaraite allometry across individuals was concordant
+with macroevolutionary trends of interspecific allometry among species
+of \emph{Pristurus} across the phylogeny. \hfill\break
+
+Our analyses also exposed significant differences in the allometry of
+body form among \emph{Pristurus} utilizing distinct habitats (Table 1).
+Here, comparisons of multivariate allometric vectors identified that
 ground-dwelling \emph{Pristurus} displayed a distinct allometric trend
 as compared with \emph{Pristurus} occupying both the rock and tree
-habitats (Table 2). A visualization of multivariate allometric trends
-(Fig. 2) confirmed these statistical findings, and indicated that the
-allometric trajectory in rock-dwelling animals was more extreme as
-compared with either ground or tree-dwelling \emph{Pristurus}.
-Inspection of individual regression coefficients for each trait
-(Supplemental Information) further corroborated this, revealing steeper
-allometric coefficients for all head and limb traits in ground-dwelling
-\emph{Pristurus} as compared with rock and tree-dwelling taxa. Overall,
-these findings revealed that larger individuals of ground-dwelling
+habitats (Table 2). Inspection of the regression coefficients for each
+trait (Supplemental Information) found steeper allometric coefficients
+for all head and limb traits in ground-dwelling \emph{Pristurus} as
+compared with rock and tree-dwelling taxa, corroborating this result.
+These findings implied that larger individuals of ground-dwelling
 \emph{Pristurus} species displayed proportionately larger heads and
 limbs, as compared with large individuals in taxa utilizing other
-habitat types. \hfill\break
+habitat types. A visualization of multivariate allometric trends (Fig.
+2) confirmed these statistical findings, and indicated that the
+allometric trajectory in rock-dwelling animals was more extreme as
+compared with either ground or tree-dwelling \emph{Pristurus}.
+\hfill\break
 
-Ground: head and body dimensions are more positively allometric
-(relative to SVL) than in rock/tree groups, and whereas allometric
-coefficients more similar in rock \& tree.
+When allometric patterns were mapped on the phylogeny, traitgrams
+elucidated that changes in allometric trends were not concentrated to
+specific regions of the phylogeny (Figure 3). Rather, increases and
+decreases in allometry of both the head traits and the limb traits
+occurred repeatedly (see also Supplemental Information). When these
+patterns were viewed relative to body size, large ground-dwelling
+species tended to display steeper head allometry as compared to large
+rock-dwelling species; who displayed shallower head allometry (Figure
+3A). Likewise, a similar pattern was observed when comparing small
+species utilizing these habitats. In contrast, large ground-dwelling
+species exhibited intermediate patterns of limb allometry, and small
+species in general were more variable in their patterns of limb
+allometry (Figure 3B). Inspection of traitgrams thus revealed some
+degree of discordance in patterns of allometry across body regions; a
+pattern evidenced by the relatively low correlation between slopes
+representing head and limb allometry respectively (\(\rho = 0.42\)).
+\hfill\break
 
-Formally evaluated using PLS: confirming \ldots\ldots. WHen mapped on
-the phylogeny (\ldots.) Here traitgrams (by SVL) elucidated that heads
-more strongly allometric in XXX, implying that larger individuals of
-these species display proportionately larger heads relative to the
-`typical' trend in the genus. By contrast, \ldots{} less strong
-(negative? ) allometry
-
-steeper/shallower slopes? resulting in \ldots{}
-
-**Careful! use steeper slope, not positive/negative.
-
-When viewed in light of phylomorphospace\ldots.
+When body shape differentiation in \emph{Pristurus} was viewed in
+phylomorphospace (Figure 4), we found broad overlap among habitat
+groups, though arboreal (tree-dwelling) species were somewhat more
+separated in morphospace. Rock-dwelling species occupied a slightly
+larger region of morphospace as compared with the other groups, though
+this pattern was not statistically significant (Supplemental
+Information). Intriguingly, when viewed in relation to body size, large
+\emph{Pristurus} species were not localized to a particular region of
+morphospace, nor were smaller species. Instead, the largest
+rock-dwelling species were found in close proximity to the smallest
+ground-dwelling species, indicating that they were similar in overall
+body shape. Likewise, the smaller rock-dwelling species were found close
+to large ground-dwelling species in morphospace, indicating they
+displayed similar body shapes as well. Finally, integrating the patterns
+revealed in the phylomorphospace with those identified in our earlier
+analyses revealed a complex interplay between body shape, body size, and
+multivariate allometry in \emph{Pristurus}; where species with similar
+body shapes displayed differing overall size, were found in distinct
+habitats, and exhibited different allometric trends.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
+
+\begin{itemize}
+\item
+  First paragraph; restate topic/questions (see last par of Intro);
+  summarize general findings \ldots{}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    something about linking allometry and phenotypic diversification?
+  \end{itemize}
+\item
+  result 1: implication
+\item
+  result 2: implication
+\item
+  result 3: implication
+
+  \begin{itemize}
+  \tightlist
+  \item
+    morphospace: Thus there was a reciprocal relationship between body
+    shape and body size across ground-dwelling and rock-dwelling
+    species.
+  \end{itemize}
+\item
+  one interesting\ldots{} head vs.~(correlation of head vs.~limb slopes:
+  0.42. Pretty low. Implies some sort of differential something here,
+  resulting in distinct allometric patterns for these two body regions.
+  SImilar to Antigoni's work (and refs therein). IMPLICATION: tie this
+  into integration/modularity. Less integrated across the whole
+  organism, and more modular\ldots{} Future studies should examine this.
+\end{itemize}
+
+closing paragraph
 
 \newpage
 
@@ -387,74 +460,82 @@ When viewed in light of phylomorphospace\ldots.
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
-\leavevmode\hypertarget{ref-AdamsCollyer2009}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-AdamsCollyer2009}{}}%
 Adams, D. C., and M. L. Collyer. 2009. A general framework for the
 analysis of phenotypic trajectories in evolutionary studies. Evolution
 63:1143--1154.
 
-\leavevmode\hypertarget{ref-AdamsNistri2010}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-AdamsNistri2010}{}}%
 Adams, D. C., and A. Nistri. 2010. Ontogenetic convergence and evolution
 of foot morphology in european cave salamanders (family:
 plethodontidae). BMC Evolutionary Biology 10:1--10. BioMed Central.
 
-\leavevmode\hypertarget{ref-CollyerAdams2007}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2007}{}}%
 Collyer, M. L., and D. C. Adams. 2007. Analysis of two-state
 multivariate phenotypic change in ecological studies. Ecology
 88:683--692.
 
-\leavevmode\hypertarget{ref-CollyerAdams2013}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2013}{}}%
 Collyer, M. L., and D. C. Adams. 2013. Phenotypic trajectory analysis:
 Comparison of shape change patterns in evolution and ecology. Hystrix
 24:75--83.
 
-\leavevmode\hypertarget{ref-RRPP}{}%
-Collyer, M. L., and D. C. Adams. 2022. R: RRPP: Linear model evaluation
-with randomized residuals in a permutation procedure. Vsn. 1.3.1. R
-Foundation for Statistical Computing, Vienna, Austria.
+\leavevmode\vadjust pre{\hypertarget{ref-RRPP}{}}%
+Collyer, M. L., and D. C. Adams. 2022.
+\href{https://CRAN.R-project.org/package=RRPP}{R: RRPP: Linear model
+evaluation with randomized residuals in a permutation procedure. Vsn.
+1.3.1}. R Foundation for Statistical Computing, Vienna, Austria.
 
-\leavevmode\hypertarget{ref-CollyerAdams2018}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2018}{}}%
 Collyer, M. L., and D. C. Adams. 2018. RRPP: An r package for fitting
 linear models to high-dimensional data using residual randomization.
 Methods in Ecology and Evolution 9:1772--1779.
 
-\leavevmode\hypertarget{ref-Collyer_et_al2015}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Collyer_et_al2015}{}}%
 Collyer, M. L., D. J. Sekora, and D. C. Adams. 2015. A method for
 analysis of phenotypic change for phenotypes described by
 high-dimensional data. Heredity 115:357--365.
 
-\leavevmode\hypertarget{ref-DrakeKlingenberg2008}{}%
-Drake, A. G., and C. P. Klingenberg. 2008. The pace of morphological
-change: Historical transformation of skull shape in st bernard dogs.
+\leavevmode\vadjust pre{\hypertarget{ref-DrakeKlingenberg2008}{}}%
+Drake, A. G., and C. P. Klingenberg. 2008.
+\href{https://doi.org/10.1098/rspb.2007.1169}{The pace of morphological
+change: Historical transformation of skull shape in st bernard dogs}.
 Proceedings of the Royal Society B: Biological Sciences 275:71--76.
 
-\leavevmode\hypertarget{ref-Freedman1983}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Freedman1983}{}}%
 Freedman, D., and D. Lane. 1983. A nonstochastic interpretation of
 reported significance levels. Journal of Business {\&} Economic
 Statistics 1:292--298.
 
-\leavevmode\hypertarget{ref-RCT}{}%
-R Core Team. 2022. R: A language and environment for statistical
-computing. Version 4.2.1. R Foundation for Statistical Computing,
-Vienna, Austria.
+\leavevmode\vadjust pre{\hypertarget{ref-KALIONTZOPOULOU2010}{}}%
+Kaliontzopoulou, A., M. A. Carretero, and G. A. Llorente. 2010.
+Intraspecific ecomorphological variation: Linear and geometric
+morphometrics reveal habitat-related patterns within podarcis bocagei
+wall lizards. Journal of Evolutionary Biology 23:1234--1244.
 
-\leavevmode\hypertarget{ref-Rohlf2000}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-RCT}{}}%
+R Core Team. 2022. \href{https://www.R-project.org/}{R: A language and
+environment for statistical computing. Version 4.2.1}. R Foundation for
+Statistical Computing, Vienna, Austria.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Rohlf2000}{}}%
 Rohlf, F. J., and M. Corti. 2000. Use of two-block partial least-squares
 to study covariation in shape. Systematic Biology 49:740--753.
 
-\leavevmode\hypertarget{ref-Tejero-Cicuendez2022}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Tejero-Cicuendez2022}{}}%
 Tejero-Cicuéndez, H., A. H. Patton, D. S. Caetano, J. Šmíd, L. J.
 Harmon, and S. Carranza. 2022. Reconstructing squamate biogeography in
 afro-arabia reveals the influence of a complex and dynamic geologic
 past. Systematic Biology 71:261--272.
 
-\leavevmode\hypertarget{ref-Tejero-Cicuendez2021}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Tejero-Cicuendez2021}{}}%
 Tejero-Cicuéndez, H., M. Simó-Riudalbas, I. Menéndez, and S. Carranza.
-2021a. Ecological specialization, rather than the island effect,
-explains morphological diversification in an ancient radiation of
-geckos. Proceedings of the Royal Society B: Biological Sciences
-288:20211821.
+2021a. \href{https://doi.org/10.1098/rspb.2021.1821}{Ecological
+specialization, rather than the island effect, explains morphological
+diversification in an ancient radiation of geckos}. Proceedings of the
+Royal Society B: Biological Sciences 288:20211821.
 
-\leavevmode\hypertarget{ref-PristurusData}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-PristurusData}{}}%
 Tejero-Cicuéndez, H., M. Simó-Riudalbas, I. Menéndez, and S. Carranza.
 2021b. Ecological specialization, rather than the island effect,
 explains morphological diversification in an ancient radiation of
