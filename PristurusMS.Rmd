@@ -26,7 +26,7 @@ header-includes:
 ```
 
 \begin{center}
-\textbf{ORDER TBD:  H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,*}$,  Iris Men{\'{e}}ndez$^{2,3}$, Marc Sim{\'{o}} Riudalbas$^{1}$, Salvador Carranza$^{1}$, and Dean C. Adams$^{4}$} 
+\textbf{ORDER TBD:  H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,*}$,  Iris Men{\'{e}}ndez$^{2,3}$, Marc Sim{\'{o}} Riudalbas$^{1}$, Salvador Carranza$^{1}$, and Dean C. Adams$^{4}$}
 \end{center}
 
 \begin{center}`r format(Sys.time(), '%d %B, %Y')`\end{center}
@@ -54,7 +54,7 @@ $^{*}$Correspondence: Héctor Tejero-Cicuéndez cicuendez93@gmail.com
 
 **Data Archiving**: Data are available on DRYAD (doi:10.5061/dryad.xwdbrv1f6 [@PristurusData]). R-scripts are available at **XXX**. \hfill\break
 
-**Acknowledgments**: We thank XYZPDQ... This work was sponsored in part by XXX (to SC) DCA was funded in part by National Science Foundation Grant DBI-1902511. 
+**Acknowledgments**: We thank XYZPDQ... This work was sponsored in part by XXX (to SC) DCA was funded in part by National Science Foundation Grant DBI-1902511.
 
 \newpage
 
@@ -70,26 +70,26 @@ The mechanisms through which phenotypic diversity emerges and evolves are an ess
 
 Ecological specialization is one of the main sources of phenotypic diversity. When organisms colonize new and unique habitats, they are subjected to novel ecological dynamics that may impose different functional requirements. This ecomorphological relationship may result in the repeated evolution of certain phenotypes (i.e., convergence) and the appearance of the so-called ecomorphs, when the general morphological features of the species within a clade can be tightly related to specific ecological contexts. This includes emblematic examples of adaptive radiations such as the differential body size and shape of Anolis species exploiting different microhabitats (Losos 2009), the disparity in beak morphology in Darwin’s finches (REFS) and Hawaiian honeycreepers (REFS), or the differences in jaw morphology among cichlid fishes (REFS). \hfill\break
 
-However, while the patterns of morphological differences among distinct ecological contexts have been well documented in a variety of vertebrate taxa, the specific trajectories of morphological evolution are in many cases less known. A particularly interesting question is perhaps the extent to which evolutionary allometry can describe this phenotypic differentiation. ALLOMETRY BLABLABLA. \hfill\break
+However, while the patterns of morphological differences among distinct ecological contexts have been well documented in a variety of vertebrate taxa, the specific trajectories of morphological evolution are in many cases less known. A particularly interesting question is perhaps the extent to which this phenotypic differentiation can be explained by covariance between body parts resulting from body size variation (i.e., allometry). The role of allometry as a determinant of morphological evolution, whether it is caused by developmental constraints or by functional adaptations, has been discussed for decades (REFS), and the ever growing availability of biological data allows for testing allometry-related hypotheses in newly sampled ecological systems.  \hfill\break
 
 The Afro-Arabian geckos in the genus *Pristurus* afford the opportunity to elucidate the interdigitating effects of allometry and habitat specialization on clade-level patterns of phenotypic diversity. Prior work on this system [@Tejero-Cicuendez2021] revealed that the colonization of ground habitats has been a trigger of morphological change, specifically reflected in an increase in body size and shape disparity. Interestingly, some ground-dwelling species are among the largest of the genus and also show increased relative head sizes and limb proportions, while some other species with this ecological specialization have evolved to be among the smallest of the group. Additionally, among the species exploiting rocky habitats (the most common ecological feature in *Pristurus*), there are also species with both considerably large and small body sizes [@Tejero-Cicuendez2021]. What remains unexplored, however, is how the evolution of body shape is related to differences in body size and whether habitat specialization has an impact in this relationship shape-size. (how this relationship shape-size differs among habitats.) \hfill\break
 
 **last paragraph**
-In this study, we used a combination of multivariate morphometric and phylogenetic comparative analysis to interrogate macroevolutionary patterns of evolutionary allometry in *Pristurus* geckos of Afro-Arabia. Using a combination of phenotypic, phylogenetic, and ecological data, we characterized allometric trends in body form to discern the extent to which those patterns differed across species occupying distinct ecological habitats, and to explore how allometric differences related to overall patterns of phenotypic diversification in the group. 
+In this study, we used a combination of multivariate morphometric and phylogenetic comparative analysis to interrogate macroevolutionary patterns of evolutionary allometry in *Pristurus* geckos of Afro-Arabia. Using a combination of phenotypic, phylogenetic, and ecological data, we characterized allometric trends in body form to discern the extent to which those patterns differed across species occupying distinct ecological habitats, and to explore how allometric differences related to overall patterns of phenotypic diversification in the group.
 
 The independent diversification of both Socotran and continental taxa, the ecological and behavioural diversity and the unique phenotypic dataset compiled in this study, make this group of geckos an attractive model system to investigate keystone dynamics in evolutionary biology such as the island effect and ecological adaptation, and their impact on morphological evolution.
 
-Our findings 
+Our findings
 
  Overall our work has ... (some implication).
- 
+
  Our results demonstrate that differing tracectories of allometric growth can result in similar adult phenotypes... (Don't like it! We've got adults, yes? )
 
 # Materials and Methods
 
 ## Data
 
-We used a combination of phenotypic, phylogenetic, and ecological data to characterize and evaluate intra- and interspecific allometric trends. The data utilized here were obtained from our prior work on this system  [@Tejero-Cicuendez2021; @Tejero-Cicuendez2022], and are briefly described here. First we used a time-dated, molecular phylogeny that included all members of the genus *Pristurus*, including several currently undescribed taxa. The tree was estimated in a Bayesian framework, using five mitochondrial markers, six nuclear markers, and 21 calibration points [for details see @Tejero-Cicuendez2022]. Next we categorized each species as belonging to one of three ecological groups (ground, rock, or tree), based on descriptions of habitat use found in the literature [see @Tejero-Cicuendez2021]. Finally, we obtained a phenotypic data set containing body size (snout-vent length: SVL) and eight linear measurements (Figure 1) that described overall body form: trunk length (TrL), head length (HL), head width (HW), head height (HH), humerus length (Lhu), ulna length (Lun), femur length (Lfe), and tibia length (Ltb) [@Tejero-Cicuendez2021]. We restricted our study to those species represented by nine or more individuals; resulting in a dataset of 687 individuals from 25 species (invidivuals per species: $\mu=27$; min = 9, max = 56). Species in the phenotypic dataset were then matched to the phylogeny, which was subsequently pruned to arrive at the final topology. All measurements were log-transformed prior to statistical analyses. Additional details regarding data collection and formal descriptions of each linear measurement may be found in the original sources [see @Tejero-Cicuendez2021; @Tejero-Cicuendez2022]. The data are found on DRYAD: https://doi.org/10.5061/dryad.xwdbrv1f6 [@PristurusData]. 
+We used a combination of phenotypic, phylogenetic, and ecological data to characterize and evaluate intra- and interspecific allometric trends. The data utilized here were obtained from our prior work on this system  [@Tejero-Cicuendez2021; @Tejero-Cicuendez2022], and are briefly described here. First we used a time-dated, molecular phylogeny that included all members of the genus *Pristurus*, including several currently undescribed taxa. The tree was estimated in a Bayesian framework, using five mitochondrial markers, six nuclear markers, and 21 calibration points [for details see @Tejero-Cicuendez2022]. Next we categorized each species as belonging to one of three ecological groups (ground, rock, or tree), based on descriptions of habitat use found in the literature [see @Tejero-Cicuendez2021]. Finally, we obtained a phenotypic data set containing body size (snout-vent length: SVL) and eight linear measurements (Figure 1) that described overall body form: trunk length (TrL), head length (HL), head width (HW), head height (HH), humerus length (Lhu), ulna length (Lun), femur length (Lfe), and tibia length (Ltb) [@Tejero-Cicuendez2021]. We restricted our study to those species represented by nine or more individuals; resulting in a dataset of 687 individuals from 25 species (invidivuals per species: $\mu=27$; min = 9, max = 56). Species in the phenotypic dataset were then matched to the phylogeny, which was subsequently pruned to arrive at the final topology. All measurements were log-transformed prior to statistical analyses. Additional details regarding data collection and formal descriptions of each linear measurement may be found in the original sources [see @Tejero-Cicuendez2021; @Tejero-Cicuendez2022]. The data are found on DRYAD: https://doi.org/10.5061/dryad.xwdbrv1f6 [@PristurusData].
 
 ## Statistical and Comparative Analyses
 
@@ -109,21 +109,21 @@ Our analyses also exposed significant differences in the allometry of body form 
 
 When allometric patterns were mapped on the phylogeny, traitgrams elucidated that changes in allometric trends were not concentrated to specific regions of the phylogeny (Figure 3). Rather, increases and decreases in allometry of both the head traits and the limb traits occurred repeatedly (see also Supplemental Information). When these patterns were viewed relative to body size, large ground-dwelling species tended to display steeper head allometry as compared to large rock-dwelling species; who displayed shallower head allometry (Figure 3A). Likewise, a similar pattern was observed when comparing small species utilizing these habitats. In contrast, large ground-dwelling species exhibited intermediate patterns of limb allometry, and small species in general were more variable in their patterns of limb allometry (Figure 3B). Inspection of traitgrams thus revealed some degree of discordance in patterns of allometry across body regions; a pattern evidenced by the relatively low correlation between slopes representing head and limb allometry respectively ($\rho = 0.42$). \hfill\break
 
-When body shape differentiation in *Pristurus* was viewed in phylomorphospace (Figure 4), we found broad overlap among habitat groups, though arboreal (tree-dwelling) species were somewhat more separated in morphospace. Rock-dwelling species occupied a slightly larger region of morphospace as compared with the other groups, though this pattern was not statistically significant (Supplemental Information). Intriguingly, when viewed in relation to body size, large *Pristurus* species were not localized to a particular region of morphospace, nor were smaller species. Instead, the largest rock-dwelling species were found in close proximity to the smallest ground-dwelling species, indicating that they were similar in overall body shape. Likewise, the smaller rock-dwelling species were found close to large ground-dwelling species in morphospace, indicating they displayed similar body shapes as well. Finally, integrating the patterns revealed in the phylomorphospace with those identified in our earlier analyses revealed a complex interplay between body shape, body size, and multivariate allometry in *Pristurus*; where species with similar body shapes displayed differing overall size, were found in distinct habitats, and exhibited different allometric trends. 
+When body shape differentiation in *Pristurus* was viewed in phylomorphospace (Figure 4), we found broad overlap among habitat groups, though arboreal (tree-dwelling) species were somewhat more separated in morphospace. Rock-dwelling species occupied a slightly larger region of morphospace as compared with the other groups, though this pattern was not statistically significant (Supplemental Information). Intriguingly, when viewed in relation to body size, large *Pristurus* species were not localized to a particular region of morphospace, nor were smaller species. Instead, the largest rock-dwelling species were found in close proximity to the smallest ground-dwelling species, indicating that they were similar in overall body shape. Likewise, the smaller rock-dwelling species were found close to large ground-dwelling species in morphospace, indicating they displayed similar body shapes as well. Finally, integrating the patterns revealed in the phylomorphospace with those identified in our earlier analyses revealed a complex interplay between body shape, body size, and multivariate allometry in *Pristurus*; where species with similar body shapes displayed differing overall size, were found in distinct habitats, and exhibited different allometric trends.
 
 # Discussion
 
-- First paragraph; restate topic/questions (see last par of Intro); summarize general findings ... 
-  - something about linking allometry and phenotypic diversification? 
+- First paragraph; restate topic/questions (see last par of Intro); summarize general findings ...
+  - something about linking allometry and phenotypic diversification?
 
 - result 1: implication
 
 - result 2: implication
 
 - result 3: implication
-  - morphospace: Thus there was a reciprocal relationship between body shape and body size across ground-dwelling and rock-dwelling species. 
+  - morphospace: Thus there was a reciprocal relationship between body shape and body size across ground-dwelling and rock-dwelling species.
 
-- one interesting...  head vs. (correlation of head vs. limb slopes: 0.42. Pretty low. Implies some sort of differential something here, resulting in distinct allometric patterns for these two body regions.  SImilar to Antigoni's work (and refs therein).    IMPLICATION: tie this into integration/modularity.  Less integrated across the whole organism, and more modular... Future studies should examine this. 
+- one interesting...  head vs. (correlation of head vs. limb slopes: 0.42. Pretty low. Implies some sort of differential something here, resulting in distinct allometric patterns for these two body regions.  SImilar to Antigoni's work (and refs therein).    IMPLICATION: tie this into integration/modularity.  Less integrated across the whole organism, and more modular... Future studies should examine this.
 
 closing paragraph
 
@@ -135,7 +135,7 @@ closing paragraph
  \setlength{\leftskip}{0.25in}
  \setlength{\parskip}{8pt}
  \noindent
- 
+
 <div id="refs"></div>
 
 \newpage
@@ -149,7 +149,7 @@ data <- data0[data0$species %in% sp.to.keep, ]
   data$habitat_broad <- as.factor(data$habitat_broad)  
   data$SVL <- log(data$SVL)
 shape <- as.matrix(log(data[, 8:ncol(data)]))
-rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad, 
+rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad,
                        species = data$species)
 
 # Comparison of multivariate allometry among habitat types
@@ -186,7 +186,7 @@ Figure 2. Plot of regression scores and predicted lines representing the relatio
 
 Figure 3. Traitgrams showing the evolution of body size (SVL) through time based on the phylogenetic tree of *Pristurus*. Colors represent an evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size (see text for descriptions). Species names are colored by habitat use: rock (beige), ground (dark purple), and tree (magenta). \hfill\break
 
-Figure 4. Phylomorphospace of *Pristurus*, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: rock (beige), ground (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace. 
+Figure 4. Phylomorphospace of *Pristurus*, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: rock (beige), ground (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace.
 
 \newpage
 
