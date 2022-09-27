@@ -557,13 +557,25 @@ ramp <- colorRampPalette(c("#00929c","gray80",  "#d62e31"))
 cm.head <- contMap(tree = tree, x = head.slp, outline = FALSE)
 cm.head$cols[] <- ramp(1001)
 pdf('plots/cm_head.pdf')
-plot(cm.head, outline = FALSE)
+plot(cm.head, outline = FALSE, legend = FALSE)
+add.color.bar(prompt = FALSE, cols = cm.head$cols, leg = 15, 
+              title = 'head slope', 
+              subtitle = '',
+              lwd = 8, lims = cm.head$lims, 
+              outline = FALSE, 
+              x = 0, y = 1, fsize = 0.8)
 dev.off()
 
 cm.limb <- contMap(tree = tree, x = limb.slp, outline = FALSE)
 cm.limb$cols[] <- ramp(1001)
 pdf('plots/cm_limb.pdf')
-plot(cm.limb, outline = FALSE)
+plot(cm.limb, outline = FALSE, legend = FALSE)
+add.color.bar(prompt = FALSE, cols = cm.limb$cols, leg = 15, 
+              title = 'limb slope', 
+              subtitle = '',
+              lwd = 8, lims = cm.limb$lims, 
+              outline = FALSE, 
+              x = 0, y = 1, fsize = 0.8)
 dev.off()
 
 # phenograms head and limb slopes ----
