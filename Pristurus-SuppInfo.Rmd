@@ -21,7 +21,7 @@ library(tidyverse)
   knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# 1: R-script of all computations presented in the article
+# 1: R-script for Article Computations
 
 Below is an R-script that may be used to reproduce all statistical analyses found in the paper. The data are found on DRYAD: (doi:10.5061/dryad.xwdbrv1f6 [@PristurusData]). Additional scripts used to generate publication-ready plots, and scripts for the additional plots found below, are found are available at **XXX**.
 
