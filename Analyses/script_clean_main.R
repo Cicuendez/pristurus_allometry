@@ -128,7 +128,8 @@ habitat.slope.plot <- ggplot(data = fit.hab.ggplot.data, aes(x = svl)) +
   theme.clean() +
   theme(legend.position = 'bottom', 
         panel.grid.minor.x = element_blank(),
-        panel.grid.minor.y = element_blank(),
+        panel.grid.minor.y = element_blank(), 
+        legend.title = element_blank()
   )
 
 ggsave('plots/figure_2_ggplot.png', habitat.slope.plot)
@@ -455,7 +456,8 @@ large_small.phylomorpho.plot <- phymor.plot.ls +
   labs(title = 'Phylomorphospace', 
        subtitle = '(largest and smallest species highlighted)') +
   theme.clean() + 
-  theme(legend.position = 'bottom')
+  theme(legend.position = 'bottom', 
+        legend.title = element_blank())
 
 ggsave('plots/phylomorphospace_large_small.pdf', 
        plot = large_small.phylomorpho.plot)
