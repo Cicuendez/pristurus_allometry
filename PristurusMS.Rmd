@@ -15,7 +15,7 @@ bibliography: Pristurus-Refs.bib
 header-includes:
     - \usepackage{setspace}\doublespacing
     - \usepackage{lineno}\linenumbers
-
+fontsize: 11pt
 ---
 
 ```{r setup, include=FALSE}
