@@ -195,14 +195,14 @@ include_graphics("Figs/figure_2_ggplot.png")
 
 \newpage
 
-```{r, echo = FALSE, out.width="100%", fig.cap = "Traitgrams showing the evolution of body size (SVL) through time based on the phylogenetic tree of \\textit{Pristurus}. Colors represent an evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size (see text for descriptions). Species names are colored by habitat use: rock (beige), ground (dark purple), and tree (magenta)."}
+```{r, echo = FALSE, out.width="100%", fig.cap = "Traitgrams showing the evolution of body size (SVL) through time based on the phylogenetic tree of \\textit{Pristurus}. Colors represent an evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size (see text for descriptions). Species names are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta)."}
 
 include_graphics("Figs/figure_phenograms.png")
 ```
 
 \newpage
 
-```{r, echo = FALSE, out.width="100%", fig.cap = "Phylomorphospace of \\textit{Pristurus}, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: rock (beige), ground (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace."}
+```{r, echo = FALSE, out.width="100%", fig.cap = "Phylomorphospace of \\textit{Pristurus}, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace."}
 
 include_graphics("Figs/phylomorphospace_large_small.png")
 ```
