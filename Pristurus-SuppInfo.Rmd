@@ -23,24 +23,24 @@ library(tidyverse)
 
 # 1: R-script for Article Computations
 
-Below is an R-script that may be used to reproduce all statistical analyses found in the paper. The data are found on DRYAD: (doi:10.5061/dryad.xwdbrv1f6 [@PristurusData]). Additional scripts used to generate publication-ready plots, and scripts for the additional plots found below, are found are available at **XXX**.
+Below is an R-script that may be used to reproduce all statistical analyses found in the paper. The data are found on DRYAD: (doi:10.5061/dryad.xwdbrv1f6 [@PristurusData]). Additional scripts used to generate publication-ready plots, and scripts for the additional plots found below, are available at **XXX**.
 
 ```{r, eval=FALSE, echo = TRUE}
 libs <- c('geomorph', 'RRPP', 'phytools', 'geiger', 'tidyverse')
 easypackages::libraries(libs)
 
 # 0: Data Prep
-data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';', dec = '.', 
+data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';', dec = '.',
                     header = TRUE, stringsAsFactors = TRUE)
   sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
   data$species <- droplevels(data$species)
   data$SVL <- log(data$SVL)
 shape <- as.matrix(log(data[, 8:ncol(data)]))
-rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad, 
+rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad,
                        species = data$species)
 tree0 <- read.nexus('data/phylogeny/pristurus_tree_final.nex')
-LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), 
+LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0),
                    groups = rdf$species)$LS.means[[1]]
 sz.mn <- tapply(rdf$svl,rdf$species,mean)
 hab.mn <- as.factor(by(rdf$habitat,rdf$species,unique))
@@ -93,7 +93,7 @@ cm.limb <- contMap(tree = tree, x = limb.slp, outline = FALSE)
 # 4: phylomorphospace of size-standardized data (residuals)
 shape.res <- residuals(allom.sp)
 pca.w.phylo <- gm.prcomp(shape.res, phy = tree)
-plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black', 
+plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black',
      phylo.par = list(node.labels = FALSE))
 ```
 
@@ -101,7 +101,7 @@ plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black',
 
 # 2: Additional Analyses and Visualizations
 
-Here we provide additional analyses which complement those found in the article. 
+Here we provide additional analyses which complement those found in the article.
 
 ### Inspection of Regression Coefficients (Slopes)
 
@@ -109,14 +109,14 @@ Here are the regression slopes for each habitat group, found from our linear mod
 
 ```{r, eval=TRUE, echo = FALSE}
 # 0: Data Prep
-data0 <- read.table('Analyses/data/morpho/morpho_pristurus.csv', sep = ';', dec = '.', 
+data0 <- read.table('Analyses/data/morpho/morpho_pristurus.csv', sep = ';', dec = '.',
                     header = TRUE, stringsAsFactors = TRUE)
   sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
   data$species <- droplevels(data$species)
   data$SVL <- log(data$SVL)
 shape <- as.matrix(log(data[, 8:ncol(data)]))
-rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad, 
+rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad,
                        species = data$species)
 
 ```
@@ -127,7 +127,7 @@ fit.coef <- fit.hab$LM$coefficients
 
 coef.hab <- rbind(fit.coef[2,], #ground
   fit.coef[2,]+fit.coef[5,], #rock
-  fit.coef[2,]+fit.coef[6,]) #tree 
+  fit.coef[2,]+fit.coef[6,]) #tree
 rownames(coef.hab) <- c("Ground", "Rock", "Tree")
 
 coef.hab
@@ -136,11 +136,11 @@ coef.hab
 
 ### Traitgrams of Individual Trait Allometry
 
-In the main article we provided traitgrams of allometric slopes for composites of head traits (Figure 3A) and limb traits (Figure 3B). Here we provide trait grams for the allometric relationship of each body trait separately. As in the main article, traitgrams are visualized from an evolutionary mapping of body size (SVL), and the color represents changes in the allometric slope for each phenotypic trait, found from an evolutionary mapping of the species-level slopes under a Brownian motion model of evolution.
+In the main article we provided traitgrams of allometric slopes for composites of head traits (Figure 3A) and limb traits (Figure 3B). Here we provide traitgrams for the allometric relationship of each body trait separately. As in the main article, traitgrams are visualized from an evolutionary mapping of body size (SVL), and the color represents changes in the allometric slope for each phenotypic trait, found from an evolutionary mapping of the species-level slopes under a Brownian motion model of evolution.
 
 Here we see that XYZPDQ
 
-```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="100%", fig.cap= "Traitgrams of regression slopes for each phenotypic variable. Colors designate habitat groups."}
+```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="100%", fig.cap= "Traitgrams of regression slopes for each phenotypic variable. Colors at the tips designate habitat groups."}
 
 include_graphics("Figs/phenograms_variables.png")
 ```
@@ -149,10 +149,10 @@ include_graphics("Figs/phenograms_variables.png")
 
 ### Evolutionary Mapping of Head & Limb Allometry
 
-In the main article, allometric trends in both head dimensions were mapped onto the phylogeny under a Brownian motion model of evolution to discern macroevolutionary changes across the phylogeny. These were visualized on traitgrams, where body size differences were optimized (main article: Fig. 3). Here we present evolutionary mappings of allometric trends individually, so that increases and decreases in allometric slopes across the phylogeny are more readily interpreted. A summary of these patterns was described in the main article. 
+In the main article, allometric trends in both head dimensions were mapped onto the phylogeny under a Brownian motion model of evolution to discern macroevolutionary changes across the phylogeny. These were visualized on traitgrams, where body size differences were optimized (main article: Fig. 3). Here we present evolutionary mappings of allometric trends individually, so that increases and decreases in allometric slopes across the phylogeny are more readily interpreted. A summary of these patterns was described in the main article.
 
 Briefly, these plots show that changes in allometry were not concentrated to particular regions of the phylogeny, but rather displayed both increases and decreases in allometry of both the head traits and the limb traits occurred repeatedly in this group.
- 
+
 ```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="100%", fig.cap= "Evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size."}
 
 include_graphics("Figs/contmap_slopes.png")
@@ -166,7 +166,7 @@ include_graphics("Figs/contmap_slopes.png")
  \setlength{\leftskip}{0.25in}
  \setlength{\parskip}{8pt}
  \noindent
- 
+
 <div id="refs"></div>
 
 \newpage
