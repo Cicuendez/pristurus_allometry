@@ -100,6 +100,17 @@ legend('topleft', levels(habitat.fctr), pt.bg = hab.colors, pch = 22)
 plot(rdf$svl, plot.base$RegScore, col = hab.colors[as.numeric(rdf$habitat)], 
      pch = 16) # same thing
 
+# ISOMETRY line ----
+mn.sz <- mean(rdf$svl)
+mn.shape <- apply(rdf$shape,2,mean)
+slopes <- rep(1,ncol(rdf$shape))
+intercepts <- mn.shape - (slopes * mn.sz)
+X <- cbind(1,rdf$svl)
+b <- rbind(intercepts,slopes)
+preds <- X%*%b
+iso.line <- prcomp(preds)$x[,1]
+plot(rdf$svl,iso.line)  #HERE IT IS
+
 # plot ggplot2 ----
 # Figure 2
 # Plot habitat slopes with ggplot2 
@@ -111,10 +122,14 @@ fit.hab.ggplot.data <- data.frame(fitted_PC1 = plot.base$PredLine,
 habitat.slope.plot <- ggplot(data = fit.hab.ggplot.data, aes(x = svl)) +
   geom_point(aes(y = RegScore, color = habitat), alpha = 0.2, size = 2) +
   geom_line(aes(y = fitted_PC1, color = habitat), size = 1) +
+  geom_line(aes(y = iso.line), lty = 'dashed', size = 0.5) +
   scale_color_manual(values = hab.colors) +
   labs(x = 'logSVL', y = 'Regression Scores') +
   theme.clean() +
-  theme(legend.position = 'bottom')
+  theme(legend.position = 'bottom', 
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank(),
+  )
 
 ggsave('plots/figure_2_ggplot.png', habitat.slope.plot)
 
