@@ -97,6 +97,8 @@ plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black',
      phylo.par = list(node.labels = FALSE))
 ```
 
+\newpage
+
 # 2: Additional Analyses and Visualizations
 
 Here we provide additional analyses which complement those found in the article. 
@@ -130,7 +132,7 @@ rownames(coef.hab) <- c("Ground", "Rock", "Tree")
 
 coef.hab
 ```
-
+\newpage
 
 ### Traitgrams of Individual Trait Allometry
 
@@ -138,10 +140,12 @@ In the main article we provided traitgrams of allometric slopes for composites o
 
 Here we see that XYZPDQ
 
-```{r, fig.align="center",echo=FALSE, out.width="100%", fig.cap= "Traitgrams of regression slopes for each phenotypic variable. Colors designate habitat groups."}
+```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="100%", fig.cap= "Traitgrams of regression slopes for each phenotypic variable. Colors designate habitat groups."}
 
 include_graphics("Figs/phenograms_variables.png")
 ```
+
+\newpage
 
 ### Evolutionary Mapping of Head & Limb Allometry
 
@@ -149,7 +153,7 @@ In the main article, allometric trends in both head dimensions were mapped onto 
 
 Briefly, these plots show that changes in allometry were not concentrated to particular regions of the phylogeny, but rather displayed both increases and decreases in allometry of both the head traits and the limb traits occurred repeatedly in this group.
  
-```{r, fig.align="center",echo=FALSE, out.width="100%", fig.cap= "Evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size."}
+```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="100%", fig.cap= "Evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size."}
 
 include_graphics("Figs/contmap_slopes.png")
 ```
