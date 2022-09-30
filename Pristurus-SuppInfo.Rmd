@@ -105,7 +105,7 @@ Here we provide additional analyses which complement those found in the article.
 
 ### Inspection of Regression Coefficients (Slopes)
 
-Here are the regression slopes for each habitat group, found from our linear model. These display differences in allometry among groups, variable by variable
+Here are the regression slopes for each habitat group, found from our linear model. These display differences in allometry among groups, variable by variable.
 
 ```{r, eval=TRUE, echo = FALSE}
 # 0: Data Prep
