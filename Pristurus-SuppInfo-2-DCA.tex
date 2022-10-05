@@ -201,7 +201,8 @@ for the additional plots found below, are available at \textbf{XXX}.
 
 \CommentTok{\#Slopes by habitat}
 \NormalTok{fit.coef }\OtherTok{\textless{}{-}}\NormalTok{ fit.hab}\SpecialCharTok{$}\NormalTok{LM}\SpecialCharTok{$}\NormalTok{coefficients}
-\NormalTok{ind.coef }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(fit.coef[}\DecValTok{2}\NormalTok{,], fit.coef[}\DecValTok{2}\NormalTok{,]}\SpecialCharTok{+}\NormalTok{fit.coef[}\DecValTok{5}\NormalTok{,], fit.coef[}\DecValTok{2}\NormalTok{,]}\SpecialCharTok{+}\NormalTok{fit.coef[}\DecValTok{6}\NormalTok{,])}
+\NormalTok{ind.coef }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(fit.coef[}\DecValTok{2}\NormalTok{,], fit.coef[}\DecValTok{2}\NormalTok{,]}\SpecialCharTok{+}\NormalTok{fit.coef[}\DecValTok{5}\NormalTok{,], }
+\NormalTok{                  fit.coef[}\DecValTok{2}\NormalTok{,]}\SpecialCharTok{+}\NormalTok{fit.coef[}\DecValTok{6}\NormalTok{,])}
 \FunctionTok{rownames}\NormalTok{(ind.coef) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Ground"}\NormalTok{,}\StringTok{"Rock"}\NormalTok{, }\StringTok{"Tree"}\NormalTok{)}
 \NormalTok{ind.coef}
 
@@ -225,7 +226,8 @@ for the additional plots found below, are available at \textbf{XXX}.
 \NormalTok{cm.limb }\OtherTok{\textless{}{-}} \FunctionTok{contMap}\NormalTok{(}\AttributeTok{tree =}\NormalTok{ tree, }\AttributeTok{x =}\NormalTok{ limb.slp, }\AttributeTok{outline =} \ConstantTok{FALSE}\NormalTok{)}
 
 \CommentTok{\# 4: Compare Integration}
-\NormalTok{lindims.gp }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{( }\FunctionTok{split}\NormalTok{( shape[,}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(shape)], rdf}\SpecialCharTok{$}\NormalTok{habitat), matrix, }\AttributeTok{ncol=}\FunctionTok{ncol}\NormalTok{(shape))}
+\NormalTok{lindims.gp }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{( }\FunctionTok{split}\NormalTok{( shape[,}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(shape)], rdf}\SpecialCharTok{$}\NormalTok{habitat), }
+\NormalTok{                      matrix, }\AttributeTok{ncol=}\FunctionTok{ncol}\NormalTok{(shape))}
 \NormalTok{Vrel.gp }\OtherTok{\textless{}{-}} \FunctionTok{Map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{integration.Vrel}\NormalTok{(x), lindims.gp) }
 \FunctionTok{c}\NormalTok{(Vrel.gp}\SpecialCharTok{$}\NormalTok{ground}\SpecialCharTok{$}\NormalTok{ZR,Vrel.gp}\SpecialCharTok{$}\NormalTok{rock}\SpecialCharTok{$}\NormalTok{ZR,Vrel.gp}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{ZR)}
 \NormalTok{out }\OtherTok{\textless{}{-}} \FunctionTok{compare.ZVrel}\NormalTok{(Vrel.gp}\SpecialCharTok{$}\NormalTok{ground, Vrel.gp}\SpecialCharTok{$}\NormalTok{rock, Vrel.gp}\SpecialCharTok{$}\NormalTok{tree)}

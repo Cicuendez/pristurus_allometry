@@ -68,7 +68,8 @@ pw.hab <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
 
 #Slopes by habitat
 fit.coef <- fit.hab$LM$coefficients
-ind.coef <- rbind(fit.coef[2,], fit.coef[2,]+fit.coef[5,], fit.coef[2,]+fit.coef[6,])
+ind.coef <- rbind(fit.coef[2,], fit.coef[2,]+fit.coef[5,], 
+                  fit.coef[2,]+fit.coef[6,])
 rownames(ind.coef) <- c("Ground","Rock", "Tree")
 ind.coef
 
@@ -92,7 +93,8 @@ contMap(tree = tree, x = head.slp, outline = FALSE)
 cm.limb <- contMap(tree = tree, x = limb.slp, outline = FALSE)
 
 # 4: Compare Integration
-lindims.gp <- lapply( split( shape[,1:ncol(shape)], rdf$habitat), matrix, ncol=ncol(shape))
+lindims.gp <- lapply( split( shape[,1:ncol(shape)], rdf$habitat), 
+                      matrix, ncol=ncol(shape))
 Vrel.gp <- Map(function(x) integration.Vrel(x), lindims.gp) 
 c(Vrel.gp$ground$ZR,Vrel.gp$rock$ZR,Vrel.gp$tree$ZR)
 out <- compare.ZVrel(Vrel.gp$ground, Vrel.gp$rock, Vrel.gp$tree)

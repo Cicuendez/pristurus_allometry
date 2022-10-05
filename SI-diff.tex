@@ -1,7 +1,7 @@
 % Options for packages loaded elsewhere
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL Pristurus-SuppInfo.tex     Wed Oct  5 09:32:58 2022
-%DIF ADD Pristurus-SuppInfo-2.tex   Wed Oct  5 09:32:39 2022
+%DIF DEL Pristurus-SuppInfo-2.tex       Wed Oct  5 09:32:39 2022
+%DIF ADD Pristurus-SuppInfo-2-DCA.tex   Wed Oct  5 17:29:16 2022
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
@@ -285,7 +285,8 @@ for the additional plots found below, are available at \textbf{XXX}.
 
 \CommentTok{\#Slopes by habitat}
 \NormalTok{fit.coef }\OtherTok{\textless{}{-}}\NormalTok{ fit.hab}\SpecialCharTok{$}\NormalTok{LM}\SpecialCharTok{$}\NormalTok{coefficients}
-\NormalTok{ind.coef }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(fit.coef[}\DecValTok{2}\NormalTok{,], fit.coef[}\DecValTok{2}\NormalTok{,]}\SpecialCharTok{+}\NormalTok{fit.coef[}\DecValTok{5}\NormalTok{,], fit.coef[}\DecValTok{2}\NormalTok{,]}\SpecialCharTok{+}\NormalTok{fit.coef[}\DecValTok{6}\NormalTok{,])}
+\NormalTok{ind.coef }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(fit.coef[}\DecValTok{2}\NormalTok{,], fit.coef[}\DecValTok{2}\NormalTok{,]}\SpecialCharTok{+}\NormalTok{fit.coef[}\DecValTok{5}\DIFdelbegin \DIFdel{\NormalTok{,], fit.coef[}}\DIFdelend \DIFaddbegin \DIFadd{\NormalTok{,], }
+\NormalTok{                  fit.coef[}}\DIFaddend \DecValTok{2}\NormalTok{,]}\SpecialCharTok{+}\NormalTok{fit.coef[}\DecValTok{6}\NormalTok{,])}
 \FunctionTok{rownames}\NormalTok{(ind.coef) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Ground"}\NormalTok{,}\StringTok{"Rock"}\NormalTok{, }\StringTok{"Tree"}\NormalTok{)}
 \NormalTok{ind.coef}
 
@@ -308,8 +309,18 @@ for the additional plots found below, are available at \textbf{XXX}.
 \FunctionTok{contMap}\NormalTok{(}\AttributeTok{tree =}\NormalTok{ tree, }\AttributeTok{x =}\NormalTok{ head.slp, }\AttributeTok{outline =} \ConstantTok{FALSE}\NormalTok{)}
 \NormalTok{cm.limb }\OtherTok{\textless{}{-}} \FunctionTok{contMap}\NormalTok{(}\AttributeTok{tree =}\NormalTok{ tree, }\AttributeTok{x =}\NormalTok{ limb.slp, }\AttributeTok{outline =} \ConstantTok{FALSE}\NormalTok{)}
 
-\CommentTok{\# 4: phylomorphospace of size{-}standardized data (residuals)}
-\NormalTok{shape.res }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(allom.sp)}
+\DIFdelbegin \DIFdel{\CommentTok{\# 4: phylomorphospace of size{-}standardized data (residuals)}
+}\DIFdelend \DIFaddbegin \DIFadd{\CommentTok{\# 4: Compare Integration}
+\NormalTok{lindims.gp }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{( }\FunctionTok{split}\NormalTok{( shape[,}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(shape)], rdf}\SpecialCharTok{$}\NormalTok{habitat), }
+\NormalTok{                      matrix, }\AttributeTok{ncol=}\FunctionTok{ncol}\NormalTok{(shape))}
+\NormalTok{Vrel.gp }\OtherTok{\textless{}{-}} \FunctionTok{Map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{integration.Vrel}\NormalTok{(x), lindims.gp) }
+\FunctionTok{c}\NormalTok{(Vrel.gp}\SpecialCharTok{$}\NormalTok{ground}\SpecialCharTok{$}\NormalTok{ZR,Vrel.gp}\SpecialCharTok{$}\NormalTok{rock}\SpecialCharTok{$}\NormalTok{ZR,Vrel.gp}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{ZR)}
+\NormalTok{out }\OtherTok{\textless{}{-}} \FunctionTok{compare.ZVrel}\NormalTok{(Vrel.gp}\SpecialCharTok{$}\NormalTok{ground, Vrel.gp}\SpecialCharTok{$}\NormalTok{rock, Vrel.gp}\SpecialCharTok{$}\NormalTok{tree)}
+\FunctionTok{summary}\NormalTok{(out)}
+}
+
+\DIFadd{\CommentTok{\# 5: phylomorphospace of size{-}standardized data (residuals)}
+}\DIFaddend \NormalTok{shape.res }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(allom.sp)}
 \NormalTok{pca.w.phylo }\OtherTok{\textless{}{-}} \FunctionTok{gm.prcomp}\NormalTok{(shape.res, }\AttributeTok{phy =}\NormalTok{ tree)}
 \FunctionTok{plot}\NormalTok{(pca.w.phylo, }\AttributeTok{phylo =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{bg =} \StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{,}
      \AttributeTok{phylo.par =} \FunctionTok{list}\NormalTok{(}\AttributeTok{node.labels =} \ConstantTok{FALSE}\NormalTok{))}
@@ -373,8 +384,7 @@ changes in the allometric slope for each phenotypic trait, found from an
 evolutionary mapping of the species-level slopes under a Brownian motion
 model of evolution.
 
-Here we see that \DIFdelbegin \DIFdel{XYZPDQ
-}\DIFdelend \DIFaddbegin \DIFadd{there are differential allometric dynamics for some
+Here we see that there are differential allometric dynamics for some
 morphological variables. Most notably, large species inhabiting rocky
 habitats show an increase in the allometric slope for the length of the
 tibia (Ltb), while the rest of the limb segments (Lhu, Lun, and Lfe)
@@ -384,18 +394,20 @@ the size increase has occurred together with a reduction of the
 allometric slope. Overall, large ground-dwelling species show opposite
 allometric trends to those of the large rock dwellers in most variables.
 However, it might be interesting to notice that one of these large
-ground species, }\emph{\DIFadd{Pristurus ornithocephalus}} \DIFadd{(the fourth largest
+ground species, \emph{Pristurus ornithocephalus} (the fourth largest
 species of the genus, and the second largest ground species) presents
 unique allometric tendencies relative to the other large ground species,
 both for all head variables and some of the limb variables (e.g., Lhu
 and Lfe). This might be reflecting species-specific ecological dynamics,
 and more detailed data and analyses (e.g., geometric morphometrics)
 could shed light on this morphological pattern.
-}\DIFaddend 
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=1\linewidth]{Figs/phenograms_variables} 
+{\centering \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=1\linewidth]{Figs/phenograms_variables} 
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.9\linewidth]{Figs/phenograms_variables} 
+\DIFaddendFL 
 
 }
 
@@ -430,6 +442,70 @@ traits and the limb traits occurred repeatedly in this group.
 
 \caption{Evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size.}\label{fig:unnamed-chunk-5}
 \end{figure}
+\DIFaddbegin 
+
+\newpage
+
+\hypertarget{morphological-integration}{%
+\subsubsection{Morphological
+Integration}\label{morphological-integration}}
+
+\DIFadd{In the main article, we performed analyses of morphological integration
+on the set of body traits representing body form. Here we perform the
+same analysis, using size-standardized data.
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DIFadd{\NormalTok{shape}\FloatTok{.2} \OtherTok{\textless{}{-}}\NormalTok{ shape }\SpecialCharTok{{-}}\NormalTok{ rdf}\SpecialCharTok{%
+\mbox{%DIFAUXCMD
+$}\NormalTok{svl}
+\NormalTok{shape.gp }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{( }\FunctionTok{split}\NormalTok{( shape}\FloatTok{.2}\NormalTok{[,}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(shape}\FloatTok{.2}\NormalTok{)], rdf}\SpecialCharTok{$
+}%DIFAUXCMD
+}\NormalTok{habitat), }
+\NormalTok{                    matrix, }\AttributeTok{ncol=}\FunctionTok{ncol}\NormalTok{(shape}\FloatTok{.2}\NormalTok{))}
+\NormalTok{Vrel.gp.shp }\OtherTok{\textless{}{-}} \FunctionTok{Map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{integration.Vrel}\NormalTok{(x), shape.gp) }
+\FunctionTok{c}\NormalTok{(Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{ground}\SpecialCharTok{$}\NormalTok{ZR,Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{rock}\SpecialCharTok{$}\NormalTok{ZR,Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{ZR)}
+}\end{Highlighting}
+\end{Shaded}
+
+\DIFmodbegin
+\begin{DIFverbatim}[alsolanguage=DIFcode]
+%DIF > ## [1] 2.403052 1.904412 1.224868
+\end{DIFverbatim}
+\DIFmodend
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DIFadd{\NormalTok{out.shp }\OtherTok{\textless{}{-}} \FunctionTok{compare.ZVrel}\NormalTok{(Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{ground, Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{rock, Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{tree)}
+\FunctionTok{summary}\NormalTok{(out.shp)}
+}\end{Highlighting}
+\end{Shaded}
+
+\DIFmodbegin
+\begin{DIFverbatim}[alsolanguage=DIFcode]
+%DIF > ## 
+%DIF > ## Effect sizes
+%DIF > ## 
+%DIF > ## Vrel.gp.shp$ground   Vrel.gp.shp$rock   Vrel.gp.shp$tree 
+%DIF > ##         -0.1468813         -0.9606380         -0.9189899 
+%DIF > ## 
+%DIF > ## Effect sizes for pairwise differences in rel.eig effect size
+%DIF > ## 
+%DIF > ##                    Vrel.gp.shp$ground Vrel.gp.shp$rock Vrel.gp.shp$tree
+%DIF > ## Vrel.gp.shp$ground           0.000000        9.3926169        6.1015621
+%DIF > ## Vrel.gp.shp$rock             9.392617        0.0000000        0.3556259
+%DIF > ## Vrel.gp.shp$tree             6.101562        0.3556259        0.0000000
+%DIF > ## 
+%DIF > ## P-values
+%DIF > ## 
+%DIF > ##                    Vrel.gp.shp$ground Vrel.gp.shp$rock Vrel.gp.shp$tree
+%DIF > ## Vrel.gp.shp$ground       1.000000e+00     5.852770e-21     1.050368e-09
+%DIF > ## Vrel.gp.shp$rock         5.852770e-21     1.000000e+00     7.221208e-01
+%DIF > ## Vrel.gp.shp$tree         1.050368e-09     7.221208e-01     1.000000e+00
+\end{DIFverbatim}
+\DIFmodend
+\DIFaddend 
 
 \newpage
 
