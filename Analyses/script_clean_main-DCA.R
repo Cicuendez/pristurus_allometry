@@ -66,3 +66,43 @@ shape.res <- residuals(allom.sp)
 pca.w.phylo <- gm.prcomp(shape.res, phy = tree)
 plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
 
+################################ NEW HERE
+
+# 5: Compare Integration
+lindims.gp <- lapply( split( shape[,1:ncol(shape)], rdf$habitat), matrix, ncol=ncol(shape))
+Vrel.gp <- Map(function(x) integration.Vrel(x), lindims.gp) 
+out <- compare.ZVrel(Vrel.gp$ground, Vrel.gp$rock, Vrel.gp$tree)
+summary(out)
+
+## plot
+
+
+##################################### FOR SI
+# 4b: phylomorphospace of linear measures
+pca.w.phylo2 <- gm.prcomp(LS.mns, phy = tree)
+plot(pca.w.phylo2, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
+
+#PC1 is size*-1
+plot(sz.mn,pca.w.phylo2$x[,1])
+cor(sz.mn,pca.w.phylo2$x[,1]) #-0.987
+#size drives the show
+
+# Integration of size-standardized variables (similar patterns; lower integration)
+shape.2 <- shape - rdf$svl
+shape.gp <- lapply( split( shape.2[,1:ncol(shape.2)], rdf$habitat), matrix, ncol=ncol(shape.2))
+Vrel.gp.shp <- Map(function(x) integration.Vrel(x), shape.gp) 
+out.shp <- compare.ZVrel(Vrel.gp.shp$ground, Vrel.gp.shp$rock, Vrel.gp.shp$tree)
+summary(out.shp)
+
+PCA.gp <- Map(function(x) prcomp(x), lindims.gp)
+PCA.gp.shp <- Map(function(x) prcomp(x), shape.gp)
+PCA.gp$ground$sdev
+PCA.gp.shp$ground$sdev
+
+##### Histograms of size: largest size range is in ground dwelling 
+svl.gp <- split(rdf$svl, rdf$habitat)
+range(svl.gp$ground)
+
+hist(svl.gp$ground,xlim = c(2.5,4.5), ylim = c(0,150),xlab = "log(SVL)", col = "black")
+hist(svl.gp$rock,add = TRUE, col="blue")
+hist(svl.gp$tree,add = TRUE, col="red")
