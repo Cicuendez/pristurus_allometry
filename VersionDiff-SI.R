@@ -3,8 +3,8 @@
     # NOTE: need to install latexdiffr from: https://github.com/hughjonesd/latexdiffr
 
 #Run latex diff by hand in MS directory
-shell(cmd="latexdiff PristurusMS.tex PristurusMS-2.tex > MS-diff.tex")
-tinytex::latexmk("MS-diff.tex") 
+shell(cmd="latexdiff Pristurus-SuppInfo.tex Pristurus-SuppInfo-2.tex > SI-diff.tex")
+tinytex::latexmk("SI-diff.tex") 
 
 ###################
 # not working

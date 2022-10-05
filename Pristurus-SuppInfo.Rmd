@@ -4,7 +4,7 @@ author: ""
 output:
   pdf_document:
     fig_caption: yes
-    keep_tex: false
+    keep_tex: TRUE
     pandoc_args:
 
 fontsize: 11pt
