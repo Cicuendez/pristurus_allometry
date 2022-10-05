@@ -71,11 +71,24 @@ plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.la
 # 5: Compare Integration
 lindims.gp <- lapply( split( shape[,1:ncol(shape)], rdf$habitat), matrix, ncol=ncol(shape))
 Vrel.gp <- Map(function(x) integration.Vrel(x), lindims.gp) 
+c(Vrel.gp$ground$ZR,Vrel.gp$rock$ZR,Vrel.gp$tree$ZR)
 out <- compare.ZVrel(Vrel.gp$ground, Vrel.gp$rock, Vrel.gp$tree)
 summary(out)
 
-## plot
 
+## plot
+library(gplots)
+Z.gp <- c(Vrel.gp$ground$ZR,Vrel.gp$rock$ZR,Vrel.gp$tree$ZR)
+Z.var <- c(Vrel.gp$ground$ZR.var,Vrel.gp$rock$ZR.var,Vrel.gp$tree$ZR.var)
+CI.gp<-qnorm(1- 0.05/2) * sqrt(Z.var)
+
+plotCI(Z.gp,ui =(Z.gp+CI.gp), li = (Z.gp-CI.gp), 
+       ylab="Integration Level (Z-Vrel)", xlab="",pch=21,cex=2, 
+       xaxt='n',pt.bg="black",lwd=3,lty=1)
+axis(1, at = 1:3,
+     labels = c("Ground",
+                "Rock",
+                "Tree"))
 
 ##################################### FOR SI
 # 4b: phylomorphospace of linear measures
