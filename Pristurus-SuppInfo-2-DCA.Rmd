@@ -19,6 +19,7 @@ bibliography: Pristurus-Refs.bib
 library(RRPP)
 library(geomorph)
 library(tidyverse)
+library(geiger)
   knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -128,6 +129,13 @@ data <- data0[data0$species %in% sp.to.keep, ]
 shape <- as.matrix(log(data[, 8:ncol(data)]))
 rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad,
                        species = data$species)
+LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
+hab.mn <- as.factor(by(rdf$habitat,rdf$species,unique))
+sz.mn <- tapply(rdf$svl,rdf$species,mean)
+levels(hab.mn) <- levels(rdf$habitat)
+tree0 <- read.nexus('Analyses/data/phylogeny/pristurus_tree_final.nex')
+tree <- treedata(phy = tree0, data = LS.mns)$phy
+C <- vcv.phylo(tree)
 
 ```
 
@@ -183,6 +191,28 @@ c(Vrel.gp.shp$ground$ZR,Vrel.gp.shp$rock$ZR,Vrel.gp.shp$tree$ZR)
 
 out.shp <- compare.ZVrel(Vrel.gp.shp$ground, Vrel.gp.shp$rock, Vrel.gp.shp$tree)
 summary(out.shp)
+```
+
+
+### Phylomorphospace and Disparity
+
+In the main article we presented a representation of phylomorphospace using size-standardized shape variables. Here we present a similar plot for the unadjusted species means. In addition, we calculate the phenotypic disparity in among species in each habitat group, and compare these using permutation. 
+
+Not surprisingly, PC1 of the morphospace represents size, and in fact scores on PC1 are highly correlated with SVL ($\rho=0.987$).
+
+```{r, eval = TRUE, echo = TRUE}
+pca.w.phylo2 <- gm.prcomp(LS.mns, phy = tree)
+cor(sz.mn,-1*pca.w.phylo2$x[,1])
+plot(pca.w.phylo2, phylo = TRUE, pch = 21, bg = 'black', 
+     phylo.par = list(node.labels = FALSE))
+```
+
+Disparity was estimated from a phylogenetic anova, obtained using `RRPP`. Here we observed that the ground-dwelling species display greater disparity then do the other two habitat groups. 
+
+```{r, eval = TRUE, echo = TRUE}
+fit.lm <- lm.rrpp(LS.mns~hab.mn, Cov =C)
+PW.lm <- pairwise(fit.lm,groups = hab.mn)
+summary(PW.lm, test.type = "var")
 ```
 
 

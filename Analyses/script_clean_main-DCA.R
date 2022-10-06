@@ -100,6 +100,11 @@ plot(sz.mn,pca.w.phylo2$x[,1])
 cor(sz.mn,pca.w.phylo2$x[,1]) #-0.987
 #size drives the show
 
+# Disparity among habitat groups
+fit.lm <- lm.rrpp(LS.mns~hab.mn, Cov =C)
+PW.lm <- pairwise(fit.lm,groups = hab.mn)
+summary(PW.lm, test.type = "var")
+
 # Integration of size-standardized variables (similar patterns; lower integration)
 shape.2 <- shape - rdf$svl
 shape.gp <- lapply( split( shape.2[,1:ncol(shape.2)], rdf$habitat), matrix, ncol=ncol(shape.2))

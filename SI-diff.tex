@@ -1,7 +1,7 @@
 % Options for packages loaded elsewhere
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL Pristurus-SuppInfo-2.tex       Wed Oct  5 09:32:39 2022
-%DIF ADD Pristurus-SuppInfo-2-DCA.tex   Wed Oct  5 17:29:16 2022
+%DIF ADD Pristurus-SuppInfo-2-DCA.tex   Thu Oct  6 12:22:22 2022
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
@@ -344,7 +344,18 @@ Here are the regression slopes for each habitat group, found from our
 linear model. These display differences in allometry among groups,
 variable by variable.
 
-\begin{Shaded}
+\DIFaddbegin \DIFmodbegin
+\begin{DIFverbatim}[alsolanguage=DIFcode]
+%DIF > ## Warning in treedata(phy = tree0, data = LS.mns): The following tips were not found in 'data' and were dropped from 'phy':
+%DIF > ##  Pristurus_adrarensis
+%DIF > ##  Pristurus_flavipunctatus
+%DIF > ##  Pristurus_sp12
+%DIF > ##  Pristurus_sp4
+%DIF > ##  Pristurus_sp9
+\end{DIFverbatim}
+\DIFmodend
+
+\DIFaddend \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{fit.hab }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(shape}\SpecialCharTok{\textasciitilde{}}\NormalTok{svl}\SpecialCharTok{*}\NormalTok{habitat, }\AttributeTok{data =}\NormalTok{ rdf)}
 \NormalTok{fit.coef }\OtherTok{\textless{}{-}}\NormalTok{ fit.hab}\SpecialCharTok{$}\NormalTok{LM}\SpecialCharTok{$}\NormalTok{coefficients}
@@ -503,6 +514,79 @@ $}\NormalTok{svl}
 %DIF > ## Vrel.gp.shp$ground       1.000000e+00     5.852770e-21     1.050368e-09
 %DIF > ## Vrel.gp.shp$rock         5.852770e-21     1.000000e+00     7.221208e-01
 %DIF > ## Vrel.gp.shp$tree         1.050368e-09     7.221208e-01     1.000000e+00
+\end{DIFverbatim}
+\DIFmodend
+
+\hypertarget{phylomorphospace-and-disparity}{%
+\subsubsection{Phylomorphospace and
+Disparity}\label{phylomorphospace-and-disparity}}
+
+\DIFadd{In the main article we presented a representation of phylomorphospace
+using size-standardized shape variables. Here we present a similar plot
+for the unadjusted species means. In addition, we calculate the
+phenotypic disparity in among species in each habitat group, and compare
+these using permutation.
+}
+
+\DIFadd{Not surprisingly, PC1 of the morphospace represents size, and in fact
+scores on PC1 are highly correlated with SVL (\(\rho=0.987\)).
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DIFadd{\NormalTok{pca.w.phylo2 }\OtherTok{\textless{}{-}} \FunctionTok{gm.prcomp}\NormalTok{(LS.mns, }\AttributeTok{phy =}\NormalTok{ tree)}
+\FunctionTok{cor}\NormalTok{(sz.mn,}\SpecialCharTok{{-}}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pca.w.phylo2}\SpecialCharTok{$}\NormalTok{x[,}\DecValTok{1}\NormalTok{])}
+}\end{Highlighting}
+\end{Shaded}
+
+\DIFmodbegin
+\begin{DIFverbatim}[alsolanguage=DIFcode]
+%DIF > ## [1] 0.9879806
+\end{DIFverbatim}
+\DIFmodend
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DIFadd{\FunctionTok{plot}\NormalTok{(pca.w.phylo2, }\AttributeTok{phylo =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{bg =} \StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{phylo.par =} \FunctionTok{list}\NormalTok{(}\AttributeTok{node.labels =} \ConstantTok{FALSE}\NormalTok{))}
+}\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Pristurus-SuppInfo-2-DCA_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\DIFadd{Disparity was estimated from a phylogenetic anova, obtained using
+}\texttt{\DIFadd{RRPP}}\DIFadd{. Here we observed that the ground-dwelling species display
+greater disparity then do the other two habitat groups.
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DIFadd{\NormalTok{fit.lm }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(LS.mns}\SpecialCharTok{\textasciitilde{}}\NormalTok{hab.mn, }\AttributeTok{Cov =}\NormalTok{C)}
+\NormalTok{PW.lm }\OtherTok{\textless{}{-}} \FunctionTok{pairwise}\NormalTok{(fit.lm,}\AttributeTok{groups =}\NormalTok{ hab.mn)}
+\FunctionTok{summary}\NormalTok{(PW.lm, }\AttributeTok{test.type =} \StringTok{"var"}\NormalTok{)}
+}\end{Highlighting}
+\end{Shaded}
+
+\DIFmodbegin
+\begin{DIFverbatim}[alsolanguage=DIFcode]
+%DIF > ## 
+%DIF > ## Pairwise comparisons
+%DIF > ## 
+%DIF > ## Groups: ground rock tree 
+%DIF > ## 
+%DIF > ## RRPP: 1000 permutations
+%DIF > ## 
+%DIF > ## 
+%DIF > ## Observed variances by group
+%DIF > ## 
+%DIF > ##    ground      rock      tree 
+%DIF > ## 18.385078  7.666641  5.635931 
+%DIF > ## 
+%DIF > ## Pairwise distances between variances, plus statistics
+%DIF > ##                    d UCL (95%)           Z Pr > d
+%DIF > ## ground:rock 10.71844  7.924989  2.12714952  0.013
+%DIF > ## ground:tree 12.74915  8.616215  2.41223861  0.002
+%DIF > ## rock:tree    2.03071  5.745950 -0.03422601  0.521
 \end{DIFverbatim}
 \DIFmodend
 \DIFaddend 

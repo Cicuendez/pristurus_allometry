@@ -1,7 +1,7 @@
 % Options for packages loaded elsewhere
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL PristurusMS-2.tex       Wed Oct  5 17:15:30 2022
-%DIF ADD PristurusMS-2-DCA.tex   Wed Oct  5 17:12:44 2022
+%DIF ADD PristurusMS-2-DCA.tex   Thu Oct  6 12:11:34 2022
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
@@ -101,12 +101,18 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={The role of habitat and evolutionary allometry in the morphological differentiation of Pristurus geckos},
+%DIF 101c101
+%DIF <   pdftitle={The role of habitat and evolutionary allometry in the morphological differentiation of Pristurus geckos},
+%DIF -------
+  pdftitle={The role of habitat and evolutionary allometry in the morphological differentiation of Pristurus geckos (OR: Evolution along allometric lines of least resistance: Morphological differentiation in Pristurus geckos)}, %DIF > 
+%DIF -------
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{The role of habitat and evolutionary allometry in the
-morphological differentiation of \emph{Pristurus} geckos}
+morphological differentiation of \emph{Pristurus} geckos \DIFaddbegin \DIFadd{(OR: Evolution
+along allometric lines of least resistance: Morphological
+differentiation in \emph{Pristurus} geckos)}\DIFaddend }
 \author{}
 \date{\vspace{-2.5em}}
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
@@ -198,7 +204,7 @@ morphological differentiation of \emph{Pristurus} geckos}
 \textbf{ORDER TBD:  H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,*}$,  Iris Men{\'{e}}ndez$^{2,3}$, Adri{\'{a}} Talavera, Marc Sim{\'{o}}-Riudalbas$^{1}$, Salvador Carranza$^{1}$, and Dean C. Adams$^{4}$}
 \end{center}
 
-\begin{center}05 October, 2022\end{center}
+\begin{center}\DIFdelbegin \DIFdel{05 }\DIFdelend \DIFaddbegin \DIFadd{06 }\DIFaddend October, 2022\end{center}
 
 \(^{1}\)Institute of Evolutionary Biology (CSIC-Universitat Pompeu
 Fabra), Passeig Marítim de la Barceloneta 37-49, Barcelona 08002, Spain
@@ -435,13 +441,12 @@ approach see Adams and Nistri 2010). \hfill\break
 size and with each other (i.e., integration), we conducted an analysis
 of integration. Here we characterized the extent of morphological
 integration in body form for individuals within each habitat group.
-Integration was estimated using the relative eigenvalue variance
-(\(V_{rel}\): Pavlicev et al. 2009), which summarizes the dispersion of
-eigenvalues of the trait covariance matrix (see Conaway and Adams 2022).
-To compare the strength of morphological integration across habitat
-groups, we converted \(V_{rel}\) to an effect size (\(Z\)-score) which
-measures the strength of integration (Conaway and Adams 2022), and
-performed a series of two-sample tests to compare effect sizes among
+Integration was estimated by summarizing he dispersion of eigenvalues of
+the trait covariance matrix (sensu Pavlicev et al. 2009). This measure
+(\(V_{rel}\)) was subsequently converted to an effect size (a
+\(Z\)-score), which quantified the strength of morphological integration
+(see Conaway and Adams 2022). We then performed a series of two-sample
+tests to compare the strength of morphological integration across
 habitat groups. Additionally and for comparison, we repeated these
 analyses on the set of size-standardized trait data, found as a set of
 shape ratios (sensu Mosimann 1970) where each trait was divided by body
@@ -452,11 +457,14 @@ phenotypic diversification in the group we generated a phylomorphospace,
 based on the size-standardized species means obtained from a
 phylogenetic regression (see Tejero-Cicuéndez et al. 2021a). Here,
 phenotypic similarities among species, relative to their phylogenetic
-relationships and habitat affiliations, were observed. All analyses were
-conducted in R 4.2.1 (R Core Team 2022), using \texttt{RRPP} version
-1.3.1 (Collyer and Adams 2018; Collyer and Adams 2022) \DIFaddbegin \DIFadd{and
-}\texttt{\DIFadd{geomorph}} \DIFadd{4.0.4 (Baken et al. 2021)}\DIFaddend , and scripts written by the
-authors (available at \textbf{XXX}).
+relationships and habitat affiliations, were observed. \DIFaddbegin \DIFadd{A similar
+phylomorphospace was constructed for species means not corrected for
+body size, and the phenotypic disparity among species means in each
+habitat was calculated and subsequently compared (Supplemental
+Information). }\DIFaddend All analyses were conducted in R 4.2.1 (R Core Team 2022),
+using \texttt{RRPP} version 1.3.1 (Collyer and Adams 2018; Collyer and
+Adams 2022) \DIFaddbegin \DIFadd{and }\texttt{\DIFadd{geomorph}} \DIFadd{4.0.4 (Baken et al. 2021)}\DIFaddend , and scripts
+written by the authors (available at \textbf{XXX}).
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -595,7 +603,17 @@ trends.
     Nevertheless, when size is accounted for, the rank-order of
     magnitudes of integration remain the same, implying that
     ground-dwelling }\emph{\DIFadd{Pristurus}} \DIFadd{are still relatively constrained in
-    patterns of trait covariation as compared with the other two groups.
+    patterns of trait covariation as compared with the other two
+    groups.}\\
+  \item
+    \DIFadd{This notion was further supported when viewing the phylomorphospace
+    of the species means not adjusted for size (SI). Here (and not
+    surprisingly), PC1 is dominated by size, with small species at one
+    end and larger species at the other. More importantly however, is
+    that the disparity among species utilizing different habitats
+    differed significantly in this space. Here, ground-dwelling
+    displayed significantly greater phenotypic disparity than did the
+    other groups (SI).
   }\end{itemize}
 \item
   \DIFadd{result 4: }\DIFaddend morphospace: Thus there was a reciprocal relationship
@@ -611,11 +629,24 @@ trends.
   SImilar to Antigoni's work (and refs therein). IMPLICATION: tie this
   into integration/modularity. Less integrated across the whole
   organism, and more modular\ldots{} Future studies should examine this.
-\end{itemize}
+\DIFaddbegin \item
+  \DIFadd{In conclusion\ldots{} -Synthesizing these patterns together \ldots{}
+  (summarize: steeper allometry, higher integration, greater disparity
+  in body size and body form all in ground-dwelling species). TOgether
+  the patterns uncovered in our study imply that phenotypic
+  diversification among ground-dwelling }\emph{\DIFadd{Pristurus}} \DIFadd{follows tightly
+  along its allometric trajectory, as evidenced by the higher disparity
+  and stronger morphological integration\ldots. some reference back to
+  Goswami `fly in a tube' paper. Thus, }\emph{\DIFadd{Pristurus body forms appear
+  to diversify along }}\DIFadd{allometric* lines of least resistance\ldots.
+  (Schluter ref again)
+}\DIFaddend \end{itemize}
 
-\DIFdelbegin \DIFdel{closing }\DIFdelend \DIFaddbegin \DIFadd{In conclusion\ldots{} }\DIFaddend paragraph
+\DIFdelbegin \DIFdel{closing paragraph
+}%DIFDELCMD < 
 
-\newpage
+%DIFDELCMD < %%%
+\DIFdelend \newpage
 
 \hypertarget{references}{%
 \section*{References}\label{references}}
