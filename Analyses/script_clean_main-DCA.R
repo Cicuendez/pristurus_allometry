@@ -37,10 +37,10 @@ pw.hab <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
   summary(pw.hab, type = 'VC', stat.table = FALSE)
 
 #Slopes by habitat
-fit.coef <- fit.hab$LM$coefficients
-ind.coef <- rbind(fit.coef[2,], fit.coef[2,]+fit.coef[5,], fit.coef[2,]+fit.coef[6,])
-rownames(ind.coef) <- c("Ground","Rock", "Tree")
-ind.coef
+coef.hab <- fit.hab$LM$coefficients
+slp.hab <- rbind(coef.hab[2,], coef.hab[2,]+coef.hab[5,], coef.hab[2,]+coef.hab[6,])
+rownames(slp.hab) <- c("Ground","Rock", "Tree")
+slp.hab
 
 # 3: Map allometry slopes on phylogeny
 head.scores <- two.b.pls(shape[, c(2:4)], rdf$svl)$XScores[, 1]

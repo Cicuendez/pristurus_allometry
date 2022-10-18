@@ -46,11 +46,11 @@ tree <- treedata(phy = tree0, data = LS.mns)$phy
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
 anova(fit.hab)
 ##### regression coefficients
-fit.coef <- fit.hab$LM$coefficients
+coef.hab <- fit.hab$LM$coefficients
 
-rbind(fit.coef[1,], fit.coef[2,]) #ground
-rbind(fit.coef[1,]+fit.coef[3,], fit.coef[2,]+fit.coef[5,]) #rock
-rbind(fit.coef[1,]+fit.coef[4,], fit.coef[2,]+fit.coef[6,]) #tree 
+rbind(coef.hab[1,], coef.hab[2,]) #ground
+rbind(coef.hab[1,]+coef.hab[3,], coef.hab[2,]+coef.hab[5,]) #rock
+rbind(coef.hab[1,]+coef.hab[4,], coef.hab[2,]+coef.hab[6,]) #tree 
 
 # Pairwise differences in the angle ----
 pw.hab <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
@@ -132,7 +132,7 @@ habitat.slope.plot <- ggplot(data = fit.hab.ggplot.data, aes(x = svl)) +
         legend.title = element_blank()
   )
 
-ggsave('plots/figure_2_ggplot.png', habitat.slope.plot)
+ggsave('../Figs/figure_2_ggplot.png', habitat.slope.plot)
 
 
 # size model (species data) ----
@@ -144,7 +144,7 @@ identical(names(sz.mn), rownames(LS.mns))
 rdf.size <- rrpp.data.frame(svl = sz.mn, shape = LS.mns)
 
 # Multivariate linear model
-fit.svl <- lm.rrpp(shape~svl, data = rdf.size, Cov = vcv.phylo(tree))
+fit.svl <- lm.rrpp(rdf.size$shape~rdf.size$svl, Cov = vcv.phylo(tree))
 anova(fit.svl)
 
 shape.res <- residuals(fit.svl)
@@ -459,9 +459,9 @@ large_small.phylomorpho.plot <- phymor.plot.ls +
   theme(legend.position = 'bottom', 
         legend.title = element_blank())
 
-ggsave('plots/phylomorphospace_large_small.pdf', 
+ggsave('../Figs/phylomorphospace_large_small.pdf', 
        plot = large_small.phylomorpho.plot)
-ggsave('plots/phylomorphospace_large_small.png', 
+ggsave('../Figs/phylomorphospace_large_small.png', 
        plot = large_small.phylomorpho.plot)
 
 ?scale_color_manual

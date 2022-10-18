@@ -37,11 +37,11 @@ rdf <- rrpp.data.frame(svl = svl, shape = shape, habitat = habitat.fctr,
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
 anova(fit.hab)
 ##### regression coefficients
-fit.coef <- fit.hab$LM$coefficients
+coef.hab <- fit.hab$LM$coefficients
 
-rbind(fit.coef[1,], fit.coef[2,]) #ground
-rbind(fit.coef[1,]+fit.coef[3,], fit.coef[2,]+fit.coef[5,]) #rock
-rbind(fit.coef[1,]+fit.coef[4,], fit.coef[2,]+fit.coef[6,]) #tree 
+rbind(coef.hab[1,], coef.hab[2,]) #ground
+rbind(coef.hab[1,]+coef.hab[3,], coef.hab[2,]+coef.hab[5,]) #rock
+rbind(coef.hab[1,]+coef.hab[4,], coef.hab[2,]+coef.hab[6,]) #tree 
 
 # Pairwise differences in the angle ----
 pw.hab <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
@@ -124,7 +124,7 @@ plot(fit.sp, predictor = rdf$svl, type = 'regression', pch = 16,
 # regression coefficients
 fit.coef.sp <- fit.sp$LM$coefficients
 
-# get species slopes ----
+# get species slopes: STATIC ALLOMETRY ----
 sp.slp <- fit.coef.sp[grep('svl', rownames(fit.coef.sp)), ]
 sp.slp[-1,] <- sp.slp[-1,] + sp.slp[1,]
 
@@ -550,9 +550,9 @@ pw.shape.hab_df <- summary(pw.shape.hab, type = 'var', stat.table = FALSE)
 hab.sp.fctr
 head.res <- shape.res[, 2:4]
 rdf.head.hab <- rrpp.data.frame(head = head.res, hab = hab.sp.fctr)
-fit.head.hab <- lm.rrpp(head~hab, data = rdf.head.hab, Cov = vcv(tree))
-anova(fit.head.hab)
-pw.head.hab <- pairwise(fit.head.hab, groups = rdf.head.hab$hab)
+fit.head.hab.sp <- lm.rrpp(head~hab, data = rdf.head.hab, Cov = vcv(tree))
+anova(fit.head.hab.sp)
+pw.head.hab <- pairwise(fit.head.hab.sp, groups = rdf.head.hab$hab)
 pw.head.hab_df <- summary(pw.head.hab, type = 'var', stat.table = FALSE)
 
 # limb ~ habitat model ----
@@ -564,42 +564,54 @@ pw.limb.hab <- pairwise(fit.limb.hab, groups = rdf.limb.hab$hab)
 pw.limb.hab_df <- summary(pw.limb.hab, type = 'var', stat.table = FALSE)
 
 # PLS ----
-# PLS head vs size 
+# ... PLS head vs size ----
 svl <- log(data$SVL)
 shape.head <- shape[, c(2:4)]
 
 pls.head <- two.b.pls(shape.head, svl)
 
-# PLS limbs vs size
+# ... PLS limbs vs size ----
 shape.limb <- shape[, 5:8]
 pls.limb <- two.b.pls(shape.limb, svl)
 
-# Get scores
+# ... PLS whole shape vs size ----
+pls.shape <- two.b.pls(shape, svl)
+
+# Get PLS scores ----
 limb.scores <- pls.limb$XScores[, 1]
 head.scores <- pls.head$XScores[, 1]
+shape.scores <- pls.shape$XScores[, 1]
 
-par(mfrow=c(1,2))
+par(mfrow=c(1,3))
 plot(svl, pls.limb$XScores[, 1], pch = 22, bg = hab.colors[habitat.fctr])
 plot(svl, pls.head$XScores[, 1], pch = 25, 
-       bg = hab.colors[habitat.fctr])
+     bg = hab.colors[habitat.fctr])
+plot(svl, pls.shape$XScores[, 1], pch = 21, 
+     bg = hab.colors[habitat.fctr])
 
+# SLOPES ----
 # LM scores ~ svl*sp 
 # Get a slope per species for head and limbs 
 # (instead of for each variable as we did before)
 
 fit.head.sp <- lm.rrpp(head.scores ~ svl*species.fctr)
 fit.limb.sp <- lm.rrpp(limb.scores ~ svl*species.fctr)
+fit.shape.sp <- lm.rrpp(shape.scores ~ svl*species.fctr)
 anova(fit.head.sp)
 anova(fit.limb.sp)
+anova(fit.shape.sp)
 
 plot(fit.head.sp, predictor = svl, type = 'regression', pch = 16, 
      col = species.fctr)
 plot(fit.limb.sp, predictor = svl, type = 'regression', pch = 16, 
      col = species.fctr)
+plot(fit.shape.sp, predictor = svl, type = 'regression', pch = 16, 
+     col = species.fctr)
 
 # regression coefficients
 coef.head <- fit.head.sp$LM$coefficients
 coef.limb <- fit.limb.sp$LM$coefficients
+coef.shape <- fit.shape.sp$LM$coefficients
 
 # get per-species slopes
 head.slp <- coef.head[grep('svl', rownames(coef.head)), ]
@@ -612,10 +624,15 @@ limb.slp[-1] <- limb.slp[-1] + limb.slp[1]
 names(limb.slp) <- gsub('svl:species.fctr', '', names(limb.slp))
 names(limb.slp) <- gsub('svl', 'Pristurus_abdelkuri', names(limb.slp))
 
+shape.slp <- coef.shape[grep('svl', rownames(coef.shape)), ]
+shape.slp[-1] <- shape.slp[-1] + shape.slp[1]
+names(shape.slp) <- gsub('svl:species.fctr', '', names(shape.slp))
+names(shape.slp) <- gsub('svl', 'Pristurus_abdelkuri', names(shape.slp))
+
 # We already have the tree and the data matched 
 identical(tree$tip.label, names(head.slp))
 
-# contMap head and limb slopes ----
+# contMap SLOPES head and limb  ----
 cm.head <- contMap(tree = tree, x = head.slp, outline = FALSE)
 cm.head$cols[] <- ramp(1001)
 pdf('plots/cm_head.pdf')
@@ -628,9 +645,9 @@ pdf('plots/cm_limb.pdf')
 plot(cm.limb, outline = FALSE)
 dev.off()
 
-# phenograms head and limb slopes ----
+# phenograms SLOPES head and limb ----
 pdf('plots/phenogram_head.pdf')
-phenogram(tree = cm.head$tree, x = svl.sp, 
+phenogram(tree = cm.head$tree, x = sz.mn, 
           colors = cm.head$cols, 
           #          ftype = 'off', 
           ftype = 'i',
@@ -646,7 +663,7 @@ add.color.bar(prompt = FALSE, cols = cm.head$cols, leg = 20,
 dev.off()
 
 pdf('plots/phenogram_limb_reverse.pdf')
-phenogram(tree = cm.limb$tree, x = svl.sp, 
+phenogram(tree = cm.limb$tree, x = sz.mn, 
           colors = cm.limb$cols, 
           #ftype = 'off', 
           ftype = 'i',
@@ -657,6 +674,111 @@ add.color.bar(prompt = FALSE, cols = cm.limb$cols, leg = 20,
               title = 'limb slope', 
               subtitle = '',
               lwd = 8, lims = cm.limb$lims, 
+              outline = FALSE, 
+              x = 5, y = 3, fsize = 0.8)
+dev.off()
+# These two plots, the phenograms of the head and the limbs slopes, 
+# have been combined in Illustrator for the final version of the figure.
+
+# RESIDUALS ----
+# PLS scores ~ svl (not per species!) to get residuals
+# shape
+fit.shape <- lm.rrpp(shape.scores ~ svl)
+fit.shape.res <- residuals(fit.shape)
+fit.shape$LM$coefficients[2,]
+
+shape.res.specimens <- data.frame(shape.res = fit.shape.res, species = species.fctr)
+
+shape.res.sp <- rowsum(shape.res.specimens$shape.res, 
+                       shape.res.specimens$species) /
+  as.vector(table(shape.res.specimens$species))
+
+# head
+fit.head <- lm.rrpp(head.scores ~ svl)
+fit.head.res <- residuals(fit.head)
+
+head.res.specimens <- data.frame(head.res = fit.head.res, species = species.fctr)
+
+head.res.sp <- rowsum(head.res.specimens$head.res, 
+                      head.res.specimens$species) /
+  as.vector(table(head.res.specimens$species))
+
+# limbs
+fit.limb <- lm.rrpp(limb.scores ~ svl)
+fit.limb.res <- residuals(fit.limb)
+
+limb.res.specimens <- data.frame(limb.res = fit.limb.res, species = species.fctr)
+
+limb.res.sp <- rowsum(limb.res.specimens$limb.res, 
+                      limb.res.specimens$species) /
+  as.vector(table(limb.res.specimens$species))
+
+
+# contMaps RESIDUALS ----
+# ... shape ----
+cm.shape.res <- contMap(tree = tree, x = shape.res.sp[,1], outline = FALSE)
+cm.shape.res$cols[] <- ramp(1001)
+plot(cm.shape.res, outline = FALSE)
+
+# ... head ----
+cm.head.res <- contMap(tree = tree, x = head.res.sp[,1], outline = FALSE)
+cm.head.res$cols[] <- ramp(1001)
+plot(cm.head.res, outline = FALSE)
+
+# ... limbs ----
+cm.limb.res <- contMap(tree = tree, x = limb.res.sp[,1], outline = FALSE)
+cm.limb.res$cols[] <- ramp(1001)
+plot(cm.limb.res, outline = FALSE)
+
+
+# Phenograms RESIDUALS ----
+# ... shape ----
+pdf('plots/residuals_phenogram_shape.pdf')
+phenogram(tree = cm.shape.res$tree, x = sz.mn, 
+          colors = cm.shape.res$cols, 
+          #          ftype = 'off', 
+          ftype = 'i',
+          fsize = 0.7, 
+          spread.cost=c(1,0),
+          xlab = 'time (ma)', ylab = 'logSVL')
+add.color.bar(prompt = FALSE, cols = cm.shape.res$cols, leg = 20, 
+              title = 'shape res', 
+              subtitle = '',
+              lwd = 8, lims = cm.shape.res$lims, 
+              outline = FALSE, 
+              x = 5, y = 3, fsize = 0.8)
+dev.off()
+
+# ... head ----
+pdf('../../pristurus_allometry_Dean/plots/residuals_phenogram_head.pdf')
+phenogram(tree = cm.head.res$tree, x = sz.mn, 
+          colors = cm.head.res$cols, 
+          #          ftype = 'off', 
+          ftype = 'i',
+          fsize = 0.7, 
+          spread.cost=c(1,0),
+          xlab = 'time (ma)', ylab = 'logSVL')
+add.color.bar(prompt = FALSE, cols = cm.head.res$cols, leg = 20, 
+              title = 'head residuals', 
+              subtitle = '',
+              lwd = 8, lims = cm.head.res$lims, 
+              outline = FALSE, 
+              x = 5, y = 3, fsize = 0.8)
+dev.off()
+
+# ... limbs ----
+pdf('../../pristurus_allometry_Dean/plots/residuals_phenogram_limbs.pdf')
+phenogram(tree = cm.limb.res$tree, x = sz.mn, 
+          colors = cm.limb.res$cols, 
+          #          ftype = 'off', 
+          ftype = 'i',
+          fsize = 0.7, 
+          spread.cost=c(1,0),
+          xlab = 'time (ma)', ylab = 'logSVL')
+add.color.bar(prompt = FALSE, cols = cm.limb.res$cols, leg = 20, 
+              title = 'limb residuals', 
+              subtitle = '',
+              lwd = 8, lims = cm.limb.res$lims, 
               outline = FALSE, 
               x = 5, y = 3, fsize = 0.8)
 dev.off()
