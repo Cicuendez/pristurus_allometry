@@ -178,6 +178,49 @@ slp.limbshape.tree <-rbind(evol_alom = slp.limbshape.hab['tree',],
 slp.limbshape.correlations.tree <- vec.cor.matrix(slp.limbshape.tree)[1,]
 slp.limbshape.angles.tree <- (acos(RRPP:::vec.cor.matrix(slp.limbshape.tree))*180/pi)[1,]
 
+# TABLE CORRELATION AND ANGLES ----
+# Get a table with the correlation and angle of each species to the 
+# evolutionary allometry of their respective habitat
+cor.angle.table <- data.frame(species = c(names(slp.headshape.angles.ground), 
+                       names(slp.headshape.angles.rock), 
+                       names(slp.headshape.angles.tree)), 
+           hab = c(rep('ground', length(slp.headshape.angles.ground)), 
+                   rep('rock', length(slp.headshape.angles.rock)), 
+                   rep('tree', length(slp.headshape.angles.tree))),
+           cor_head = c(slp.headshape.correlations.ground, 
+                   slp.headshape.correlations.rock,
+                   slp.headshape.correlations.tree),
+           angle_head = c(slp.headshape.angles.ground, 
+                     slp.headshape.angles.rock, 
+                     slp.headshape.angles.tree),
+           cor_limb = c(slp.limbshape.correlations.ground, 
+                        slp.limbshape.correlations.rock,
+                        slp.limbshape.correlations.tree),
+           angle_limb = c(slp.limbshape.angles.ground, 
+                          slp.limbshape.angles.rock, 
+                          slp.limbshape.angles.tree))
+cor.angle.table <- cor.angle.table[cor.angle.table$species != 'evol_alom', ])
+
+write.table(cor.angle.table, '../Tables/cor_angles.csv', sep = ';', 
+            dec = '.', quote = FALSE, row.names = FALSE)
+
+# COMPARE BETWEEN SPECIES ----
+# Sort by habitat
+slp.sort <- sp.slp[as.character(cor.angle.table$species),]
+
+# Get correlation matrix between species 
+slp.sp.cor <- round(vec.cor.matrix(slp.sort), 2)
+slp.sp.angle <- round(acos(RRPP:::vec.cor.matrix(slp.sort))*180/pi, 2)
+
+write.table(slp.sp.angle, '../Tables/angles_between_species_slopes.csv', sep = ';', 
+            dec = '.', quote = FALSE, row.names = FALSE)
+
+heatmap(slp.sp.angle, Rowv = FALSE)
+heatmap.2(slp.sp.angle)
+
+
+
+
 
 # PLOT STATIC ALLOMETRY PER HABITAT ----
 fit.sp.ggplot.data <- data.frame(pred_head = plot.pls.head$PredLine, 
@@ -189,6 +232,8 @@ fit.sp.ggplot.data <- data.frame(pred_head = plot.pls.head$PredLine,
                                    svl = rdf$svl,
                                    habitat = rdf$habitat, 
                                    sp = rdf$species)
+
+range(fit.sp.ggplot.data$slope_head)
 
 # Set the color palette
 ramp <- colorRampPalette(c("#00929c","gray80",  "#d62e31"))
