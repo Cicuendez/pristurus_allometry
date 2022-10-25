@@ -212,6 +212,9 @@ slp.sort <- sp.slp[as.character(cor.angle.table$species),]
 slp.sp.cor <- round(vec.cor.matrix(slp.sort), 2)
 slp.sp.angle <- round(acos(RRPP:::vec.cor.matrix(slp.sort))*180/pi, 2)
 
+write.table(slp.sp.cor, '../Tables/cor_between_species_slopes.csv', sep = ';', 
+            dec = '.', quote = FALSE, row.names = TRUE, col.names = NA)
+
 write.table(slp.sp.angle, '../Tables/angles_between_species_slopes.csv', sep = ';', 
             dec = '.', quote = FALSE, row.names = TRUE, col.names = NA)
 
