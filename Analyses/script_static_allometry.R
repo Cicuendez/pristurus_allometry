@@ -199,7 +199,7 @@ cor.angle.table <- data.frame(species = c(names(slp.headshape.angles.ground),
            angle_limb = c(slp.limbshape.angles.ground, 
                           slp.limbshape.angles.rock, 
                           slp.limbshape.angles.tree))
-cor.angle.table <- cor.angle.table[cor.angle.table$species != 'evol_alom', ])
+cor.angle.table <- cor.angle.table[cor.angle.table$species != 'evol_alom', ]
 
 write.table(cor.angle.table, '../Tables/cor_angles.csv', sep = ';', 
             dec = '.', quote = FALSE, row.names = FALSE)
