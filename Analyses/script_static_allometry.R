@@ -1,5 +1,6 @@
 
-
+libs <- c('geomorph', 'RRPP', 'phytools', 'geiger', 'tidyverse')
+easypackages::libraries(libs)
 
 # Evolutionary allometry ---- 
 # (from individuals dataset)
@@ -10,6 +11,7 @@ data$species <- droplevels(data$species)
 data$SVL <- log(data$SVL)
 species.fctr <- as.factor(data$species)
 habitat.fctr <- as.factor(data$habitat_broad)
+shape <- as.matrix(log(data[, 8:ncol(data)]))
 
 rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, 
                        habitat = data$habitat_broad, 
@@ -104,7 +106,7 @@ slp.limbshape.hab
 # lm(shape.vars ~ svl*sp)
 fit.headshape.sp <- lm.rrpp(shape.head ~ svl*species.fctr)
 plot.headshape.fit <- plot(fit.headshape.sp, predictor = svl, type = 'regression', pch = 16, 
-     col = species.fctr)
+                           col = species.fctr)
 plot.headshape.fit$PredLine
 plot.headshape.fit$RegScore
 plot(fit.headshape.sp, predictor = svl, type = 'regression', pch = 16, 
@@ -149,13 +151,13 @@ slp.headshape.angles.ground <- (acos(RRPP:::vec.cor.matrix(slp.headshape.ground)
 
 # head rock
 slp.headshape.rock <-rbind(evol_alom = slp.headshape.hab['rock',], 
-                             headshape.slp[hab.mn == 'rock', ])
+                           headshape.slp[hab.mn == 'rock', ])
 slp.headshape.correlations.rock <- vec.cor.matrix(slp.headshape.rock)[1,]
 slp.headshape.angles.rock <- (acos(RRPP:::vec.cor.matrix(slp.headshape.rock))*180/pi)[1,]
 
 # head tree
 slp.headshape.tree <-rbind(evol_alom = slp.headshape.hab['tree',], 
-                             headshape.slp[hab.mn == 'tree', ])
+                           headshape.slp[hab.mn == 'tree', ])
 slp.headshape.correlations.tree <- vec.cor.matrix(slp.headshape.tree)[1,]
 slp.headshape.angles.tree <- (acos(RRPP:::vec.cor.matrix(slp.headshape.tree))*180/pi)[1,]
 
@@ -182,23 +184,23 @@ slp.limbshape.angles.tree <- (acos(RRPP:::vec.cor.matrix(slp.limbshape.tree))*18
 # Get a table with the correlation and angle of each species to the 
 # evolutionary allometry of their respective habitat
 cor.angle.table <- data.frame(species = c(names(slp.headshape.angles.ground), 
-                       names(slp.headshape.angles.rock), 
-                       names(slp.headshape.angles.tree)), 
-           hab = c(rep('ground', length(slp.headshape.angles.ground)), 
-                   rep('rock', length(slp.headshape.angles.rock)), 
-                   rep('tree', length(slp.headshape.angles.tree))),
-           cor_head = c(slp.headshape.correlations.ground, 
-                   slp.headshape.correlations.rock,
-                   slp.headshape.correlations.tree),
-           angle_head = c(slp.headshape.angles.ground, 
-                     slp.headshape.angles.rock, 
-                     slp.headshape.angles.tree),
-           cor_limb = c(slp.limbshape.correlations.ground, 
-                        slp.limbshape.correlations.rock,
-                        slp.limbshape.correlations.tree),
-           angle_limb = c(slp.limbshape.angles.ground, 
-                          slp.limbshape.angles.rock, 
-                          slp.limbshape.angles.tree))
+                                          names(slp.headshape.angles.rock), 
+                                          names(slp.headshape.angles.tree)), 
+                              hab = c(rep('ground', length(slp.headshape.angles.ground)), 
+                                      rep('rock', length(slp.headshape.angles.rock)), 
+                                      rep('tree', length(slp.headshape.angles.tree))),
+                              cor_head = c(slp.headshape.correlations.ground, 
+                                           slp.headshape.correlations.rock,
+                                           slp.headshape.correlations.tree),
+                              angle_head = c(slp.headshape.angles.ground, 
+                                             slp.headshape.angles.rock, 
+                                             slp.headshape.angles.tree),
+                              cor_limb = c(slp.limbshape.correlations.ground, 
+                                           slp.limbshape.correlations.rock,
+                                           slp.limbshape.correlations.tree),
+                              angle_limb = c(slp.limbshape.angles.ground, 
+                                             slp.limbshape.angles.rock, 
+                                             slp.limbshape.angles.tree))
 cor.angle.table <- cor.angle.table[cor.angle.table$species != 'evol_alom', ]
 
 write.table(cor.angle.table, '../Tables/cor_angles.csv', sep = ';', 
@@ -218,23 +220,103 @@ write.table(slp.sp.cor, '../Tables/cor_between_species_slopes.csv', sep = ';',
 write.table(slp.sp.angle, '../Tables/angles_between_species_slopes.csv', sep = ';', 
             dec = '.', quote = FALSE, row.names = TRUE, col.names = NA)
 
-heatmap(slp.sp.angle, Rowv = FALSE)
-heatmap.2(slp.sp.angle)
 
 
+
+# PLS ----
+# ... PLS head vs size ----
+svl <- log(data$SVL)
+shape.head <- shape[, c(2:4)]
+
+pls.head <- two.b.pls(shape.head, svl)
+
+# ... PLS limbs vs size ----
+shape.limb <- shape[, 5:8]
+pls.limb <- two.b.pls(shape.limb, svl)
+
+# ... PLS whole shape vs size ----
+pls.shape <- two.b.pls(shape, svl)
+
+# Get PLS scores ----
+limb.scores <- pls.limb$XScores[, 1]
+head.scores <- pls.head$XScores[, 1]
+shape.scores <- pls.shape$XScores[, 1]
+
+hab.colors <- c(ground = "#F1B670", rock = "#683B5E", tree = "#E93F7B")
+
+par(mfrow=c(1,3))
+plot(svl, pls.limb$XScores[, 1], pch = 22, bg = hab.colors[habitat.fctr])
+plot(svl, pls.head$XScores[, 1], pch = 25, 
+     bg = hab.colors[habitat.fctr])
+plot(svl, pls.shape$XScores[, 1], pch = 21, 
+     bg = hab.colors[habitat.fctr])
+
+# SLOPES ----
+# LM scores ~ svl*sp 
+# Get a slope per species for head and limbs 
+# (instead of for each variable as we did before)
+
+fit.head.sp <- lm.rrpp(head.scores ~ svl*species.fctr)
+fit.limb.sp <- lm.rrpp(limb.scores ~ svl*species.fctr)
+fit.shape.sp <- lm.rrpp(shape.scores ~ svl*species.fctr)
+anova(fit.head.sp)
+anova(fit.limb.sp)
+anova(fit.shape.sp)
+
+plot.pls.head <- plot(fit.head.sp, predictor = svl, type = 'regression', pch = 16, 
+                      col = species.fctr)
+plot.pls.head$PredLine
+plot.pls.head$RegScore
+plot(fit.head.sp, predictor = svl, type = 'regression', pch = 16, 
+     reg.type = 'RegScore', 
+     col = species.fctr)
+
+plot.pls.limb <- plot(fit.limb.sp, predictor = svl, type = 'regression', pch = 16, 
+                      col = species.fctr)
+plot.pls.limb$PredLine
+plot.pls.limb$RegScore
+plot(fit.limb.sp, predictor = svl, type = 'regression', pch = 16, 
+     reg.type = 'RegScore', 
+     col = species.fctr)
+
+
+plot(fit.shape.sp, predictor = svl, type = 'regression', pch = 16, 
+     col = species.fctr)
+
+# regression coefficients
+coef.head <- fit.head.sp$LM$coefficients
+coef.limb <- fit.limb.sp$LM$coefficients
+coef.shape <- fit.shape.sp$LM$coefficients
+
+# get per-species slopes
+head.slp <- coef.head[grep('svl', rownames(coef.head)), ]
+head.slp[-1] <- head.slp[-1] + head.slp[1]
+names(head.slp) <- gsub('svl:species.fctr', '', names(head.slp))
+names(head.slp) <- gsub('svl', 'Pristurus_abdelkuri', names(head.slp))
+
+limb.slp <- coef.limb[grep('svl', rownames(coef.limb)), ]
+limb.slp[-1] <- limb.slp[-1] + limb.slp[1]
+names(limb.slp) <- gsub('svl:species.fctr', '', names(limb.slp))
+names(limb.slp) <- gsub('svl', 'Pristurus_abdelkuri', names(limb.slp))
+
+shape.slp <- coef.shape[grep('svl', rownames(coef.shape)), ]
+shape.slp[-1] <- shape.slp[-1] + shape.slp[1]
+names(shape.slp) <- gsub('svl:species.fctr', '', names(shape.slp))
+names(shape.slp) <- gsub('svl', 'Pristurus_abdelkuri', names(shape.slp))
 
 
 
 # PLOT STATIC ALLOMETRY PER HABITAT ----
+
 fit.sp.ggplot.data <- data.frame(pred_head = plot.pls.head$PredLine, 
-                                   regscore_head = plot.pls.head$RegScore, 
-                                   slope_head = head.slp[rdf$species],
-                                   pred_limb = plot.pls.limb$PredLine, 
-                                   regscore_limb = plot.pls.limb$RegScore, 
-                                   slope_limb = limb.slp[rdf$species],
-                                   svl = rdf$svl,
-                                   habitat = rdf$habitat, 
-                                   sp = rdf$species)
+                                 regscore_head = plot.pls.head$RegScore, 
+                                 slope_head = head.slp[rdf$species],
+                                 pred_limb = plot.pls.limb$PredLine, 
+                                 regscore_limb = plot.pls.limb$RegScore, 
+                                 slope_limb = limb.slp[rdf$species],
+                                 svl = rdf$svl,
+                                 habitat = rdf$habitat, 
+                                 sp = rdf$species)
 
 range(fit.sp.ggplot.data$slope_head)
 
@@ -247,7 +329,7 @@ head_static_plot <- ggplot(data = fit.sp.ggplot.data, aes(x = svl)) +
   geom_point(aes(y = regscore_head, color = as.factor(slope_head)), 
              alpha = 0.1, size = 2) +
   geom_line(aes(y = pred_head, color = as.factor(slope_head)), size = 1) +
-#  geom_line(aes(y = iso.line), lty = 'dashed', size = 0.5) +
+  #  geom_line(aes(y = iso.line), lty = 'dashed', size = 0.5) +
   #scale_color_manual(values = hab.colors) +
   scale_color_manual(values = ramp(25)) +
   labs(x = 'logSVL', y = 'Regression Scores',
