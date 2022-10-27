@@ -1,5 +1,5 @@
 ---
-title: "The role of habitat and evolutionary allometry in the morphological differentiation of *Pristurus* geckos (OR: Evolution along allometric lines of least resistance: Morphological differentiation in *Pristurus* geckos)"
+title: "Evolution along allometric lines of least resistance: Morphological differentiation in *Pristurus* geckos"
 author: ""
 
 output:
@@ -26,7 +26,7 @@ fontsize: 11pt
 ```
 
 \begin{center}
-\textbf{ORDER TBD:  H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,*}$,  Iris Men{\'{e}}ndez$^{2,3}$, Adri{\'{a}}n Talavera, Gabriel Riaño, Marc Sim{\'{o}}-Riudalbas$^{1}$, Salvador Carranza$^{1}$, and Dean C. Adams$^{4}$}
+\textbf{H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,*}$,  Iris Men{\'{e}}ndez$^{2,3}$, Adri{\'{a}}n Talavera, Gabriel Riaño, Marc Sim{\'{o}}-Riudalbas$^{1}$, Salvador Carranza$^{1}$, and Dean C. Adams$^{4}$}
 \end{center}
 
 \begin{center}`r format(Sys.time(), '%d %B, %Y')`\end{center}
@@ -213,41 +213,52 @@ Figure 1. Linear Measurements used in this study. SVL = snout-vent length, TL = 
 
 Figure 2. Plot of regression scores and predicted lines representing the relationship between linear body measurements and size (SVL). Individuals are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Isometric trend represented by the dashed line.  \hfill\break
 
-Figure 3. Traitgrams showing the evolution of body size (SVL) through time based on the phylogenetic tree of *Pristurus*. Colors represent an evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size (see text for descriptions). Species names are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). \hfill\break
+Figure 3. Traitgrams showing the evolution of body size (SVL) through time based on the phylogenetic tree of *Pristurus*. Colors represent an evolutionary mapping of residuals from phylogenetic regressions describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size (see text for descriptions). Species names are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). \hfill\break
 
-Figure 4. Phylomorphospace of *Pristurus*, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace.
+Figure 4. 
+
+Figure 5. Phylomorphospace of *Pristurus*, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace.
+
+Figure 6. Representative specimens from large and small \textit{Pristurus} species, colored by habitat use: ground (beige) and rock (dark purple). Specimens are scaled to a common body size (SVL) to emphasize the relative differences in limb and head proportions. Original scale shown as the gray bar.
 
 \newpage
 
-```{r, fig.align="center", echo=FALSE, out.width="100%", fig.cap= "Linear Measurements used in this study. SVL = snout-vent length, TL = trunk length, HL = head length, HW = head width, HH = head height, Lhu = humerus length, Lun = ulna length, Lfe = femur length, Ltb = tibia length (for details see Tejero-Cicu{\'{e}}ndez et al. 2021a)."}
+```{r, fig.align="center", echo=FALSE, out.width="100%", fig.cap= "Linear Measurements used in this study. SVL = snout-vent length, TL = trunk length, HL = head length, HW = head width, HH = head height, Lhu = humerus length, Lun = ulna length, Lfe = femur length, Ltb = tibia length (for details see Tejero-Cicu{\\'{e}}ndez et al. 2021a)."}
 
 include_graphics("Figs/Fig1.png")
 ```
 
 \newpage
 
-```{r, echo=FALSE, out.width="100%", fig.cap= "Plot of regression scores and predicted lines representing the relationship between linear body measurements and size (SVL). Individuals are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Isometric trend represented by the dashed line."}
+```{r, fig.align="center", echo=FALSE, out.width="100%", fig.cap= "Plot of regression scores and predicted lines representing the relationship between linear body measurements and size (SVL). Individuals are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Isometric trend represented by the dashed line."}
 
 include_graphics("Figs/figure_2_ggplot.png")
 ```
 
 \newpage
 
-```{r, echo = FALSE, out.width="100%", fig.cap = "Traitgrams showing the evolution of body size (SVL) through time based on the phylogenetic tree of \\textit{Pristurus}. Colors represent an evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size (see text for descriptions). Species names are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta)."}
+```{r, fig.align="center",  echo=FALSE, out.width="100%", fig.cap = "Traitgrams showing the evolution of body size (SVL) through time based on the phylogenetic tree of \\textit{Pristurus}. Colors represent an evolutionary mapping of residuals from phylogenetic regressions describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size (see text for descriptions). Species names are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta)."}
 
 include_graphics("Figs/figure_3_phenogram_RESIDUALS.png")
 ```
 
 \newpage
 
-```{r, echo = FALSE, out.width="100%", fig.cap = "adsf"}
+```{r, fig.align="center",  echo=FALSE, out.width="100%", fig.cap = "adsf"}
 
 include_graphics("Figs/figure_4_static_allometry.png")
 ```
 
 \newpage
 
-```{r, echo = FALSE, out.width="100%", fig.cap = "Phylomorphospace of \\textit{Pristurus}, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace."}
+```{r, fig.align="center",  echo=FALSE, out.width="100%", fig.cap = "Phylomorphospace of \\textit{Pristurus}, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace."}
 
 include_graphics("Figs/figure_5_phylomorphospace_large_small.png")
+```
+
+\newpage
+
+```{r, fig.align="center", echo=FALSE, out.height="90%", fig.cap = "Representative specimens from large and small \\textit{Pristurus} species, colored by habitat use: ground (beige) and rock (dark purple). Specimens are scaled to a common body size (SVL) to emphasize the relative differences in limb and head proportions. Original scale shown as the gray bar."}
+
+include_graphics("Figs/figure_6_Pristurus_allometry_rescaledSVL_1cm.png")
 ```
