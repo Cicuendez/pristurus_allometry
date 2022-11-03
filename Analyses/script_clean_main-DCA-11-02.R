@@ -39,16 +39,16 @@ pw.hab1 <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
 # 2A: Compare evolutionary and static (habitat) allometry 
 fit.0 <- lm.rrpp(shape~habitat, data = rdf) #H_0: group differences only (no allometry) 
 pw.hab <- pairwise(fit.hab, fit.null = fit.0, groups = rdf$habitat, covariate = rdf$svl)
-summary(pw.hab, type = 'VC', stat.table = FALSE)
-  slp.hab <- pw.hab$slopes[[1]]
+  slp.hab <- pw.hab$slopes[[1]] #slopes by habitat
 
-#Slopes by habitat
+#Test 
 slopes <- lapply(1:1000, function(j) rbind(coef.evol,pw.hab$slopes[[j]]))
 slp.ang <- lapply(1:1000, function(j) acos(RRPP:::vec.cor.matrix(slopes[[j]]))*180/pi)
 
 slp.hab.obs <- slp.ang[[1]]
 slp.Z <- RRPP:::effect.list(slp.ang)
 slp.P <- RRPP:::Pval.list(slp.ang)
+slp.P <-1-slp.P; diag(slp.P) <- 1 #test for similar (not different)
 
 slp.hab.obs
 slp.Z
@@ -78,34 +78,18 @@ plot(head.slp,limb.slp)
 contMap(tree = tree, x = head.slp, outline = FALSE)
 cm.limb <- contMap(tree = tree, x = limb.slp, outline = FALSE)
 
-# 4: phylomorphospace of size-standardized data (residuals)
-shape.res <- residuals(allom.sp)
-pca.w.phylo <- gm.prcomp(shape.res, phy = tree)
-plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
-
-################################ NEW HERE
-
-# 5: Compare Integration
+# 4: Compare Integration
 lindims.gp <- lapply( split( shape[,1:ncol(shape)], rdf$habitat), matrix, ncol=ncol(shape))
 Vrel.gp <- Map(function(x) integration.Vrel(x), lindims.gp) 
 c(Vrel.gp$ground$ZR,Vrel.gp$rock$ZR,Vrel.gp$tree$ZR)
 out <- compare.ZVrel(Vrel.gp$ground, Vrel.gp$rock, Vrel.gp$tree)
 summary(out)
 
+# 5: phylomorphospace of size-standardized data (residuals)
+shape.res <- residuals(allom.sp)
+pca.w.phylo <- gm.prcomp(shape.res, phy = tree)
+plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
 
-## plot
-library(gplots)
-Z.gp <- c(Vrel.gp$ground$ZR,Vrel.gp$rock$ZR,Vrel.gp$tree$ZR)
-Z.var <- c(Vrel.gp$ground$ZR.var,Vrel.gp$rock$ZR.var,Vrel.gp$tree$ZR.var)
-CI.gp<-qnorm(1- 0.05/2) * sqrt(Z.var)
-
-plotCI(Z.gp,ui =(Z.gp+CI.gp), li = (Z.gp-CI.gp), 
-       ylab="Integration Level (Z-Vrel)", xlab="",pch=21,cex=2, 
-       xaxt='n',pt.bg="black",lwd=3,lty=1)
-axis(1, at = 1:3,
-     labels = c("Ground",
-                "Rock",
-                "Tree"))
 
 ##################################### FOR SI
 # 4b: phylomorphospace of linear measures
