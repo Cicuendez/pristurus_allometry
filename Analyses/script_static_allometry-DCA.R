@@ -50,6 +50,10 @@ mean(slp.angles)
 hist(slp.angles)
 
 sort(slp.angles, decreasing = FALSE)
+Nsp <- table(rdf$species)
+
+cor(as.numeric(Nsp),slp.angles[-1])  #No relationship with Nsp
+plot(as.numeric(Nsp),slp.angles[-1])
 
 # 2: Compare evol and static (habitat) allometry ----
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
@@ -59,8 +63,6 @@ slp.hab <- rbind(coef.hab[2,], coef.hab[2,]+coef.hab[5,],
 rownames(slp.hab) <- c("ground","rock", "tree")
 slp.hab <-rbind(coef.evol, slp.hab)
 slp.hab.angles <- acos(RRPP:::vec.cor.matrix(slp.hab)[,1])*180/pi
-mean(slp.hab.angles)
-hist(slp.hab.angles)
 slp.hab.angles
 
 #####################################################################

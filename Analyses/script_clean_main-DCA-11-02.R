@@ -30,31 +30,35 @@ M <-rbind(coef.evol <- allom.sp$LM$gls.coefficients[2,],
 
 acos(RRPP:::vec.cor.matrix(M))*180/pi  #virtually parallel (angle of 1.49 degrees)
 
-# 2: Comparison of multivariate allometry among habitat types
+# 2: MANCOVA & comparison of allometry among habitats 
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
   anova(fit.hab)
-pw.hab <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
-  summary(pw.hab, type = 'VC', stat.table = FALSE)
+pw.hab1 <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
+  summary(pw.hab1, type = 'VC', stat.table = FALSE)
+  
+# 2A: Compare evolutionary and static (habitat) allometry 
+fit.0 <- lm.rrpp(shape~habitat, data = rdf) #H_0: group differences only (no allometry) 
+pw.hab <- pairwise(fit.hab, fit.null = fit.0, groups = rdf$habitat, covariate = rdf$svl)
+summary(pw.hab, type = 'VC', stat.table = FALSE)
+  slp.hab <- pw.hab$slopes[[1]]
 
 #Slopes by habitat
-coef.hab <- fit.hab$LM$coefficients
-slp.hab <- rbind(coef.hab[2,], coef.hab[2,]+coef.hab[5,], coef.hab[2,]+coef.hab[6,])
-rownames(slp.hab) <- c("Ground","Rock", "Tree")
-slp.hab
+slopes <- lapply(1:1000, function(j) rbind(coef.evol,pw.hab$slopes[[j]]))
+slp.ang <- lapply(1:1000, function(j) acos(RRPP:::vec.cor.matrix(slopes[[j]]))*180/pi)
 
-#Add evol. allometry vector
-slp.hab <-rbind(coef.evol, slp.hab)
-slp.hab.angles <- acos(RRPP:::vec.cor.matrix(slp.hab)[,1])*180/pi
-slp.hab.angles
+slp.hab.obs <- slp.ang[[1]]
+slp.Z <- RRPP:::effect.list(slp.ang)
+slp.P <- RRPP:::Pval.list(slp.ang)
 
-####################################  Do pairwise-like comparison of angles
-  #including Evol. Allom vector (need to add it in somehow)
+slp.hab.obs
+slp.Z
+slp.P  #angles significantly smaller than expected
 
+res <- cbind(slp.hab.obs[-1,1],slp.Z[-1,1],slp.P[-1,1])
+colnames(res) <- c("Angle","Effect Size", "P-value")
+rownames(res) <- c("Ground", "Rock", "Tree")
+res
 
-
-
-
-###################################
 # 3: Map allometry slopes on phylogeny
 head.scores <- two.b.pls(shape[, c(2:4)], rdf$svl)$XScores[, 1]
 limb.scores <- two.b.pls(shape[, 5:8], rdf$svl)$XScores[, 1]
