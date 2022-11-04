@@ -196,32 +196,51 @@ for the additional plots found below, are available at \textbf{XXX}.
 \CommentTok{\# 2: Comparison of multivariate allometry among habitat types}
 \NormalTok{fit.hab }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(shape}\SpecialCharTok{\textasciitilde{}}\NormalTok{svl}\SpecialCharTok{*}\NormalTok{habitat, }\AttributeTok{data =}\NormalTok{ rdf)}
   \FunctionTok{anova}\NormalTok{(fit.hab)}
-\NormalTok{pw.hab1 }\OtherTok{\textless{}{-}} \FunctionTok{pairwise}\NormalTok{(fit.hab, }\AttributeTok{groups =}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{habitat, }\AttributeTok{covariate =}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl)}
-  \FunctionTok{summary}\NormalTok{(pw.hab1, }\AttributeTok{type =} \StringTok{\textquotesingle{}VC\textquotesingle{}}\NormalTok{, }\AttributeTok{stat.table =} \ConstantTok{FALSE}\NormalTok{)}
 
-\CommentTok{\# 2A: Compare evolutionary and static (habitat) allometry }
-\NormalTok{fit}\FloatTok{.0} \OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(shape}\SpecialCharTok{\textasciitilde{}}\NormalTok{habitat, }\AttributeTok{data =}\NormalTok{ rdf) }\CommentTok{\#H\_0: group differences; no allometry }
-\NormalTok{pw.hab }\OtherTok{\textless{}{-}} \FunctionTok{pairwise}\NormalTok{(fit.hab, }\AttributeTok{fit.null =}\NormalTok{ fit}\FloatTok{.0}\NormalTok{, }\AttributeTok{groups =}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{habitat, }
-                   \AttributeTok{covariate =}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl)}
-\NormalTok{  slp.hab }\OtherTok{\textless{}{-}}\NormalTok{ pw.hab}\SpecialCharTok{$}\NormalTok{slopes[[}\DecValTok{1}\NormalTok{]] }
-
-\CommentTok{\#Test }
-\NormalTok{slopes }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(j) }\FunctionTok{rbind}\NormalTok{(coef.evol,pw.hab}\SpecialCharTok{$}\NormalTok{slopes[[j]]))}
-\NormalTok{slp.ang }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(j) }\FunctionTok{acos}\NormalTok{(RRPP}\SpecialCharTok{:::}\FunctionTok{vec.cor.matrix}\NormalTok{(slopes[[j]]))}\SpecialCharTok{*}
-                    \DecValTok{180}\SpecialCharTok{/}\NormalTok{pi)}
+\CommentTok{\# 2A: Compare habitat vectors versus isometry and to each other}
+  \CommentTok{\#H\_0: isometry as common slope model}
+\NormalTok{mn.sz }\OtherTok{\textless{}{-}} \FunctionTok{tapply}\NormalTok{(rdf}\SpecialCharTok{$}\NormalTok{svl,rdf}\SpecialCharTok{$}\NormalTok{habitat,mean)}
+\NormalTok{mn.shape }\OtherTok{\textless{}{-}} \FunctionTok{rowsum}\NormalTok{(rdf}\SpecialCharTok{$}\NormalTok{shape, rdf}\SpecialCharTok{$}\NormalTok{habitat)}\SpecialCharTok{/}\FunctionTok{as.vector}\NormalTok{(}\FunctionTok{table}\NormalTok{(rdf}\SpecialCharTok{$}\NormalTok{habitat))}
+\NormalTok{coef.iso }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\NormalTok{intercepts }\OtherTok{\textless{}{-}}\NormalTok{ mn.shape }\SpecialCharTok{{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{tcrossprod}\NormalTok{(coef.iso,mn.sz))}
+\NormalTok{X }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{rdf}\SpecialCharTok{$}\NormalTok{svl}\SpecialCharTok{+}\NormalTok{rdf}\SpecialCharTok{$}\NormalTok{habitat)}
+\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(intercepts[}\DecValTok{1}\NormalTok{,],coef.iso,intercepts[}\DecValTok{2}\NormalTok{,]}\SpecialCharTok{{-}}\NormalTok{intercepts[}\DecValTok{1}\NormalTok{,],}
+\NormalTok{           intercepts[}\DecValTok{3}\NormalTok{,]}\SpecialCharTok{{-}}\NormalTok{intercepts[}\DecValTok{1}\NormalTok{,])}
+\NormalTok{preds }\OtherTok{\textless{}{-}}\NormalTok{ X}\SpecialCharTok{\%*\%}\NormalTok{b}
+\NormalTok{E.iso }\OtherTok{\textless{}{-}}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{shape }\SpecialCharTok{{-}}\NormalTok{ preds }
+\NormalTok{perms }\OtherTok{\textless{}{-}}\NormalTok{ RRPP}\SpecialCharTok{:::}\FunctionTok{perm.index}\NormalTok{(}\AttributeTok{n =}\NormalTok{ fit.hab}\SpecialCharTok{$}\NormalTok{LM}\SpecialCharTok{$}\NormalTok{n, }\AttributeTok{iter =} \DecValTok{999}\NormalTok{)}
+\NormalTok{slopes }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{)\{}
+\NormalTok{  slopes[[j]] }\OtherTok{\textless{}{-}} \FunctionTok{pairwise}\NormalTok{(}\FunctionTok{lm.rrpp}\NormalTok{((preds}\SpecialCharTok{+}\NormalTok{E.iso[perms[[j]],]) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl}\SpecialCharTok{*}\NormalTok{rdf}\SpecialCharTok{$}\NormalTok{habitat, }
+          \AttributeTok{iter=}\DecValTok{0}\NormalTok{), }\AttributeTok{groups =}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{habitat,}\AttributeTok{covariate =}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl)}\SpecialCharTok{$}\NormalTok{slopes[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{\}  }
+\NormalTok{slp.ang }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(j) }
+     \FunctionTok{acos}\NormalTok{(RRPP}\SpecialCharTok{:::}\FunctionTok{vec.cor.matrix}\NormalTok{(}\FunctionTok{rbind}\NormalTok{(slopes[[j]],coef.iso)))}\SpecialCharTok{*}\DecValTok{180}\SpecialCharTok{/}\NormalTok{pi)}
 
 \NormalTok{slp.hab.obs }\OtherTok{\textless{}{-}}\NormalTok{ slp.ang[[}\DecValTok{1}\NormalTok{]]}
 \NormalTok{slp.Z }\OtherTok{\textless{}{-}}\NormalTok{ RRPP}\SpecialCharTok{:::}\FunctionTok{effect.list}\NormalTok{(slp.ang)}
 \NormalTok{slp.P }\OtherTok{\textless{}{-}}\NormalTok{ RRPP}\SpecialCharTok{:::}\FunctionTok{Pval.list}\NormalTok{(slp.ang)}
-\NormalTok{slp.P }\OtherTok{\textless{}{-}}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{slp.P; }\FunctionTok{diag}\NormalTok{(slp.P) }\OtherTok{\textless{}{-}} \DecValTok{1} \CommentTok{\#test for similar (not different)}
 
 \NormalTok{slp.hab.obs}
 \NormalTok{slp.Z}
 \NormalTok{slp.P  }
 
-\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(slp.hab.obs[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],slp.Z[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],slp.P[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{])}
+\CommentTok{\# 2B: Compare evolutionary and static (habitat) allometry }
+  \CommentTok{\#H\_0: common slope isometry}
+\NormalTok{slp.ang.ev }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(j) }\FunctionTok{cos}\NormalTok{(RRPP}\SpecialCharTok{:::}\FunctionTok{vec.cor.matrix}\NormalTok{(}\FunctionTok{rbind}\NormalTok{(coef.evol,}
+\NormalTok{              slopes[[j]])))}\SpecialCharTok{*}\DecValTok{180}\SpecialCharTok{/}\NormalTok{pi)}
+
+\NormalTok{slp.hab.ev.obs }\OtherTok{\textless{}{-}}\NormalTok{ slp.ang.ev[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{slp.Z.ev }\OtherTok{\textless{}{-}}\NormalTok{ RRPP}\SpecialCharTok{:::}\FunctionTok{effect.list}\NormalTok{(slp.ang.ev)}
+\NormalTok{slp.P.ev }\OtherTok{\textless{}{-}}\NormalTok{ RRPP}\SpecialCharTok{:::}\FunctionTok{Pval.list}\NormalTok{(slp.ang.ev)}
+
+\NormalTok{slp.hab.ev.obs}
+\NormalTok{slp.Z.ev}
+\NormalTok{slp.P.ev  }
+
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(slp.hab.ev.obs[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],slp.Z.ev[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],slp.P.ev[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{])}
 \FunctionTok{colnames}\NormalTok{(res) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Angle"}\NormalTok{,}\StringTok{"Effect Size"}\NormalTok{, }\StringTok{"P{-}value"}\NormalTok{)}
-\FunctionTok{rownames}\NormalTok{(res) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Ground"}\NormalTok{, }\StringTok{"Rock"}\NormalTok{, }\StringTok{"Tree"}\NormalTok{)}
+\FunctionTok{rownames}\NormalTok{(res) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Ev vs. Ground"}\NormalTok{, }\StringTok{"Ev vs. Rock"}\NormalTok{, }\StringTok{"Ev vs. Tree"}\NormalTok{)}
 \NormalTok{res}
 
 \CommentTok{\# 3: Map allometry slopes on phylogeny}

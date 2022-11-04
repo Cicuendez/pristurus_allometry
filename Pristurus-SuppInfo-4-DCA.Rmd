@@ -64,32 +64,51 @@ acos(RRPP:::vec.cor.matrix(M))*180/pi
 # 2: Comparison of multivariate allometry among habitat types
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
   anova(fit.hab)
-pw.hab1 <- pairwise(fit.hab, groups = rdf$habitat, covariate = rdf$svl)
-  summary(pw.hab1, type = 'VC', stat.table = FALSE)
 
-# 2A: Compare evolutionary and static (habitat) allometry 
-fit.0 <- lm.rrpp(shape~habitat, data = rdf) #H_0: group differences; no allometry 
-pw.hab <- pairwise(fit.hab, fit.null = fit.0, groups = rdf$habitat, 
-                   covariate = rdf$svl)
-  slp.hab <- pw.hab$slopes[[1]] 
-
-#Test 
-slopes <- lapply(1:1000, function(j) rbind(coef.evol,pw.hab$slopes[[j]]))
-slp.ang <- lapply(1:1000, function(j) acos(RRPP:::vec.cor.matrix(slopes[[j]]))*
-                    180/pi)
+# 2A: Compare habitat vectors versus isometry and to each other
+  #H_0: isometry as common slope model
+mn.sz <- tapply(rdf$svl,rdf$habitat,mean)
+mn.shape <- rowsum(rdf$shape, rdf$habitat)/as.vector(table(rdf$habitat))
+coef.iso <- c(1,1,1,1,1,1,1,1)
+intercepts <- mn.shape - t(tcrossprod(coef.iso,mn.sz))
+X <- model.matrix(~rdf$svl+rdf$habitat)
+b <- rbind(intercepts[1,],coef.iso,intercepts[2,]-intercepts[1,],
+           intercepts[3,]-intercepts[1,])
+preds <- X%*%b
+E.iso <- rdf$shape - preds 
+perms <- RRPP:::perm.index(n = fit.hab$LM$n, iter = 999)
+slopes <- list()
+for(j in 1:1000){
+  slopes[[j]] <- pairwise(lm.rrpp((preds+E.iso[perms[[j]],]) ~ rdf$svl*rdf$habitat, 
+          iter=0), groups = rdf$habitat,covariate = rdf$svl)$slopes[[1]]
+}  
+slp.ang <- lapply(1:1000, function(j) 
+     acos(RRPP:::vec.cor.matrix(rbind(slopes[[j]],coef.iso)))*180/pi)
 
 slp.hab.obs <- slp.ang[[1]]
 slp.Z <- RRPP:::effect.list(slp.ang)
 slp.P <- RRPP:::Pval.list(slp.ang)
-slp.P <-1-slp.P; diag(slp.P) <- 1 #test for similar (not different)
 
 slp.hab.obs
 slp.Z
 slp.P  
 
-res <- cbind(slp.hab.obs[-1,1],slp.Z[-1,1],slp.P[-1,1])
+# 2B: Compare evolutionary and static (habitat) allometry 
+  #H_0: common slope isometry
+slp.ang.ev <- lapply(1:1000, function(j) cos(RRPP:::vec.cor.matrix(rbind(coef.evol,
+              slopes[[j]])))*180/pi)
+
+slp.hab.ev.obs <- slp.ang.ev[[1]]
+slp.Z.ev <- RRPP:::effect.list(slp.ang.ev)
+slp.P.ev <- RRPP:::Pval.list(slp.ang.ev)
+
+slp.hab.ev.obs
+slp.Z.ev
+slp.P.ev  
+
+res <- cbind(slp.hab.ev.obs[-1,1],slp.Z.ev[-1,1],slp.P.ev[-1,1])
 colnames(res) <- c("Angle","Effect Size", "P-value")
-rownames(res) <- c("Ground", "Rock", "Tree")
+rownames(res) <- c("Ev vs. Ground", "Ev vs. Rock", "Ev vs. Tree")
 res
 
 # 3: Map allometry slopes on phylogeny

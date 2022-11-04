@@ -90,11 +90,11 @@ We used a combination of phenotypic, phylogenetic, and ecological data to charac
 
 We conducted a series of analyses to interrogate allometric trends, patterns of integration, and macroevolutionary changes in allometry, relative to differentiation in body form. First we characterized evolutionary allometry in the genus by performing a phylogenetic multivariate regression of body form on body size (i.e., SVL), using the species means as data. We then performed an analogous procedure at the individual level, regressing body form on body size using our entire dataset. From both the species-level (phylogenetic) and the individual-level analyses, we obtained the set of regression coefficients, and calculated the difference in their angular direction to describe the extent to which patterns of allometry at the individual level were concordant with evolutionary allometric trends across species. \hfill\break
 
-Next we used the dataset containing all individuals to determine whether trends in static allometry differed across habitat groups. This was accomplished by performing a multivariate analysis of covariance, with body size ($SVL$), $habitat$, and $SVL\times habitat$ as model effects. Significance was evaluated using 999 iterations of a permutation procedure, where residuals from a reduced model were randomly permuted in each permutation (RRPP), model statistics were recalculated, and used to generate empirical null sampling distributions to evaluate the observed test statistics [following @Freedman1983; @CollyerAdams2007; @Collyer_et_al2015]. We then compared the multivariate allometric vectors for each habitat group by calculating pairwise differences in their angular direction in morphospace, and evaluating these relative to empirical sampling distributions obtained through RRPP [@CollyerAdams2007; @AdamsCollyer2009; @CollyerAdams2013]. Patterns of multivariate allometry relative to body size were visualized via regression scores [@DrakeKlingenberg2008] and predicted lines [@AdamsNistri2010], based on the coefficients and fitted values from the linear model described above. \hfill\break
+Next we used the dataset containing all individuals to determine whether trends in static allometry differed across habitat groups. This was accomplished by performing a multivariate analysis of covariance, with body size ($SVL$), $habitat$, and $SVL\times habitat$ as model effects. Significance was evaluated using 999 iterations of a permutation procedure, where residuals from a reduced model were randomly permuted in each permutation (RRPP), model statistics were recalculated, and used to generate empirical null sampling distributions to evaluate the observed test statistics [following @Freedman1983; @CollyerAdams2007; @Collyer_et_al2015]. We then compared the multivariate allometric vectors for each habitat group to one another, and to a vector representing isometry, by calculating pairwise differences in their angular direction in morphospace, and evaluating these relative to empirical sampling distributions obtained through RRPP [@CollyerAdams2007; @AdamsCollyer2009; @CollyerAdams2013]. Here, residuals were obtained from a common isometry reduced model, whose 'common slope' component described a pattern of multivariate isometry, and whose intercepts allowed for differences in least-squares means among groups. Patterns of multivariate allometry relative to body size were visualized via regression scores [@DrakeKlingenberg2008] and predicted lines [@AdamsNistri2010], based on the coefficients and fitted values from the linear model described above. \hfill\break
 
 Additionally, because allometry describes the extent to which traits covary with body size and with each other (i.e., integration), we conducted an analysis of integration. Here we characterized the extent of morphological integration in body form for individuals within each habitat group by summarizing the dispersion of eigenvalues of their respective trait covariance matrix [sensu @Pavlicev2009]. This measure ($V_{rel}$) was subsequently converted to an effect size (a $Z$-score), which quantified the strength of morphological integration [@ConawayAdams2022]. We then performed a series of two-sample tests to compare the strength of morphological integration across habitat groups, following the procedures of Conaway and Adams [-@ConawayAdams2022]. Additionally and for comparison, we repeated these analyses on the set of size-standardized trait data, found as a set of shape ratios [sensu @Mosimann1970] where each trait was divided by body size (Supplemental Information). \hfill\break
 
-To determine the extent to which static and evolutionary allometry were concordant, we evaluated the directions in morphospace of both the evolutionary (species-level) and static (habitat-based) allometric trends. Specifically, we we obtained the set of regression coefficients from both the phylogenetic multivariate regression and the multivariate analysis of covariance analyses above, and calculated the differences in angular direction between the evolutionary trajectory and the static allometry trend for each habitat group. The observed angles were then statistically evaluated relative to empirical sampling distributions obtained through permutation (RRPP), based on a null model containing habitat groups but lacking an allometric component.  \hfill\break
+To determine the extent to which static and evolutionary allometry were concordant, we evaluated the directions in morphospace of both the evolutionary (species-level) and static (habitat-based) allometric trends. Specifically, we we obtained the set of regression coefficients from both the phylogenetic multivariate regression and the multivariate analysis of covariance analyses above, and calculated the differences in angular direction between the evolutionary trajectory and the static allometry trend for each habitat group. The observed angles were then statistically evaluated relative to empirical sampling distributions obtained through permutation (RRPP), based on the common isometry reduced model described above.  \hfill\break
 
 Next, to discern how allometric trends resulted in the evolution of distinct body forms, we examined changes in the body shape proportions across the phylogeny. Here we treated the head dimensions and limb dimensions separately, as allometric trends could potentially differ between these body regions due to differential functional or selective constraints [@KALIONTZOPOULOU2010]. Because both the head and limb data were multivariate, we first performed a partial least squares (PLS) analysis [@Rohlf2000] of the head traits versus SVL, and the limb traits versus SVL, to describe the direction of maximal covaration between each body region and size. Then, we measured the mean residuals of each species to the allometric trend inferred, which show if head and limbs proportions of species are greater or smaller than expected for their body size. The species residuals were then mapped on the phylogeny of *Pristurus* using a Brownian motion model of evolution, to qualitatively evaluate shifts in head and limbs proportionality across the phylogeny for the group. Similarly, within-species patterns of static allometry were visualized by plotting regressions of PLS scores on SVL for both head and limb traits separately. \hfill\break
 
@@ -104,11 +104,11 @@ Finally, to relate within-species allometric trends with patterns of phenotypic 
 
 Using phylogenetic regression, we found significant evolutionary allometry in body form across species ($N_{sp}=25$; $F = 217.9$; $Z =5.53$; $P < 0.001$). Likewise, when allometry in body form was examined across individuals, a similar pattern was observed ($N_{ind}=687$; $F = 7910.8$; $Z =9.20$; $P < 0.001$). Further, the vectors of regression coefficients between the two analyses were highly correlated ($\rho = 0.94$) and were oriented in nearly parallel directions in morphospace ($\theta = 1.49^\circ$). This revealed that the pattern of multivariate allometry across individuals was concordant with macroevolutionary trends of interspecific allometry among species of *Pristurus* across the phylogeny. \hfill\break
 
-Our analyses also exposed significant differences in the allometry of body form among *Pristurus* utilizing distinct habitats (Table 1). Here, comparisons of multivariate allometric vectors identified that ground-dwelling *Pristurus* displayed a distinct allometric trend as compared with *Pristurus* occupying both the rock and tree habitats (Table 2). In addition, allometric patterns in both rock and tree habitats were similar to the multivariate line of isometry (Figure 2), while patterns of multivariate allometry in ground-dwelling *Pristurus* was decidely steeper.  Inspection of the regression coefficients for each trait (Supplemental Information) confirmed the steeper allometric coefficients for all head and limb traits in ground-dwelling *Pristurus* as compared with rock and tree-dwelling taxa, corroborating this result. Taken together, these findings implied that larger individuals of ground-dwelling *Pristurus* species displayed disproportionately larger heads and limbs, as compared with large individuals in taxa utilizing other habitat types. Multivariate visualizations of these multivariate allometric trends (Figure 2) confirmed these statistical findings, and indicated that the allometric trajectory in ground-dwelling *Pristurus* was more extreme as compared with either rock or tree-dwelling *Pristurus*. \hfill\break
+Our analyses also exposed significant differences in the allometry of body form among *Pristurus* utilizing distinct habitats (Table 1). Further, pairwise comparisons of multivariate allometric vectors revealed that patterns of static allometry in each habitat differed significantly from isometry, indicating the presence of multivariate allometry in each (Table 2). Additionally, comparisons identified that ground-dwelling *Pristurus* displayed the most distinct allometric trend as compared with *Pristurus* occupying both the rock and tree habitats (Table 2; Figure 2). Inspection of the regression coefficients for each trait (Supplemental Information) revealed that allometry in this group was exemplified by steeper allometric coefficients for all head and limb traits as compared with rock and tree-dwelling taxa. These findings implied that larger individuals of ground-dwelling *Pristurus* species displayed disproportionately larger heads and limbs, as compared with large individuals in taxa utilizing other habitat types. Multivariate visualizations of these multivariate allometric trends (Figure 2) confirmed these statistical findings, and indicated that the allometric trajectory in ground-dwelling *Pristurus* was more extreme as compared with either rock or tree-dwelling *Pristurus*. \hfill\break
 
 Examination of patterns of trait covariation revealed strong levels of morphological integration within each habitat type ($Z_{ground}=3.97$; $Z_{rock}=3.72$; $Z_{tree}=2.15$). Further, two-sample tests revealed that the strength of morphological integration was significantly greater in ground-dwelling *Pristurus* than either those utilizing rock ($Z_{Groung-Rock}=6.59$; $P << 0.001$) or tree habitats ($Z_{Groung-Tree}=11.17$; $P << 0.001$). *Pristurus* utilizing tree habitats displayed the lowest levels of integration, which were also significantly less than in the rock habitat ($Z_{Rock-Tree}=7.19$; $P << 0.001$). When size was accounted for in the data, levels of integration dropped considerably, though the overall pattern and differences among habitat groups remained the same (Supplemental Information). \hfill\break
 
-Comparisons of evolutionary allometry with static allometry in each habitat revealed substantial concordance between these allometric trends. Here, vectors of regression coefficients representing static allometry within habitat groups were oriented in very similar directions with the regression vector representing evolutionary allometry, with small pairwise angles between them ($\theta: 2.5^\circ\rightarrow6^\circ$). Subsequent permutation tests indicated that they were significantly more congruent than expected (Table 3). Notably, static allometry in ground-dwelling *Pristurus* was most similar to trends of evolutionary allometry, displaying the smallest angular difference and largest effect size. Thus, static and evolutionary allometry trends were essentially parallel in this group, indicating a direct correspondence between the two. This result implied that phenotypic evolution across species aligned closely with directions of allometric variation within habitat groups at the individual level; namely that larger individuals and larger ground-dwelling species exhibited disproportionately larger heads and limbs, while smaller individuals and smaller ground-dwelling species displayed disproportionately smaller heads and limbs. \hfill\break
+Comparisons of evolutionary allometry with static allometry in each habitat revealed substantial concordance between these allometric trends. Here, vectors of regression coefficients representing static allometry within habitat groups were oriented in very similar directions with the regression vector representing evolutionary allometry, with small pairwise angles between them ($\theta: 2.3^\circ\rightarrow5.9^\circ$). Subsequent permutation tests indicated no differences between the static allometry vectors and the regression vector representing evolutionary allometry, indicating strong congruence between them (Table 3). Notably, static allometry in ground-dwelling *Pristurus* was most similar to trends of evolutionary allometry, displaying the smallest angular difference and largest effect size. Thus, static and evolutionary allometry trends were essentially parallel in this group, indicating a direct correspondence between the two. This result implied that phenotypic evolution across species aligned closely with directions of allometric variation within habitat groups at the individual level; namely that larger individuals and larger ground-dwelling species exhibited disproportionately larger heads and limbs, while smaller individuals and smaller ground-dwelling species displayed disproportionately smaller heads and limbs. \hfill\break
 
 Mapping the residuals of species into the phylogeny showed that large ground-dwelling species displayed greater head proportions than large rock-dwelling species, who exhibited smaller heads relative to body size (Figure 3A). Conversely, the opposite pattern was observed when comparing small species utilizing these habitats: ground-dwelling species showed small relative head proportions while rock-dwelling species displayed generally larger head proportions. In contrast, limb shape showed more variable patterns. Although all large ground-dwelling species consistently displayed large relative limb proportions, large rock-dwelling species were more variable in this trait, with *P. insignis* exhibiting large and *P. insignoides* small limb proportions. For small species, shifts in relative limb proportions seemed more independent of habitat utilization, since there were differences in limb residuals both within rock- and ground-dwelling species (Figure 3B). Visual inspection of static allometry trends within species (Figure 4) largely confirmed these patterns, illustrating that ground-dwelling species generally displayed steeper allometric patterns as compared with rock-dwelling species. Overall there was general concordance across taxa in terms of trends of multivariate allometry, affirming that the association between evolutionary allometry and habitat-based static allometry was robust. \hfill\break
 
@@ -201,16 +201,49 @@ kbl(tb1,align = "llllll", "latex", booktabs=TRUE,caption ="Multivariate analysis
 
 \newpage
 
-```{r echo=FALSE}
-tb2 <- as.data.frame(matrix(c(0.000, 0.001, 0.001, 6.872, 0.000, 0.261, 3.657, 0.649, 0.000),ncol = 3, byrow = T))
-rownames(tb2) <- colnames(tb2) <- c("Ground", "Rock", "Tree")
-tb2[1,2] <- cell_spec(tb2[1, 2], bold = T)
-tb2[1,3] <- cell_spec(tb2[1, 3], bold = T)
-tb2[2,1] <- cell_spec(tb2[2, 1], bold = T)
-tb2[3,1] <- cell_spec(tb2[3, 1], bold = T)
+```{r echo=FALSE, eval = TRUE}
+# 2A: Compare habitat vectors versus isometry and to each other
+  #H_0: isometry as common slope model
+mn.sz <- tapply(rdf$svl,rdf$habitat,mean)
+mn.shape <- rowsum(rdf$shape, rdf$habitat)/as.vector(table(rdf$habitat))
+coef.iso <- c(1,1,1,1,1,1,1,1)
+intercepts <- mn.shape - t(tcrossprod(coef.iso,mn.sz))
+X <- model.matrix(~rdf$svl+rdf$habitat)
+b <- rbind(intercepts[1,],coef.iso,intercepts[2,]-intercepts[1,],
+           intercepts[3,]-intercepts[1,])
+preds <- X%*%b
+E.iso <- rdf$shape - preds 
+perms <- RRPP:::perm.index(n = fit.hab$LM$n, iter = 999)
+slopes <- list()
+for(j in 1:1000){
+  slopes[[j]] <- pairwise(lm.rrpp((preds+E.iso[perms[[j]],]) ~ rdf$svl*rdf$habitat, iter=0), 
+           groups = rdf$habitat,covariate = rdf$svl)$slopes[[1]]
+  
+}  
+slp.ang <- lapply(1:1000, function(j) acos(RRPP:::vec.cor.matrix(rbind(slopes[[j]],coef.iso)))*180/pi)
 
-kbl(tb2,align = "llllll", "latex", booktabs=TRUE,caption ="Pairwise comparisons of multivariate static allometry across habitats. Effect sizes ($Z_{\\theta_{12}}$) based on pairwise differences in angular direction are below the diagonal, and their corresponding significance levels are above diagonal. Significant values in bold.", escape = FALSE) %>%
+slp.hab.obs <- slp.ang[[1]]
+slp.Z <- RRPP:::effect.list(slp.ang)
+slp.P <- RRPP:::Pval.list(slp.ang)
+
+slp.hab.obs <- round(slp.hab.obs, digits = 3)
+slp.Z <- round(slp.Z, digits = 3)
+slp.P <- round(slp.P, digits = 3)
+slp.Z[upper.tri(slp.Z)]<- slp.P[upper.tri(slp.P)]<- slp.hab.obs[upper.tri(slp.hab.obs)]<- ""  
+
+rownames(slp.hab.obs) <- colnames(slp.hab.obs) <- 
+  rownames(slp.Z) <- colnames(slp.Z) <- 
+  rownames(slp.P) <- colnames(slp.P) <-
+  c("Ground", "Rock", "Tree", "Isometry")
+
+tb2 <- rbind(slp.hab.obs,slp.Z,slp.P)
+
+kbl(tb2, align = "cccc","latex", booktabs=TRUE,caption ="Pairwise comparisons of multivariate static allometry for each habitat group. Comparisons with the vector of multivariate isometry are included. Displayed are: pairwise angular differences ($\\theta_{12}$), their associated effect sizes ($Z_{\\theta_{12}}$), and significance levels obtained via permutation (RRPP).", escape = FALSE) %>%
+    pack_rows("Angle", 1, 4) %>%
+  pack_rows("Effect Size", 5, 8) %>%
+  pack_rows("P-value", 9, 12) %>%
     kable_styling(latex_options = "HOLD_position")
+
 ```
 
 
@@ -228,27 +261,18 @@ C <- vcv.phylo(tree)
 # 1: Evolutionary Allometry
 allom.sp <- lm.rrpp(LS.mns~sz.mn, Cov = C)
   coef.evol <- allom.sp$LM$gls.coefficients[2,]
-fit.0 <- lm.rrpp(shape~habitat, data = rdf) #H_0: group differences only (no allometry) 
-pw.hab <- pairwise(fit.hab, fit.null = fit.0, groups = rdf$habitat, covariate = rdf$svl)
 
-#Slopes by habitat
-slopes <- lapply(1:1000, function(j) rbind(coef.evol,pw.hab$slopes[[j]]))
-slp.ang <- lapply(1:1000, function(j) acos(RRPP:::vec.cor.matrix(slopes[[j]]))*180/pi)
+slp.ang.ev <- lapply(1:1000, function(j) acos(RRPP:::vec.cor.matrix(rbind(coef.evol,slopes[[j]])))*180/pi)
 
-slp.hab.obs <- slp.ang[[1]]
-slp.Z <- RRPP:::effect.list(slp.ang)
-slp.P <- RRPP:::Pval.list(slp.ang)
-  slp.P <-1-slp.P
-  diag(slp.P) <- 1
-slp.hab.obs <- round(slp.hab.obs, digits = 3)
-slp.Z <- round(slp.Z, digits = 3)
-slp.P <- round(slp.P, digits = 3)
+slp.hab.ev.obs <- slp.ang.ev[[1]]
+slp.Z.ev <- RRPP:::effect.list(slp.ang.ev)
+slp.P.ev <- RRPP:::Pval.list(slp.ang.ev)
 
-tb2 <- cbind(slp.hab.obs[-1,1],slp.Z[-1,1],slp.P[-1,1])
-colnames(tb2) <- c("$\\theta_{E,S}$","$Z_{\\theta_{E,S}}$", "P-value")
-rownames(tb2) <- c("Ground", "Rock", "Tree")
+res <- cbind(slp.hab.ev.obs[-1,1],slp.Z.ev[-1,1],slp.P.ev[-1,1])
+colnames(res) <- c("$\\theta_{ES}$","$Z_{\\theta_{ES}}$", "P-value")
+rownames(res) <- c("Evol. vs. Ground", "Evol. vs. Rock", "Evol. vs. Tree")
 
-kbl(tb2, align = "ccc","latex", booktabs=TRUE,caption ="Pairwise comparisons of multivariate evolutionary allometry versus static allometry for each habitat group. Pairwise angular differences between evolutionary and static allometry ($\\theta_{E,S}$), their associated effect sizes ($Z_{\\theta_{E,S}}$), and significance levels are displayed. Significance levels evaluate whether the observed angle is smaller than expected (i.e., vector directions are similar).", escape = FALSE) %>%
+kbl(res, align = "ccc","latex", booktabs=TRUE,caption ="Pairwise comparisons of multivariate evolutionary allometry versus static allometry for each habitat group. Pairwise angular differences between evolutionary and static allometry ($\\theta_{ES}$), their associated effect sizes ($Z_{\\theta_{ES}}$), and significance levels are displayed.", escape = FALSE) %>%
     kable_styling(latex_options = "HOLD_position") 
 ```
 
