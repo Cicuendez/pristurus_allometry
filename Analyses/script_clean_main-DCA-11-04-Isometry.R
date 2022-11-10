@@ -3,7 +3,7 @@
 libs <- c('geomorph', 'RRPP', 'phytools', 'geiger', 'tidyverse')
 easypackages::libraries(libs)
 
-# 0: Data Prep
+# 0: Data Prep ----
 data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';', dec = '.', header = TRUE, stringsAsFactors = TRUE)
   sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
@@ -19,18 +19,18 @@ levels(hab.mn) <- levels(rdf$habitat)
 tree <- treedata(phy = tree0, data = LS.mns)$phy
 C <- vcv.phylo(tree)
 
-# 1: Evolutionary Allometry
+# 1: Evolutionary Allometry ----
 allom.sp <- lm.rrpp(LS.mns~sz.mn, Cov = C)
 allom.ind <- lm.rrpp(shape~svl, data = rdf)
 anova(allom.sp)
 anova(allom.ind)
 
-M <-rbind(coef.evol <- allom.sp$LM$gls.coefficients[2,],
-        coef.ind <- allom.ind$LM$coefficients[2,])
+M <-rbind(coef.evol = allom.sp$LM$gls.coefficients[2,],
+        coef.ind = allom.ind$LM$coefficients[2,])
 
 acos(RRPP:::vec.cor.matrix(M))*180/pi  #virtually parallel (angle of 1.49 degrees)
 
-# 2: MANCOVA & comparison of allometry among habitats 
+# 2: MANCOVA & comparison of allometry among habitats ----
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
   anova(fit.hab)
 
@@ -60,7 +60,7 @@ slp.P <- RRPP:::Pval.list(slp.ang)
 
 slp.hab.obs
 slp.Z
-slp.P  
+slp.P #all different from isometry, and ground different from rock and tree
 
 # 2B: Compare evolutionary and static (habitat) allometry 
   #H_0: common slope isometry
@@ -79,7 +79,7 @@ colnames(res) <- c("Angle","Effect Size", "P-value")
 rownames(res) <- c("Ev vs. Ground", "Ev vs. Rock", "Ev vs. Tree")
 res
 
-# 3: Map allometry slopes on phylogeny
+# 3: Map allometry slopes on phylogeny ----
 head.scores <- two.b.pls(shape[, c(2:4)], rdf$svl)$XScores[, 1]
 limb.scores <- two.b.pls(shape[, 5:8], rdf$svl)$XScores[, 1]
 
@@ -98,20 +98,20 @@ plot(head.slp,limb.slp)
 contMap(tree = tree, x = head.slp, outline = FALSE)
 cm.limb <- contMap(tree = tree, x = limb.slp, outline = FALSE)
 
-# 4: Compare Integration
+# 4: Compare Integration ----
 lindims.gp <- lapply( split( shape[,1:ncol(shape)], rdf$habitat), matrix, ncol=ncol(shape))
 Vrel.gp <- Map(function(x) integration.Vrel(x), lindims.gp) 
 c(Vrel.gp$ground$ZR,Vrel.gp$rock$ZR,Vrel.gp$tree$ZR)
 out <- compare.ZVrel(Vrel.gp$ground, Vrel.gp$rock, Vrel.gp$tree)
 summary(out)
 
-# 5: phylomorphospace of size-standardized data (residuals)
+# 5: phylomorphospace of size-standardized data (residuals) ----
 shape.res <- residuals(allom.sp)
 pca.w.phylo <- gm.prcomp(shape.res, phy = tree)
 plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
 
 
-##################################### FOR SI
+##################################### FOR SI ----
 # 4b: phylomorphospace of linear measures
 pca.w.phylo2 <- gm.prcomp(LS.mns, phy = tree)
 plot(pca.w.phylo2, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
