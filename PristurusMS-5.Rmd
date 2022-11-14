@@ -54,7 +54,7 @@ $^{*}$Correspondence: Héctor Tejero-Cicuéndez cicuendez93@gmail.com
 
 # Abstract
 
-asdf
+Species living in distinct habitats often experience unique ecological selective pressures, which can drive phenotypic divergence. However, how ecophenotypic patterns are affected by allometric trends and levels of trait integration is less well understood. Here we evaluate the role of allometry in shaping patterns of body size and shape diversity in *Pristurus* geckos utilizing differing habitats. We found that patterns of body shape allometry and integration were distinct in species utilizing differing habitats, with ground-dwelling *Pristurus* displaying the most divergent allometric trend. There was also strong concordance between static allometry across individuals and evolutionary allometry among species, revealing that body shape differences among individuals were predictive of evolutionary changes across the phylogeny at macroevolutionary scales. This suggested that phenotypic evolution occurred along allometric lines of least resistance, with allometric trajectories imposing a strong influence on the magnitude and direction of size and shape changes across the phylogeny. When viewed in phylomorphospace, the largest rock-dwelling species were most similar in body shape to the smallest ground-dwelling species, and vice versa. Thus, in *Pristurus*, phenotypic evolution along the differing habitat-based allometric trajectories resulted in similar body shapes at differing body sizes in distinct ecological habitats. 
 
 \newpage
 
