@@ -23,7 +23,7 @@ library(geiger)
   knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# 1: R-script for Article Computations
+# 1: R-script for Article Computations and Flow of Allometry Operations
 
 Below is an R-script that may be used to reproduce all statistical analyses found in the paper. The data are found on DRYAD: (doi:10.5061/dryad.xwdbrv1f6 [@PristurusData]). Additional scripts used to generate publication-ready plots, and scripts for the additional plots, are found below.
 
@@ -144,6 +144,12 @@ pca.w.phylo <- gm.prcomp(shape.res, phy = tree)
 plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black',
      phylo.par = list(node.labels = FALSE))
 ```
+
+```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="90%", fig.cap= "Visual depiction of flow of operations for interrogating levels of allometry. Colors designate the different habitat groups."}
+
+include_graphics("Figs/figure_sup_allometries_ill.png")
+```
+
 
 \newpage
 

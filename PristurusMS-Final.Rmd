@@ -70,7 +70,7 @@ In this study, we employed a combination of multivariate morphometric and phylog
 
 ## (a) Data
 
-We used a combination of phenotypic, phylogenetic, and ecological data to characterize and evaluate intra- and interspecific allometric trends. The data utilized here were obtained from our prior work on this system  [@Tejero-Cicuendez2021; @Tejero-Cicuendez2022], and are briefly described here. First we used a time-dated, molecular phylogeny of squamates that included all members of the genus *Pristurus*, including several currently undescribed taxa. The tree was estimated in a Bayesian framework, using five mitochondrial markers, six nuclear markers, and 21 calibration points [@Tejero-Cicuendez2022]. Next we categorized each species as belonging to one of three ecological groups (ground, rock, or tree), based on descriptions of habitat use found in the literature [@Tejero-Cicuendez2021]. Finally, we obtained a phenotypic data set containing body size (snout-vent length: SVL) and eight linear measurements (Figure 1) that described overall body form: trunk length (TrL), head length (HL), head width (HW), head height (HH), humerus length (Lhu), ulna length (Lun), femur length (Lfe), and tibia length (Ltb) [@Tejero-Cicuendez2021]. We restricted our study to those species represented by nine or more individuals; resulting in a dataset of 687 individuals from 25 species (invidivuals per species: $\mu=27$; min = 9, max = 56). Species in the phenotypic dataset were then matched to the phylogeny, which was subsequently pruned to arrive at the final topology. All measurements were log-transformed prior to statistical analyses. Additional details regarding data collection and formal descriptions of each linear measurement may be found in the original sources [@Tejero-Cicuendez2021; @Tejero-Cicuendez2022]. The data are available on DRYAD: https://doi.org/10.5061/dryad.xwdbrv1f6 [@PristurusData].
+We used a combination of phenotypic, phylogenetic, and ecological data to characterize and evaluate intra- and interspecific allometric trends. The data utilized here were obtained from our prior work on this system  [@Tejero-Cicuendez2021; @Tejero-Cicuendez2022], and are briefly described here. First we used a time-dated, molecular phylogeny of squamates that included all members of the genus *Pristurus*, including several currently undescribed taxa. The tree was estimated in a Bayesian framework, using five mitochondrial markers, six nuclear markers, and 21 calibration points [@Tejero-Cicuendez2022]. Next we categorized each species as belonging to one of three ecological groups (ground, rock, or tree), based on descriptions of habitat use found in the literature [@Tejero-Cicuendez2021]. Finally, we obtained a phenotypic data set containing body size (snout-vent length: SVL) and eight linear measurements (Figure 1) that described overall body form: trunk length (TL), head length (HL), head width (HW), head height (HH), humerus length (Lhu), ulna length (Lun), femur length (Lfe), and tibia length (Ltb) [@Tejero-Cicuendez2021]. We restricted our study to those species represented by nine or more individuals; resulting in a dataset of 687 individuals from 25 species (invidivuals per species: $\mu=27$; min = 9, max = 56). Species in the phenotypic dataset were then matched to the phylogeny, which was subsequently pruned to arrive at the final topology. All measurements were log-transformed prior to statistical analyses. Additional details regarding data collection and formal descriptions of each linear measurement may be found in the original sources [@Tejero-Cicuendez2021; @Tejero-Cicuendez2022]. The data are available on DRYAD: https://doi.org/10.5061/dryad.xwdbrv1f6 [@PristurusData].
 
 ## (b) Statistical and Comparative Analyses
 
@@ -133,7 +133,7 @@ Finally, interpreting the observed patterns of phenotypic integration and allome
 
 **Acknowledgments**: We thank XYZPDQ...
 
-**Funding Statement**: This work was sponsored in part by XXX (to SC). IM was funded by the Alexander von Humboldt Foundation through a Humboldt Research Fellowship. DCA was funded in part by National Science Foundation Grant DBI-1902511.
+**Funding Statement**: This work was sponsored in part by XXX (to SC). IM was funded by the Alexander von Humboldt Foundation through a Humboldt Research Fellowship. AT is supported by the "la Caixa" doctoral fellowship programme (LCF/BQ/DR20/11790007). DCA was funded in part by National Science Foundation Grant DBI-1902511.
 
 \newpage
 
@@ -145,11 +145,11 @@ data <- data0[data0$species %in% sp.to.keep, ]
   data$habitat_broad <- as.factor(data$habitat_broad)
   data$SVL <- log(data$SVL)
 shape <- as.matrix(log(data[, 8:ncol(data)]))
-rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad,
+rdf <- rrpp.data.frame(SVL = data$SVL, shape = shape, habitat = data$habitat_broad,
                        species = data$species)
 
 # Comparison of multivariate allometry among habitat types
-fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
+fit.hab <- lm.rrpp(shape~SVL*habitat, data = rdf)
 tb1 <- anova(fit.hab)$table
 
 options(knitr.kable.NA = '')
@@ -162,11 +162,11 @@ kbl(tb1,align = "llllll", "latex", booktabs=TRUE,caption ="Multivariate analysis
 ```{r echo=FALSE, eval = TRUE}
 # 2A: Compare habitat vectors versus isometry and to each other
   #H_0: isometry as common slope model
-mn.sz <- tapply(rdf$svl,rdf$habitat,mean)
+mn.sz <- tapply(rdf$SVL,rdf$habitat,mean)
 mn.shape <- rowsum(rdf$shape, rdf$habitat)/as.vector(table(rdf$habitat))
 coef.iso <- c(1,1,1,1,1,1,1,1)
 intercepts <- mn.shape - t(tcrossprod(coef.iso,mn.sz))
-X <- model.matrix(~rdf$svl+rdf$habitat)
+X <- model.matrix(~rdf$SVL+rdf$habitat)
 b <- rbind(intercepts[1,],coef.iso,intercepts[2,]-intercepts[1,],
            intercepts[3,]-intercepts[1,])
 preds <- X%*%b
@@ -174,8 +174,8 @@ E.iso <- rdf$shape - preds
 perms <- RRPP:::perm.index(n = fit.hab$LM$n, iter = 999)
 slopes <- list()
 for(j in 1:1000){
-  slopes[[j]] <- pairwise(lm.rrpp((preds+E.iso[perms[[j]],]) ~ rdf$svl*rdf$habitat, iter=0),
-           groups = rdf$habitat,covariate = rdf$svl)$slopes[[1]]
+  slopes[[j]] <- pairwise(lm.rrpp((preds+E.iso[perms[[j]],]) ~ rdf$SVL*rdf$habitat, iter=0),
+           groups = rdf$habitat,covariate = rdf$SVL)$slopes[[1]]
 
 }  
 slp.ang <- lapply(1:1000, function(j) acos(RRPP:::vec.cor.matrix(rbind(slopes[[j]],coef.iso)))*180/pi)
@@ -210,7 +210,7 @@ kbl(tb2, align = "cccc","latex", booktabs=TRUE,caption ="Pairwise comparisons of
 ```{r echo=FALSE, eval=TRUE}
 tree0 <- read.nexus('Analyses/data/phylogeny/pristurus_tree_final.nex')
 LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
-sz.mn <- tapply(rdf$svl,rdf$species,mean)
+sz.mn <- tapply(rdf$SVL,rdf$species,mean)
 hab.mn <- as.factor(by(rdf$habitat,rdf$species,unique))
 levels(hab.mn) <- levels(rdf$habitat)
 tree <- treedata(phy = tree0, data = LS.mns)$phy
@@ -249,7 +249,7 @@ Figure 4. Patterns of static allometry for each species for head traits (upper p
 
 Figure 5. Phylomorphospace of *Pristurus*, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace.
 
-Figure 6. Representative specimens from large and small \textit{Pristurus} species, colored by habitat use: ground (beige) and rock (dark purple). Specimens are scaled to a common body size (SVL) to emphasize the relative differences in limb and head proportions. Original scale shown as the gray bar.
+Figure 6. Representative specimens from large and small \textit{Pristurus} species, colored by habitat use: ground (beige) and rock (dark purple). Specimens are scaled to a common body size (SVL, gray rectangles) to emphasize the relative differences in limb and head proportions. Relatively slender-headed and short-limbed species shown on the left. Original scale shown as the gray bar.
 
 \newpage
 
@@ -288,7 +288,7 @@ include_graphics("Figs/figure_5_phylomorphospace_large_small.png")
 
 \newpage
 
-```{r, fig.align="center", echo=FALSE, out.width="100%", fig.cap = "Representative specimens from large and small \\textit{Pristurus} species, colored by habitat use: ground (beige) and rock (dark purple). Specimens are scaled to a common body size (SVL) to emphasize the relative differences in limb and head proportions. Original scale shown as the gray bar."}
+```{r, fig.align="center", echo=FALSE, out.width="100%", fig.cap = "Representative specimens from large and small \\textit{Pristurus} species, colored by habitat use: ground (beige) and rock (dark purple). Specimens are scaled to a common body size (SVL, gray rectangles) to emphasize the relative differences in limb and head proportions. Relatively slender-headed and short-limbed species shown on the left. Original scale shown as the gray bar."}
 
 include_graphics("Figs/figure_6_Pristurus_allometry_rescaledSVL_horizontal.png")
 ```
