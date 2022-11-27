@@ -276,7 +276,7 @@ include_graphics("Figs/figure_3_Pristurus_allometry_traitgram_legends.png")
 
 ```{r, fig.align="center",  echo=FALSE, out.width="100%", fig.cap = "Patterns of static allometry for each species for head traits (upper panel) and limb traits (lower panel). Species are separated by their habitat groups and colored by the magnitude of their regression slope (purple: steeper slopes, yellow: shallower slopes)."}
 
-include_graphics("Figs/figure_4_static_allometry_v2.png")
+include_graphics("Figs/figure_4_static_allometry_v3.png")
 ```
 
 \newpage

@@ -372,7 +372,7 @@ range(fit.sp.ggplot.data$slope_head)
 
 # Set the color palette
 ramp <- colorRampPalette(c("#00929c","gray80",  "#d62e31"))
-
+ramp2 <- colorRampPalette(c("#FDE725FF", 'gray80', "#440154FF"))
 
 head_static_plot <- ggplot(data = fit.sp.ggplot.data, aes(x = svl)) +
   facet_wrap(.~habitat, ncol = 3) +
@@ -381,13 +381,15 @@ head_static_plot <- ggplot(data = fit.sp.ggplot.data, aes(x = svl)) +
   geom_line(aes(y = pred_head, color = as.factor(slope_head)), size = 1) +
   #  geom_line(aes(y = iso.line), lty = 'dashed', size = 0.5) +
   #scale_color_manual(values = hab.colors) +
-  scale_color_manual(values = ramp(25)) +
+  scale_color_manual(values = ramp2(25)) +
   labs(x = 'logSVL', y = 'Regression Scores',
-       title = 'HEAD STATIC ALLOMETRY') +
+       title = 'HEAD', subtitle = 'INTRASPECIFIC STATIC ALLOMETRY') +
   theme_bw() +
   theme(legend.position = '', 
-        plot.title = element_text(size = 15, vjust = 1, hjust = 0.5, 
-                                  face = 'bold')
+        plot.title = element_text(size = 12, vjust = 1, hjust = 0.5, 
+                                  face = 'bold'), 
+        plot.subtitle = element_text(size = 10, vjust = 1, hjust = 0.5, 
+                                     face = 'plain')
   )
 
 limb_static_plot <- ggplot(data = fit.sp.ggplot.data, aes(x = svl)) +
@@ -397,19 +399,22 @@ limb_static_plot <- ggplot(data = fit.sp.ggplot.data, aes(x = svl)) +
   geom_line(aes(y = pred_limb, color = as.factor(slope_limb)), size = 1) +
   #  geom_line(aes(y = iso.line), lty = 'dashed', size = 0.5) +
   #scale_color_manual(values = hab.colors) +
-  scale_color_manual(values = ramp(25)) +
+  scale_color_manual(values = ramp2(25)) +
   labs(x = 'logSVL', y = 'Regression Scores',
-       title = 'LIMB STATIC ALLOMETRY') +
+       title = 'LIMBS', subtitle = 'INTRASPECIFIC STATIC ALLOMETRY') +
   theme_bw() +
   theme(legend.position = '', 
-        plot.title = element_text(size = 15, vjust = 1, hjust = 0.5, 
-                                  face = 'bold')
+        plot.title = element_text(size = 12, vjust = 1, hjust = 0.5, 
+                                  face = 'bold'), 
+        plot.subtitle = element_text(size = 10, vjust = 1, hjust = 0.5, 
+                                     face = 'plain')
   )
 
 library(patchwork)
 
 static_allometry <- head_static_plot / limb_static_plot
 
+ggsave('../Figs/static_allometry.pdf', plot = static_allometry)
 ggsave('../Figs/static_allometry.png', plot = static_allometry)
 
 
