@@ -137,6 +137,8 @@ Finally, interpreting the observed patterns of phenotypic integration and allome
 
 **Data availability statement**: All the data used in this study are available on DRYAD from a previous study: https://doi.org/10.5061/dryad.xwdbrv1f6 [@PristurusData]. The scripts for implementing all analyses and generating the figures in this manuscript can be found in the Supplementary Material and in a GitHub repository (and on DRYAD upon acceptance).
 
+**Competing interests**: The authors declare no competing interests.
+
 \newpage
 
 ```{r echo=FALSE, eval = TRUE}
