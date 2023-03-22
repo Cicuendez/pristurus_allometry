@@ -25,8 +25,8 @@ allom.ind <- lm.rrpp(shape~svl, data = rdf)
 anova(allom.sp)
 anova(allom.ind)
 
-M <-rbind(coef.evol = allom.sp$LM$gls.coefficients[2,],
-        coef.ind = allom.ind$LM$coefficients[2,])
+M <-rbind(coef.evol <- allom.sp$LM$gls.coefficients[2,],
+        coef.ind <- allom.ind$LM$coefficients[2,])
 
 acos(RRPP:::vec.cor.matrix(M))*180/pi  #virtually parallel (angle of 1.49 degrees)
 
