@@ -1,0 +1,73 @@
+#NEXUS
+[R-package PHYTOOLS, Mon Mar  1 12:16:01 2021]
+
+BEGIN TAXA;
+	DIMENSIONS NTAX = 30;
+	TAXLABELS
+		Pristurus_abdelkuri
+		Pristurus_adrarensis
+		Pristurus_carteri
+		Pristurus_celerrimus
+		Pristurus_collaris
+		Pristurus_crucifer
+		Pristurus_flavipunctatus
+		Pristurus_gallagheri
+		Pristurus_guichardi
+		Pristurus_insignis
+		Pristurus_insignoides
+		Pristurus_masirahensis
+		Pristurus_minimus
+		Pristurus_obsti
+		Pristurus_ornithocephalus
+		Pristurus_phillipsii
+		Pristurus_popovi
+		Pristurus_rupestris
+		Pristurus_samhaensis
+		Pristurus_sokotranus
+		Pristurus_somalicus
+		Pristurus_sp1
+		Pristurus_sp10
+		Pristurus_sp11
+		Pristurus_sp12
+		Pristurus_sp2
+		Pristurus_sp3
+		Pristurus_sp4
+		Pristurus_sp5
+		Pristurus_sp9
+	;
+END;
+BEGIN TREES;
+	TRANSLATE
+		1	Pristurus_abdelkuri,
+		2	Pristurus_adrarensis,
+		3	Pristurus_carteri,
+		4	Pristurus_celerrimus,
+		5	Pristurus_collaris,
+		6	Pristurus_crucifer,
+		7	Pristurus_flavipunctatus,
+		8	Pristurus_gallagheri,
+		9	Pristurus_guichardi,
+		10	Pristurus_insignis,
+		11	Pristurus_insignoides,
+		12	Pristurus_masirahensis,
+		13	Pristurus_minimus,
+		14	Pristurus_obsti,
+		15	Pristurus_ornithocephalus,
+		16	Pristurus_phillipsii,
+		17	Pristurus_popovi,
+		18	Pristurus_rupestris,
+		19	Pristurus_samhaensis,
+		20	Pristurus_sokotranus,
+		21	Pristurus_somalicus,
+		22	Pristurus_sp1,
+		23	Pristurus_sp10,
+		24	Pristurus_sp11,
+		25	Pristurus_sp12,
+		26	Pristurus_sp2,
+		27	Pristurus_sp3,
+		28	Pristurus_sp4,
+		29	Pristurus_sp5,
+		30	Pristurus_sp9
+	;
+	TREE * UNTITLED = [&R] (((((((1:28.32351378,((((7:8.216945865,24:8.216945865):3.227095162,23:11.44404103):8.371866066,(17:8.520333725,30:8.520333725):11.29557337):6.563696981,(((18:11.65124074,(27:9.526493808,28:9.526493808):2.124746927):3.22600374,26:14.87724448):2.620927212,29:17.49817169):8.881432386):1.943909703):1.226654505,2:29.55016828):1.59038856,((((3:12.71928605,(5:8.969239222,15:8.969239222):3.750046825):6.373174376,(6:10.37450379,(16:3.655806461,21:3.655806461):6.718697332):8.71795663):6.015803576,(12:5.166728511,13:5.166728511):19.94153549):3.407048735,8:28.51531273):2.625244107):1.273183226,22:32.41374007):7.080966281,((10:7.898210527,25:7.898210527):6.143220148,11:14.04143068):25.45327567):2.202334872,((9:5.449825861,14:5.449825861):12.450843,(19:4.273108512,20:4.273108512):13.62756035):23.79637235):4.425973136,4:46.12301436);
+END;
