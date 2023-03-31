@@ -94,6 +94,12 @@ res
 head.scores <- two.b.pls(shape[, c(2:4)], rdf$svl)$XScores[, 1]
 limb.scores <- two.b.pls(shape[, 5:8], rdf$svl)$XScores[, 1]
 
+head.scores <- plot(lm.rrpp(shape[, c(2:4)]~ rdf$svl), 
+                 type = "regression", predictor = rdf$svl, reg.type = "RegScore")$RegScore
+
+limb.scores <- plot(lm.rrpp(shape[, c(5:8)]~ rdf$svl), 
+                    type = "regression", predictor = rdf$svl, reg.type = "RegScore")$RegScore
+
 coef.head <- lm.rrpp(head.scores ~ rdf$svl*rdf$species)$LM$coefficients
 coef.limb <- lm.rrpp(limb.scores ~ rdf$svl*rdf$species)$LM$coefficients
 
