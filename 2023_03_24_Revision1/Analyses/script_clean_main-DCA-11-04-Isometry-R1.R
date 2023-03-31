@@ -82,7 +82,7 @@ slp.P.ev <- RRPP:::Pval.list(slp.ang.ev)
 
 slp.hab.ev.obs
 slp.Z.ev
-slp.P.ev  #not different from evol. allometry
+slp.P.ev  #rock different from evol. allometry
 
 res <- cbind(slp.hab.ev.obs[-1,1],slp.Z.ev[-1,1],slp.P.ev[-1,1])
 colnames(res) <- c("Angle","Effect Size", "P-value")
