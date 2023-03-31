@@ -46,11 +46,11 @@ fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf2)  #CHANGED 3/22/2023
 
 # 2A: Compare habitat vectors versus isometry and to each other
   #H_0: isometry as common slope model
-mn.sz <- tapply(rdf$svl,rdf$habitat,mean)
-mn.shape <- rowsum(rdf2$shape, rdf$habitat)/as.vector(table(rdf$habitat)) #CHANGED 3/22/2023
+mn.sz <- tapply(rdf2$svl,rdf2$habitat,mean)
+mn.shape <- rowsum(rdf2$shape, rdf2$habitat)/as.vector(table(rdf2$habitat)) #CHANGED 3/22/2023
 coef.iso <- c(1,1,1,1,1,1,1,1)
 intercepts <- mn.shape - t(tcrossprod(coef.iso,mn.sz))
-X <- model.matrix(~rdf$svl+rdf$habitat)
+X <- model.matrix(~rdf2$svl+rdf2$habitat)
 b <- rbind(intercepts[1,],coef.iso,intercepts[2,]-intercepts[1,],
            intercepts[3,]-intercepts[1,])
 preds <- X%*%b
