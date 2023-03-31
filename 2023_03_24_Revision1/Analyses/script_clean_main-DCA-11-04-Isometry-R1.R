@@ -89,13 +89,10 @@ colnames(res) <- c("Angle","Effect Size", "P-value")
 rownames(res) <- c("Ev vs. Ground", "Ev vs. Rock", "Ev vs. Tree")
 res
 
-########################################  DID NOT IMPLEMENT YET
-
-### NOTE: SEE REV 2. May just simplify this one and description
-
 # 3: Map allometry slopes on phylogeny ----
-head.scores <- two.b.pls(shape[, c(2:4)], rdf2$svl)$XScores[, 1]
-limb.scores <- two.b.pls(shape[, 5:8], rdf2$svl)$XScores[, 1]
+ # use multivariate regression
+head.scores <- two.b.pls(shape[, c(2:4)], rdf$svl)$XScores[, 1]
+limb.scores <- two.b.pls(shape[, 5:8], rdf$svl)$XScores[, 1]
 
 coef.head <- lm.rrpp(head.scores ~ rdf$svl*rdf$species)$LM$coefficients
 coef.limb <- lm.rrpp(limb.scores ~ rdf$svl*rdf$species)$LM$coefficients
