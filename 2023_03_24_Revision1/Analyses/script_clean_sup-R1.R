@@ -6,31 +6,35 @@ libs <- c('geomorph', 'RRPP', 'phytools', 'geiger', 'tidyverse',
           'ggphylomorpho')
 easypackages::libraries(libs)
 
-# Morpho data ----
-# Both species data and specimen data
-data.sp <- read.table('data/morpho/morpho_sp_final.csv', sep = ';', 
-                      dec = '.', header = TRUE)
+# 0: data prep ----
 data0 <- read.table('data/morpho/morpho_pristurus.csv', sep = ';', 
-                    dec = '.', header = TRUE)
-
-# Drop species with less than 5 individuals
-sp.to.keep <- names(which(table(data0$species) > 5) == TRUE)
+                    dec = '.', header = TRUE) # import morpho data (specimens)
+sp.to.keep <- names(which(table(data0$species) >= 5)) # Drop species with less than 5 individuals
 data <- data0[data0$species %in% sp.to.keep, ]
+data$species <- droplevels(data$species)
+data$SVL <- log(data$SVL) # log transform body size
+shape <- as.matrix(log(data[, 8:ncol(data)])) # log transform body shape
+rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, 
+                       habitat = data$habitat_broad, 
+                       species = data$species) # dataframe for analysis
 
-# number of species
-n.sp <- length(table(data$species))
+tree0 <- read.nexus('data/phylogeny/pristurus_tree_final.nex') # import phylogeny
+LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]] # species shape means
+sz.mn <- tapply(rdf$svl,rdf$species,mean) # species size means
+hab.mn <- as.factor(by(rdf$habitat,rdf$species,unique)) # species habitat
+levels(hab.mn) <- levels(rdf$habitat)
+tree <- treedata(phy = tree0, data = LS.mns)$phy # match morpho and phylo data
+C <- vcv.phylo(tree) # variance covariance matrix
 
-# Phylogeny ----
-tree0 <- read.nexus('data/phylogeny/pristurus_tree_final.nex')
+### NEW for Revision: 
+# Get per-species residuals to remove the evolutionary (interspecific) 
+# component of allometry
+SVL.resid <- resid(lm(data$SVL~data$species))
+shape.resid <- resid(lm(shape~data$species))
 
-# Prepare specimen data for analysis ----
-svl <- log(data$SVL)
-shape <- as.matrix(log(data[, 8:ncol(data)]))
-species.fctr <- as.factor(data$species)
-habitat.fctr <- as.factor(data$habitat_broad)
-
-rdf <- rrpp.data.frame(svl = svl, shape = shape, habitat = habitat.fctr, 
-                       species = species.fctr)
+rdf2 <- rrpp.data.frame(svl = SVL.resid, shape = shape.resid, 
+                        habitat = data$habitat_broad, 
+                        species = data$species)
 
 # Species model ----
 # Get slopes per species
