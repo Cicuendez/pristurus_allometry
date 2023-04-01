@@ -36,36 +36,32 @@ rdf2 <- rrpp.data.frame(svl = SVL.resid, shape = shape.resid,
                         habitat = data$habitat_broad, 
                         species = data$species)
 
-# Species model ----
-# Get slopes per species
-# Multivariate linear model
-fit.sp <- lm.rrpp(shape~svl*species, data = rdf)
+# 1: multivariate intraspecific allometry ----
+# shape~svl*species
+# Multivariate linear model: get slopes per species per variable
+fit.sp <- lm.rrpp(shape~svl*species, data = rdf2) 
 anova(fit.sp)
+plot(fit.sp, predictor = rdf2$svl, type = 'regression', pch = 16, 
+     col = as.numeric(rdf$species)) # plot regression scores
+fit.coef.sp <- fit.sp$LM$coefficients # regression coefficients
 
-plot(fit.sp, predictor = rdf$svl, type = 'regression', pch = 16, 
-     col = as.numeric(rdf$species))
-
-# regression coefficients
-fit.coef.sp <- fit.sp$LM$coefficients
-
-# get species slopes ----
+# get species slopes per species per variable
 sp.slp <- fit.coef.sp[grep('svl', rownames(fit.coef.sp)), ]
 sp.slp[-1,] <- sp.slp[-1,] + sp.slp[1,]
-
 rownames(sp.slp) <- gsub('svl:species', '', rownames(sp.slp))
 rownames(sp.slp) <- gsub('svl', 'Pristurus_abdelkuri', rownames(sp.slp))
 
 # Plot species slopes on the phylogeny ----
-# match the species in the tree and in the data
-dat.tree.slp <- treedata(phy = tree0, data = sp.slp)
+dat.tree.slp <- treedata(phy = tree0, data = sp.slp) # match tree and slopes
 tree <- dat.tree.slp$phy
 dat.slp <- dat.tree.slp$data
 
-# contMap slopes per variable ----
+# prepare contMap slopes per variable
 ramp <- colorRampPalette(c("#00929c","gray80",  "#d62e31"))
 cm.plots <- vector('list', length = ncol(dat.slp))
 names(cm.plots) <- colnames(dat.slp)
 
+# contMap shape variables
 for (i in 1:ncol(dat.slp)){
   print(names(cm.plots)[i])
   cm <- contMap(tree = tree, x = dat.slp[,i], outline = FALSE)
@@ -77,64 +73,25 @@ for (i in 1:ncol(dat.slp)){
   dev.off()
 }
 
-# contMap SVL ----
-rownames(data.sp) <- data.sp$species
-dat.tree.morpho <- treedata(phy = tree, data = data.sp)
-dat.morpho <- as.data.frame(dat.tree.morpho$data)
-class(dat.morpho$SVL)
-dat.num <- dat.morpho[, c(6:ncol(dat.morpho))]
-for (i in 1:ncol(dat.num)){
-  dat.num[,i] <- as.numeric(as.character(dat.num[,i]))
-}
-dat.morpho.num <- cbind(dat.morpho[, 1:5], dat.num)
-svl.sp <- log(dat.morpho.num$SVL)
-names(svl.sp) <- dat.morpho.num$species
-
-cm.svl <- contMap(tree = tree, x = svl.sp, outline = FALSE, plot = FALSE)
+# contMap SVL
+cm.svl <- contMap(tree = tree, x = sz.mn, outline = FALSE, plot = FALSE)
 cm.svl$cols[] <- ramp(1001)
 
-# Phenograms ----
+# Phenograms per-variable ----
 # phenogram slopes and SVL
-# __ Y = SVL, color = slope ----
-
-# separate files
-for (i in 1:length(cm.plots)){
-  phname <- paste0('plots/phenogram_svl_', names(cm.plots)[i], '.png')
-  png(phname)
-  phenogram(tree = cm.plots[[i]]$tree, x = svl.sp, 
-            colors = cm.plots[[i]]$cols, 
-            #          ftype = 'off', 
-            ftype = 'i',
-            fsize = 0.7, 
-            spread.cost=c(1,0),
-            xlab = 'time (ma)', ylab = 'logSVL')
-  points(x = 30.5, y = 3.65, bg = 'orchid3', col = 'black', 
-         cex = 1.5, pch = 21)
-  text(x = 31, y = 3.6, cex = 0.8, col = 'orchid3',
-       labels = substitute(paste(bold('hard ground'))),
-       adj = 0)
-  add.color.bar(prompt = FALSE, cols = cm.plots[[i]]$cols, leg = 20, 
-                title = paste0(names(cm.plots[i]), ' slope'), 
-                subtitle = '',
-                lwd = 8, lims = cm.plots[[i]]$lims, 
-                outline = FALSE, 
-                x = 5, y = 3, fsize = 0.8)
-  dev.off()
-}
-
+# Y = SVL, color = slope
 # all in one file
 png('plots/phenograms_all.png', width = 1200, height = 600)
 par(mfrow = c(2, 4))
 par(mar = c(5,5,2,2))
 for (i in 1:length(cm.plots)){
-  phenogram(tree = cm.plots[[i]]$tree, x = svl.sp, 
+  phenogram(tree = cm.plots[[i]]$tree, x = sz.mn, 
             colors = cm.plots[[i]]$cols, 
             ftype = 'off', 
             #ftype = 'i',
             #fsize = 0.7, 
             #spread.cost=c(1,0),
             xlab = 'time (ma)', ylab = 'logSVL')
-  # points(x = 30.5, y = 3.65, bg = 'orchid3', col = 'black', cex = 1.5, pch = 21)
   add.color.bar(prompt = FALSE, cols = cm.plots[[i]]$cols, leg = 20, 
                 title = paste0(names(cm.plots[i]), ' slope'), 
                 subtitle = '',
