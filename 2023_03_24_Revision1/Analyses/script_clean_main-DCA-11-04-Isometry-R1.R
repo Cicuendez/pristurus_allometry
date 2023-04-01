@@ -94,7 +94,7 @@ res
 head.scores <- two.b.pls(shape[, c(2:4)], rdf$svl)$XScores[, 1]
 limb.scores <- two.b.pls(shape[, 5:8], rdf$svl)$XScores[, 1]
 
-#CHANGED 3/22/2023 DCA 
+#CHANGED 3/31/2023 DCA 
 #Instead of the PLS, get the regression scores as suggested by reviewer
 head.scores <- plot(lm.rrpp(shape[, c(2:4)]~ rdf$svl), 
                  type = "regression", predictor = rdf$svl, reg.type = "RegScore")$RegScore
