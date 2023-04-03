@@ -135,7 +135,7 @@ plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.la
 
 
 ##################################### FOR SI ----
-# 4b: phylomorphospace of linear measures
+# 4b: phylomorphospace of linear measures ----
 pca.w.phylo2 <- gm.prcomp(LS.mns, phy = tree)
 plot(pca.w.phylo2, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
 
@@ -168,3 +168,43 @@ range(svl.gp$ground)
 hist(svl.gp$ground,xlim = c(2.5,4.5), ylim = c(0,150),xlab = "log(SVL)", col = "black")
 hist(svl.gp$rock,add = TRUE, col="blue")
 hist(svl.gp$tree,add = TRUE, col="red")
+
+
+# Phylogenetic signal of habitat ----
+# Borges et al. 2019 Bioinformatics
+# https://github.com/mrborges23/delta_statistic
+#remotes::install_github("stoufferlab/phyloint")
+library(ape)
+source('delta_statistic_code.R')
+tree # phylogenetic tree
+hab.mn # trait vector
+identical(names(hab.mn), tree$tip.label) # same order
+
+# estimate delta parameter 
+deltaA <- delta(trait = hab.mn, tree = tree, 
+                lambda0 = 0.1, se = 0.0589, 
+                sim = 10000, thin = 10, burn = 100)
+
+# estimate p-value
+nsim <- 1000
+random_delta <- rep(NA,nsim)
+for (i in 1:nsim){
+  print(paste0('simulation ', i))
+  rtrait <- sample(hab.mn) # random order of trait values
+  random_delta[i] <- delta(rtrait,tree,0.1,0.0589,10000,10,100)
+}
+p_value <- sum(random_delta>deltaA)/length(random_delta)
+boxplot(random_delta)
+abline(h=deltaA,col="red")
+
+# histogram p-value
+hist(random_delta, breaks = 25, col = 'gray80', 
+     main = '')
+arrows(x0 = deltaA, x1 = deltaA, y0 = 20, y1 = 0, col = 'red', 
+       lwd = 4, length = 0.1)
+
+# No phylogenetic signal of habitat
+
+
+
+
