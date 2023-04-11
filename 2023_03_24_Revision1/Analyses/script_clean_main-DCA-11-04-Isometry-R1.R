@@ -37,8 +37,7 @@ anova(allom.ind)
 M <-rbind(coef.evol <- allom.sp$LM$gls.coefficients[2,],
         coef.ind <- allom.ind$LM$coefficients[2,])
 
-acos(RRPP:::vec.cor.matrix(M))*180/pi  #virtually parallel (angle of 1.49 degrees)
-  #ANGLE 5.6 degrees
+acos(RRPP:::vec.cor.matrix(M))*180/pi  #nearly parallel (angle of 5.6 degrees)
 
 # 2: MANCOVA & comparison of allometry among habitats ----
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf2)  #CHANGED 3/22/2023
@@ -91,8 +90,8 @@ res
 
 # 3: Map allometry slopes on phylogeny ----
  # use multivariate regression
-head.scores <- two.b.pls(shape[, c(2:4)], rdf$svl)$XScores[, 1]
-limb.scores <- two.b.pls(shape[, 5:8], rdf$svl)$XScores[, 1]
+head.scores.old <- two.b.pls(shape[, c(2:4)], rdf$svl)$XScores[, 1]
+limb.scores.old <- two.b.pls(shape[, 5:8], rdf$svl)$XScores[, 1]
 
 #CHANGED 3/31/2023 DCA 
 #Instead of the PLS, get the regression scores as suggested by reviewer
@@ -101,6 +100,10 @@ head.scores <- plot(lm.rrpp(shape[, c(2:4)]~ rdf$svl),
 
 limb.scores <- plot(lm.rrpp(shape[, c(5:8)]~ rdf$svl), 
                     type = "regression", predictor = rdf$svl, reg.type = "RegScore")$RegScore
+
+#Reg Scores Identical to our PLS score approach
+plot(head.scores.old, head.scores)  
+plot(limb.scores.old, limb.scores)
 
 coef.head <- lm.rrpp(head.scores ~ rdf$svl*rdf$species)$LM$coefficients
 coef.limb <- lm.rrpp(limb.scores ~ rdf$svl*rdf$species)$LM$coefficients
@@ -125,6 +128,8 @@ Vrel.gp <- Map(function(x) integration.Vrel(x), lindims.gp)
 c(Vrel.gp$ground$ZR,Vrel.gp$rock$ZR,Vrel.gp$tree$ZR)
 out <- compare.ZVrel(Vrel.gp$ground, Vrel.gp$rock, Vrel.gp$tree)
 summary(out)
+
+
 
 ########################################### DID NOT IMPLEMENT YET (IS IT NEEDED?)
 

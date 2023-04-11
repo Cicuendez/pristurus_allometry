@@ -1,0 +1,10 @@
+
+### UPDATE SI SCRIPT FOR RDF2
+
+Table 1:
+"Note that there is no variation explained by the 'habitat' term, as the pooled-within species data are mean-centered."
+
+### WORDING CHANGES
+"This method partials out the effects of species differences while retaining the within-species patterns of variation and allometry"
+
+
