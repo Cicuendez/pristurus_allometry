@@ -3,7 +3,7 @@ title: 'Evolution along allometric lines of least resistance: Morphological diff
   in *Pristurus* geckos'
 author: ''
 output:
-  word_document: default
+#  word_document: default
   pdf_document:
     fig_caption: yes
     number_sections: no

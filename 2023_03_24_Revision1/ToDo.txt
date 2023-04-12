@@ -1,10 +1,20 @@
+TO DO:  SI update
 
-### UPDATE SI SCRIPT FOR RDF2
+Rev 1:
 
-Table 1:
-"Note that there is no variation explained by the 'habitat' term, as the pooled-within species data are mean-centered."
+1: Add allometry to Intro
 
-### WORDING CHANGES
-"This method partials out the effects of species differences while retaining the within-species patterns of variation and allometry"
+3: lines 75-77 (really about the Discussion section and interpretation)
 
+Rev 2:
+
+# 1: More on what is known regarding allometry (lines 17-18; 60-62). 
+   - Klingenberg, Goswami, Adams, (Jen Bright, Chris Cooney: https://www.nature.com/articles/nature21074)
+       -last one not really allometry per se, but diversification of bird bill shapes (implies allometry??)
+
+# 2: more on 'Why pristurus?' 
+
+# 4: Link of allometry patterns to drivers of selection in Discussion
+
+# 6: Novelty
 
