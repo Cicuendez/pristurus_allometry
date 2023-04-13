@@ -59,7 +59,6 @@ slopes <- list()
 for(j in 1:1000){ #CHANGED 3/22/2023
   slopes[[j]] <- pairwise(lm.rrpp((preds+E.iso[perms[[j]],]) ~ rdf2$svl*rdf2$habitat, iter=0), 
            groups = rdf2$habitat,covariate = rdf2$svl)$slopes[[1]]
-  
 }  
 slp.ang <- lapply(1:1000, function(j) acos(RRPP:::vec.cor.matrix(rbind(slopes[[j]],coef.iso)))*180/pi)
 
