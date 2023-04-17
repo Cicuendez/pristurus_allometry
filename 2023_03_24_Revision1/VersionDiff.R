@@ -3,5 +3,5 @@
     # NOTE: need to install latexdiffr from: https://github.com/hughjonesd/latexdiffr
 
 #Run latex diff by hand in MS directory
-shell(cmd="latexdiff PristurusMS-Final.tex PristurusMS-R1_2.tex > MS-diff.tex")
-tinytex::latexmk("MS-diff.tex") 
+shell(cmd="latexdiff PristurusMS-Final.tex PristurusMS-R1_2.tex > TrackChanges.tex")
+tinytex::latexmk("TrackChanges.tex") 
