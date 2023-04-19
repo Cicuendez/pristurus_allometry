@@ -298,7 +298,7 @@ include_graphics("Figs/figure_4_static_allometry_v3.png")
 
 \newpage
 
-```{r, fig.align="center",  echo=FALSE, out.width="100%", fig.cap = "Phylomorphospace of \\textit{Pristurus}, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace. Point size is proportional to mean species body size. 79% of the total variation is displayed in the first two PC axes (PC1 = 62.8%; PC2 = 16.3%)."}
+```{r, fig.align="center",  echo=FALSE, out.width="100%", fig.cap = "Phylomorphospace of \\textit{Pristurus}, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace. Point size is proportional to mean species body size. 79\\% of the total variation is displayed in the first two PC axes (PC1 = 62.8\\%; PC2 = 16.3\\%)."}
 
 include_graphics("Figs/figure_5_phylomorphospace_large_small.png")
 ```
