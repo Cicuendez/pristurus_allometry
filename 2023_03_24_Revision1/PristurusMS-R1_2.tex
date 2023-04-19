@@ -5,10 +5,10 @@
 \documentclass[
   11pt,
 ]{article}
-\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -34,8 +34,15 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Evolution along allometric lines of least resistance: Morphological differentiation in Pristurus geckos},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
-\usepackage{graphicx}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -52,29 +59,6 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
-  \fi
-  % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \usepackage{setspace}\doublespacing
 \usepackage{lineno}\linenumbers
 \usepackage[utf8]{inputenc}
@@ -94,19 +78,9 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
-\hypersetup{
-  pdftitle={Evolution along allometric lines of least resistance: Morphological differentiation in Pristurus geckos},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
 
-\title{Evolution along allometric lines of least resistance:
-Morphological differentiation in \emph{Pristurus} geckos}
+\title{Evolution along allometric lines of least resistance: Morphological
+differentiation in \emph{Pristurus} geckos}
 \author{}
 \date{\vspace{-2.5em}}
 
@@ -117,7 +91,7 @@ Morphological differentiation in \emph{Pristurus} geckos}
 \textbf{H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,2,*}$,  Iris Men{\'{e}}ndez$^{3}$, Adri{\'{a}}n Talavera$^{2}$, Gabriel Riaño$^{2}$, Bernat Burriel-Carranza$^{2}$, Marc Sim{\'{o}}-Riudalbas$^{2}$, Salvador Carranza$^{2}$, and Dean C. Adams$^{4}$}
 \end{center}
 
-\begin{center}17 April, 2023\end{center}
+\begin{center}19 abril, 2023\end{center}
 
 \(^{1}\)Evolution and Conservation Biology research Group, Department of
 Biodiversity, Ecology and Evolution. Faculty of Biology. Universidad
@@ -221,11 +195,11 @@ individuals in a single ontogenetic stage within a population or species
 sizes, as described by evolutionary allometry (see Cock 1966;
 Klingenberg and Zimmermann 1992). Indeed, across vertebrates, numerous
 studies have shown that a sizeable proportion of overall phenotypic
-variation is related to interspecific differences in body size (Pyron
-and Burbrink 2009; Piras et al. 2010; Cardini and Polly 2013; e.g.,
-Sherratt et al. 2014; Cardini et al. 2015; Bright et al. 2016; Bardua et
-al. 2021; Felice et al. 2021; Zelditch and Swiderski 2022). When viewed
-from this perspective, patterns of ontogenetic and evolutionary
+variation is related to interspecific differences in body size (e.g.,
+Sherratt et al. 2014; Pyron and Burbrink 2009; Piras et al. 2010;
+Cardini and Polly 2013; Cardini et al. 2015; Bright et al. 2016; Bardua
+et al. 2021; Felice et al. 2021; Zelditch and Swiderski 2022). When
+viewed from this perspective, patterns of ontogenetic and evolutionary
 allometry are thought to play a decisive role in shaping patterns of
 phenotypic diversification across the tree of life. \hfill\break
 
@@ -315,14 +289,14 @@ six nuclear markers, and 21 calibration points (Tejero-Cicuéndez et al.
 ecological habitat groups (ground-dwelling, rock-dwelling, or
 tree-arboreal). Habitat designations were based on substrate preferences
 and habitat use as found through extensive field observations described
-in the primary literature (Arnold 1993; Arnold 2009, and references
-therein). Finally, we obtained a phenotypic data set containing body
-size (snout-vent length: SVL) and eight linear measurements (Figure 1)
-that described overall body form: trunk length (TL), head length (HL),
-head width (HW), head height (HH), humerus length (Lhu), ulna length
-(Lun), femur length (Lfe), and tibia length (Ltb) (Tejero-Cicuéndez et
-al. 2021a). We restricted our study to those species represented by nine
-or more individuals; resulting in a dataset of 687 individuals from 25
+in the primary literature (Arnold 1993, 2009, and references therein).
+Finally, we obtained a phenotypic data set containing body size
+(snout-vent length: SVL) and eight linear measurements (Figure 1) that
+described overall body form: trunk length (TL), head length (HL), head
+width (HW), head height (HH), humerus length (Lhu), ulna length (Lun),
+femur length (Lfe), and tibia length (Ltb) (Tejero-Cicuéndez et al.
+2021a). We restricted our study to those species represented by nine or
+more individuals; resulting in a dataset of 687 individuals from 25
 species (invidivuals per species: mean=27; min = 9, max = 56). All
 specimens used in this study were adults, and thus patterns of
 ontogenetic allometry could not be explored. Species in the phenotypic
@@ -382,15 +356,14 @@ multivariate allometric vectors for each habitat group to one another,
 and to a vector representing multivariate isometry, by calculating
 pairwise angular differences in their direction in morphospace, and
 evaluating these relative to empirical sampling distributions obtained
-through RRPP (Collyer and Adams 2007; Adams and Collyer 2009; Collyer
-and Adams 2013). Here, residuals were obtained from a common isometry
-reduced model, whose common slope component described a pattern of
-multivariate isometry, and whose intercepts allowed for differences in
-least-squares means among groups. Patterns of multivariate allometry
-relative to body size were visualized via regression scores (Drake and
-Klingenberg 2008) and predicted lines (Adams and Nistri 2010), based on
-the coefficients and fitted values from the linear model described
-above. \hfill\break
+through RRPP (Collyer and Adams 2007, 2013; Adams and Collyer 2009).
+Here, residuals were obtained from a common isometry reduced model,
+whose common slope component described a pattern of multivariate
+isometry, and whose intercepts allowed for differences in least-squares
+means among groups. Patterns of multivariate allometry relative to body
+size were visualized via regression scores (Drake and Klingenberg 2008)
+and predicted lines (Adams and Nistri 2010), based on the coefficients
+and fitted values from the linear model described above. \hfill\break
 
 Additionally, because allometry describes the extent to which traits
 covary with body size and with each other (i.e., integration), we
@@ -455,11 +428,10 @@ from the largest and smallest ground-dwelling species (scaled to unit
 size), and specimens from a large and small rock-dwelling species, to
 aid in describing these allometric trends. All analyses were conducted
 in R 4.2.1 (R Core Team 2022), using \texttt{RRPP} version 1.3.2
-(Collyer and Adams 2018; Collyer and Adams 2022) and \texttt{geomorph}
-4.0.5 (Baken et al. 2021a) for statistical analyses and the
-\texttt{tidyverse} version 1.3.0 (Wickham et al. 2019),
-\texttt{phytools} version 0.7-77 (Revell 2012), and a modified version
-of the function \texttt{ggphylomorpho}
+(Collyer and Adams 2018, 2022) and \texttt{geomorph} 4.0.5 (Baken et al.
+2021a) for statistical analyses and the \texttt{tidyverse} version 1.3.0
+(Wickham et al. 2019), \texttt{phytools} version 0.7-77 (Revell 2012),
+and a modified version of the function \texttt{ggphylomorpho}
 {[}\url{https://github.com/wabarr/ggphylomorpho}{]} for data
 manipulation and visualization, as well as scripts written by the
 authors (Supplementary Material).
@@ -596,7 +568,7 @@ patterns revealed in the phylomorphospace with those from the other
 analyses revealed that the same body proportions could be obtained in
 different ways, as determined by subtle differences in allometric slope
 across habitats, combined with body size differences. As such, species
-with similar body proportinos displayed differing overall size, were
+with similar body proportions displayed differing overall size, were
 found in distinct habitats, and exhibited different allometric trends.
 \hfill\break
 
@@ -641,7 +613,7 @@ consistent with previous work at the macroevolutionary level
 (Tejero-Cicuéndez et al. 2021a), where large ground species were also
 found to display disproportionately large heads. \hfill\break
 
-Second, our findings revealed that within species, rock-dwelling
+Second, our findings revealed that, within species, rock-dwelling
 \emph{Pristurus} show a converse pattern, where smaller individuals
 displayed relatively larger heads, while larger individuals have smaller
 heads relative to their body size. These allometric patterns also
@@ -655,7 +627,7 @@ two well-differentiated phenotypes in populations of these lineages
 segregated by elevation (Garcia-Porta et al. 2017). These two ecotypes,
 defined as `slender' and `robust', differed in their head and limb
 characteristics. Our work is consistent with this, and extends these
-patterns to the allometric realm. Tejero-Cicuéndez et al. (2021a) also
+patterns to the allometric realm. Tejero-Cicuéndez et al.~(2021a) also
 performed habitat ancestral estimation, finding that the rock habitat
 was the most likely ancestral condition in the group, with subsequent
 colonization by \emph{Pristurus} of ground habitats. When patterns of
@@ -688,36 +660,44 @@ reptiles as well as in other vertebrates (Losos 2009; Reynolds et al.
 2016; Hipsley and Müller 2017; Samuels and Hopkins 2017; Watanabe et al.
 2019; Busschau and Boissinot 2022; Navalón et al. 2022; Friedman et al.
 2022), and our work in \emph{Pristurus} thus contributes to this growing
-body of literature. \hfill\break
+body of literature. Nonetheless, because the ecological shift to
+ground-dwelling habitats occurred only once on the phylogeny, it is also
+possible that some unmeasured feature that evolved on the same branch
+could have affected the observed patterns. Thus, some caution in
+interpreting the causal direction of this trend is warranted.
+\hfill\break
 
-Biologically, the findings revealed here may reflect ecological and
-behavioral changes linked to the adoption of a new lifestyle. For
-lizards, the transition to utilizing ground habitats implies adopting an
-existence in more open environments than in rocky substrates. As such,
-numerous aspects of daily existence (including activity patterns,
-climatic factors, prey availability, abundance of predators, etc.) are
-expected to exert a differential influence on an organism's phenotype
-when compared with life in their ancestral environment (Fuentes and
-Cancino (1979)). Indeed, the largest ground-dwelling \emph{Pristurus}
-species (\emph{P. carteri}, \emph{P. ornitocephalus}, and \emph{P.
-collaris}) differ from the rest of the genus in having developed
-partially nocturnal habits, which would presumably have major ecological
-consequences for their survival and reproduction. In this sense, these
-species might have been subjected to evolutionary processes selecting
-for larger relative head proportions, which would allow them to
-accommodate larger or modified eyes, a clear advantage in animals with
-nocturnal and semi-nocturnal habits (Hall and Ross 2006; Ross et al.
-2007; Hall et al. 2012). Likewise, the steep allometric patterns found
-in the limbs of large ground-dwelling species (Figure 3B) might be
-related to selective processes favoring longer limbs in large species
-present in this new ecological context. Longer limbs in open habitats
-might be advantageous for rapidly running and hiding in the sparse
-vegetation (Arnold 2009) and, in hyper-arid areas such as the Arabian
-Peninsula, this morphology might contribute to thermoregulation
-separating the body from the ground (Huey 1974; Arnold 1980; Avery et
-al. 1982). A more detailed examination of behavioral and morphological
-traits (e.g., eye shape, limb insertion) might shed light on the factors
-driving this pattern. \hfill\break
+However, considering the habitat-driven morphology perspective, the
+findings revealed here may reflect ecological and behavioral changes
+linked to the adoption of a new lifestyle. For lizards, the transition
+to utilizing ground habitats implies adopting an existence in more open
+environments than in rocky substrates. As such, numerous aspects of
+daily existence (including activity patterns, climatic factors, prey
+availability, abundance of predators, etc.) are expected to exert a
+differential influence on an organism's phenotype when compared with
+life in their ancestral environment (Fuentes and Cancino 1979). Indeed,
+the largest ground-dwelling \emph{Pristurus} species (\emph{P. carteri},
+\emph{P. ornitocephalus}, and \emph{P. collaris}) differ from the rest
+of the genus in having developed partially nocturnal habits, which would
+presumably have major ecological consequences for their survival and
+reproduction. In this sense, these species might have been subjected to
+evolutionary processes selecting for larger relative head proportions,
+which would allow them to accommodate larger or modified eyes, a clear
+advantage in animals with nocturnal and semi-nocturnal habits (Hall and
+Ross 2006; Ross et al. 2007; Hall et al. 2012). Likewise, the large
+relative proportions found in the limbs of large ground-dwelling species
+(Figure 3B) might be related to selective processes favoring longer
+limbs in large species present in this new ecological context. Longer
+limbs in open habitats -- particularly for large species -- might be
+advantageous for rapidly running and hiding in the sparse vegetation
+(Arnold 2009) and, in hyper-arid areas such as the Arabian Peninsula,
+this morphology might contribute to thermoregulation separating the body
+from the ground (Huey 1974; Arnold 1980; Avery et al. 1982). A more
+detailed examination of behavioral and morphological traits (e.g., eye
+shape, limb insertion) might shed light on the factors driving this
+pattern and serve to establish a stronger adaptive link between habitat
+use and morphological and allometric trends in \emph{Pristurus}.
+\hfill\break
 
 Another important finding of our study was the strong concordance
 between static allometry across individuals and evolutionary allometry
@@ -796,10 +776,10 @@ our study identified the presence of strong integration and allometric
 trajectories, such that evolutionary changes in body size elicit
 corresponding changes in body form. However, these trends differed
 significantly across habitats, implying that, at evolutionary scales,
-these trends serve to channel phenotypic responses to selection, but do
-so in differing directions for the different habitat groups. This, in
-turn, suggests that \emph{Pristurus} species occupying different
-habitats display differing combinations of body size with body form. The
+they serve to channel phenotypic responses to selection, but do so in
+differing directions for the different habitat groups. This, in turn,
+suggests that \emph{Pristurus} species occupying different habitats
+display differing combinations of body size with body form. The
 evolutionary consequence of ecological selection is that species have
 evolved similar shapes (Figure 6), but do so in differing habitats, and
 at different body sizes (Figure 5). Therefore, the phenotypic diversity
@@ -818,200 +798,164 @@ habitats.
 \setlength{\parskip}{8pt} \noindent
 
 \hypertarget{refs}{}
-\begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-AdamsCollyer2009}{}}%
-Adams, D. C., and M. L. Collyer. 2009.
-\href{https://doi.org/10.1111/j.1558-5646.2009.00649.x}{A general
-framework for the analysis of phenotypic trajectories in evolutionary
-studies}. Evolution 63:1143--1154.
+\leavevmode\hypertarget{ref-AdamsCollyer2009}{}%
+Adams, D. C., and M. L. Collyer. 2009. A general framework for the
+analysis of phenotypic trajectories in evolutionary studies. Evolution
+63:1143--1154.
 
-\leavevmode\vadjust pre{\hypertarget{ref-AdamsNistri2010}{}}%
-Adams, D. C., and A. Nistri. 2010.
-\href{https://doi.org/10.1186/1471-2148-10-216}{Ontogenetic convergence
-and evolution of foot morphology in {E}uropean cave salamanders
-({F}amily: {P}lethodontidae)}. BMC Evolutionary Biology 10:1--10. BioMed
-Central.
+\leavevmode\hypertarget{ref-AdamsNistri2010}{}%
+Adams, D. C., and A. Nistri. 2010. Ontogenetic convergence and evolution
+of foot morphology in European cave salamanders (Family:
+Plethodontidae). BMC Evolutionary Biology 10:1--10. BioMed Central.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Albertson2001}{}}%
-Albertson, R. C., and T. D. Kocher. 2001.
-\href{https://doi.org/10.1002/jez.1020}{Assessing morphological
+\leavevmode\hypertarget{ref-Albertson2001}{}%
+Albertson, R. C., and T. D. Kocher. 2001. Assessing morphological
 differences in an adaptive trait: A landmark-based morphometric
-approach}. Journal of Experimental Zoology 289:385--403.
+approach. Journal of Experimental Zoology 289:385--403.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Arnold1993}{}}%
-Arnold, E. N. 1993.
-\href{https://doi.org/10.1111/j.1469-7998.1993.tb02642.x}{Historical
-changes in the ecology and behaviour of semaphore geckos
-(\emph{{P}risturus}, {G}ekkonidae) and their relatives}. Journal of
-Zoology 229:353--384.
+\leavevmode\hypertarget{ref-Arnold1993}{}%
+Arnold, E. N. 1993. Historical changes in the ecology and behaviour of
+semaphore geckos (\emph{Pristurus}, Gekkonidae) and their relatives.
+Journal of Zoology 229:353--384.
 
-\leavevmode\vadjust pre{\hypertarget{ref-ARNOLD2009}{}}%
-Arnold, E. N. 2009.
-\href{https://doi.org/10.11646/zootaxa.2060.1.1}{Relationships,
-evolution and biogeography of semaphore geckos, \emph{{P}risturus}
-({S}quamata, {S}phaerodactylidae) based on morphology}. Zootaxa
-2060:1--21.
+\leavevmode\hypertarget{ref-ARNOLD2009}{}%
+Arnold, E. N. 2009. Relationships, evolution and biogeography of
+semaphore geckos, \emph{Pristurus} (Squamata, Sphaerodactylidae) based
+on morphology. Zootaxa 2060:1--21.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Arnold1980}{}}%
-Arnold, E. N. 1980. The reptiles and amphibians of {D}hofar, {S}outern
-{A}rabia. Journal of Oman Studies Special Report:273--332.
+\leavevmode\hypertarget{ref-Arnold1980}{}%
+Arnold, E. N. 1980. The reptiles and amphibians of Dhofar, Soutern
+Arabia. Journal of Oman Studies Special Report:273--332.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Arnold1983}{}}%
-Arnold, S. J. 1983.
-\href{https://doi.org/10.1093/icb/23.2.347}{Morphology, performance,
-fitness}. American Zoologist 23:347--361.
+\leavevmode\hypertarget{ref-Arnold1983}{}%
+Arnold, S. J. 1983. Morphology, performance, fitness. American Zoologist
+23:347--361.
 
-\leavevmode\vadjust pre{\hypertarget{ref-1982Avery}{}}%
+\leavevmode\hypertarget{ref-1982Avery}{}%
 Avery, R. A., Bedford J. D., and C. P. Newcombe. 1982. The role of
 thermoregulation in lizard biology: Predatory efficiency in a temperate
 basker. Behavioral Ecology and Sociobiology 11:261--267.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Baken2019}{}}%
-Baken, E. K., and D. C. Adams. 2019.
-\href{https://doi.org/10.1002/ece3.5267}{Macroevolution of arboreality
-in salamanders}. Ecology and Evolution 9:7005--7016.
+\leavevmode\hypertarget{ref-Baken2019}{}%
+Baken, E. K., and D. C. Adams. 2019. Macroevolution of arboreality in
+salamanders. Ecology and Evolution 9:7005--7016.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Baken2021}{}}%
+\leavevmode\hypertarget{ref-Baken2021}{}%
 Baken, E. K., M. L. Collyer, A. Kaliontzopoulou, and D. C. Adams. 2021a.
-\href{https://doi.org/10.1111/2041-210X.13723}{Geomorph 4.0 and gmShiny:
-Enhanced analytics and a new graphical interface for a comprehensive
-morphometric experience}. Methods in Ecology and Evolution
-12:2355--2363.
+Geomorph 4.0 and gmShiny: Enhanced analytics and a new graphical
+interface for a comprehensive morphometric experience. Methods in
+Ecology and Evolution 12:2355--2363.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Baken2021a}{}}%
-Baken, E. K., L. E. Mellenthin, and D. C. Adams. 2021b.
-\href{https://doi.org/10.1371/journal.pone.0255393}{Is salamander
-arboreality limited by broad-scale climatic conditions?} PLoS ONE
+\leavevmode\hypertarget{ref-Baken2021a}{}%
+Baken, E. K., L. E. Mellenthin, and D. C. Adams. 2021b. Is salamander
+arboreality limited by broad-scale climatic conditions? PLoS ONE
 16:e0255393.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Bardua2021}{}}%
+\leavevmode\hypertarget{ref-Bardua2021}{}%
 Bardua, C., A.-C. Fabre, J. Clavel, M. Bon, K. Das, E. L. Stanley, D. C.
-Blackburn, and A. Goswami. 2021.
-\href{https://doi.org/10.1038/s41467-021-22792-y}{Size, microhabitat,
-and loss of larval feeding drive cranial diversification in frogs}.
-Nature Communications 12. Springer Science; Business Media {LLC}.
+Blackburn, and A. Goswami. 2021. Size, microhabitat, and loss of larval
+feeding drive cranial diversification in frogs. Nature Communications
+12. Springer Science; Business Media LLC.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Bergmann1847}{}}%
-Bergmann, C. 1847. {Ü}ber die verhaltnisse der warmeokonomie der thiere
-zu ihrer grosse. G{ö}ttinger Studien 1:595--708.
+\leavevmode\hypertarget{ref-Bergmann1847}{}%
+Bergmann, C. 1847. Über die verhaltnisse der warmeokonomie der thiere zu
+ihrer grosse. Göttinger Studien 1:595--708.
 
-\leavevmode\vadjust pre{\hypertarget{ref-BERNER2008}{}}%
+\leavevmode\hypertarget{ref-BERNER2008}{}%
 Berner, D., D. C. Adams, A.-C. Grandchamp, and A. P. Hendry. 2008.
-\href{https://doi.org/10.1111/j.1420-9101.2008.01583.x}{Natural
-selection drives patterns of lake-stream divergence in stickleback
-foraging morphology}. Journal of Evolutionary Biology 21:1653--1665.
+Natural selection drives patterns of lake-stream divergence in
+stickleback foraging morphology. Journal of Evolutionary Biology
+21:1653--1665.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Bookstein2022}{}}%
-Bookstein, F. L. 2022.
-\href{https://doi.org/10.1007/s11692-022-09574-0}{Dimensions of
-morphological integration}. Evolutionary Biology 49:342--372.
+\leavevmode\hypertarget{ref-Bookstein2022}{}%
+Bookstein, F. L. 2022. Dimensions of morphological integration.
+Evolutionary Biology 49:342--372.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Bright2016}{}}%
+\leavevmode\hypertarget{ref-Bright2016}{}%
 Bright, J. A., J. Marugán-Lobón, S. N. Cobb, and E. J. Rayfield. 2016.
-\href{https://doi.org/10.1073/pnas.1602683113}{The shapes of bird beaks
-are highly controlled by nondietary factors}. Proceedings of the
-National Academy of Sciences 113:5352--5357.
+The shapes of bird beaks are highly controlled by nondietary factors.
+Proceedings of the National Academy of Sciences 113:5352--5357.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Bright2019}{}}%
+\leavevmode\hypertarget{ref-Bright2019}{}%
 Bright, J. A., J. Marugán-Lobón, E. J. Rayfield, and S. N. Cobb. 2019.
-\href{https://doi.org/10.1186/s12862-019-1432-1}{The multifactorial
-nature of beak and skull shape evolution in parrots and cockatoos
-(psittaciformes)}. {BMC} Evolutionary Biology 19. Springer Science;
-Business Media {LLC}.
+The multifactorial nature of beak and skull shape evolution in parrots
+and cockatoos (psittaciformes). BMC Evolutionary Biology 19. Springer
+Science; Business Media LLC.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Brombacher2017}{}}%
-Brombacher, A., P. A. Wilson, I. Bailey, and T. H. G. Ezard. 2017.
-\href{https://doi.org/10.1086/692570}{The breakdown of static and
-evolutionary allometries during climatic upheaval}. The American
-Naturalist 190:350--362.
+\leavevmode\hypertarget{ref-Brombacher2017}{}%
+Brombacher, A., P. A. Wilson, I. Bailey, and T. H. G. Ezard. 2017. The
+breakdown of static and evolutionary allometries during climatic
+upheaval. The American Naturalist 190:350--362.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Busschau2022}{}}%
-Busschau, T., and S. Boissinot. 2022.
-\href{https://doi.org/10.1093/biolinnean/blac008}{{Habitat determines
-convergent evolution of cephalic horns in vipers}}. Biological Journal
-of the Linnean Society 135:652--664.
+\leavevmode\hypertarget{ref-Busschau2022}{}%
+Busschau, T., and S. Boissinot. 2022. Habitat determines convergent
+evolution of cephalic horns in vipers. Biological Journal of the Linnean
+Society 135:652--664.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Calder1983}{}}%
-Calder, W. A. 1983.
-\href{https://doi.org/10.1146/annurev.es.14.110183.001241}{Ecological
-scaling: Mammals and birds}. Annual Review of Ecology and Systematics
-14:213--230.
+\leavevmode\hypertarget{ref-Calder1983}{}%
+Calder, W. A. 1983. Ecological scaling: Mammals and birds. Annual Review
+of Ecology and Systematics 14:213--230.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Cardini2015}{}}%
-Cardini, A., D. Polly, R. Dawson, and N. Milne. 2015.
-\href{https://doi.org/10.1007/s11692-015-9308-9}{Why the long face?
-Kangaroos and wallabies follow the same {``rule''} of cranial
-evolutionary allometry ({CREA}) as placentals}. Evolutionary Biology
-42:169--176.
+\leavevmode\hypertarget{ref-Cardini2015}{}%
+Cardini, A., D. Polly, R. Dawson, and N. Milne. 2015. Why the long face?
+Kangaroos and wallabies follow the same ``rule'' of cranial evolutionary
+allometry (CREA) as placentals. Evolutionary Biology 42:169--176.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Cardini2013}{}}%
-Cardini, A., and P. D. Polly. 2013.
-\href{https://doi.org/10.1038/ncomms3458}{Larger mammals have longer
-faces because of size-related constraints on skull form}. Nature
-Communications 4.
+\leavevmode\hypertarget{ref-Cardini2013}{}%
+Cardini, A., and P. D. Polly. 2013. Larger mammals have longer faces
+because of size-related constraints on skull form. Nature Communications
+4.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Chatterji2022}{}}%
+\leavevmode\hypertarget{ref-Chatterji2022}{}%
 Chatterji, R. M., C. A. Hipsley, E. Sherratt, M. N. Hutchinson, and M.
-E. H. Jones. 2022.
-\href{https://doi.org/10.1007/s10682-022-10162-z}{Ontogenetic allometry
-underlies trophic diversity in sea turtles (chelonioidea)}. Evolutionary
-Ecology 36:511--540.
+E. H. Jones. 2022. Ontogenetic allometry underlies trophic diversity in
+sea turtles (chelonioidea). Evolutionary Ecology 36:511--540.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Cock1966}{}}%
-Cock, A. G. 1966. \href{https://doi.org/10.1086/404940}{Genetical
-aspects of metrical growth and form in animals}. The Quarterly Review of
-Biology 41:131--190.
+\leavevmode\hypertarget{ref-Cock1966}{}%
+Cock, A. G. 1966. Genetical aspects of metrical growth and form in
+animals. The Quarterly Review of Biology 41:131--190.
 
-\leavevmode\vadjust pre{\hypertarget{ref-COLLAR2010}{}}%
+\leavevmode\hypertarget{ref-COLLAR2010}{}%
 Collar, D. C., J. A. Schulte, B. C. O'Meara, and J. B. Losos. 2010.
-\href{https://doi.org/10.1111/j.1420-9101.2010.01971.x}{Habitat use
-affects morphological diversification in dragon lizards}. Journal of
-Evolutionary Biology 23:1033--1049.
+Habitat use affects morphological diversification in dragon lizards.
+Journal of Evolutionary Biology 23:1033--1049.
 
-\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2007}{}}%
-Collyer, M. L., and D. C. Adams. 2007.
-\href{https://doi.org/10.1890/06-0727}{Analysis of two-state
-multivariate phenotypic change in ecological studies}. Ecology
+\leavevmode\hypertarget{ref-CollyerAdams2007}{}%
+Collyer, M. L., and D. C. Adams. 2007. Analysis of two-state
+multivariate phenotypic change in ecological studies. Ecology
 88:683--692.
 
-\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2013}{}}%
-Collyer, M. L., and D. C. Adams. 2013.
-\href{https://doi.org/10.4404/hystrix-24.1-6298}{Phenotypic trajectory
-analysis: Comparison of shape change patterns in evolution and ecology}.
-Hystrix 24:75--83.
+\leavevmode\hypertarget{ref-CollyerAdams2013}{}%
+Collyer, M. L., and D. C. Adams. 2013. Phenotypic trajectory analysis:
+Comparison of shape change patterns in evolution and ecology. Hystrix
+24:75--83.
 
-\leavevmode\vadjust pre{\hypertarget{ref-RRPP}{}}%
-Collyer, M. L., and D. C. Adams. 2022.
-\href{https://CRAN.R-project.org/package=RRPP}{R: RRPP: Linear model
-evaluation with randomized residuals in a permutation procedure. Vsn.
-1.3.2}. R Foundation for Statistical Computing, Vienna, Austria.
+\leavevmode\hypertarget{ref-CollyerAdams2018}{}%
+Collyer, M. L., and D. C. Adams. 2018. RRPP: An R package for fitting
+linear models to high-dimensional data using residual randomization.
+Methods in Ecology and Evolution 9:1772--1779.
 
-\leavevmode\vadjust pre{\hypertarget{ref-CollyerAdams2018}{}}%
-Collyer, M. L., and D. C. Adams. 2018.
-\href{https://doi.org/10.1111/2041-210X.13029}{RRPP: An {R} package for
-fitting linear models to high-dimensional data using residual
-randomization}. Methods in Ecology and Evolution 9:1772--1779.
+\leavevmode\hypertarget{ref-RRPP}{}%
+Collyer, M. L., and D. C. Adams. 2022. R: RRPP: Linear model evaluation
+with randomized residuals in a permutation procedure. Vsn. 1.3.2. R
+Foundation for Statistical Computing, Vienna, Austria.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Collyer_et_al2015}{}}%
-Collyer, M. L., D. J. Sekora, and D. C. Adams. 2015.
-\href{https://doi.org/10.1038/hdy.2014.75}{A method for analysis of
-phenotypic change for phenotypes described by high-dimensional data}.
-Heredity 115:357--365.
+\leavevmode\hypertarget{ref-Collyer_et_al2015}{}%
+Collyer, M. L., D. J. Sekora, and D. C. Adams. 2015. A method for
+analysis of phenotypic change for phenotypes described by
+high-dimensional data. Heredity 115:357--365.
 
-\leavevmode\vadjust pre{\hypertarget{ref-ConawayAdams2022}{}}%
-Conaway, M. A., and D. C. Adams. 2022.
-\href{https://doi.org/10.1111/evo.14595}{An effect size for comparing
-the strength of morphological integration across studies}. Evolution
+\leavevmode\hypertarget{ref-ConawayAdams2022}{}%
+Conaway, M. A., and D. C. Adams. 2022. An effect size for comparing the
+strength of morphological integration across studies. Evolution
 76:2244--2259.
 
-\leavevmode\vadjust pre{\hypertarget{ref-DrakeKlingenberg2008}{}}%
-Drake, A. G., and C. P. Klingenberg. 2008.
-\href{https://doi.org/10.1098/rspb.2007.1169}{The pace of morphological
-change: Historical transformation of skull shape in {S}t {B}ernard
-dogs}. Proceedings of the Royal Society B: Biological Sciences
-275:71--76.
+\leavevmode\hypertarget{ref-DrakeKlingenberg2008}{}%
+Drake, A. G., and C. P. Klingenberg. 2008. The pace of morphological
+change: Historical transformation of skull shape in St Bernard dogs.
+Proceedings of the Royal Society B: Biological Sciences 275:71--76.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Durant2012}{}}%
+\leavevmode\hypertarget{ref-Durant2012}{}%
 Durant, S. M., N. Pettorelli, S. Bashir, R. Woodroffe, T. Wacher, P. De
 Ornellas, C. Ransom, T. Abáigar, M. Abdelgadir, H. El Alqamy, M.
 Beddiaf, F. Belbachir, A. Belbachir-Bazi, A. A. Berbash, R.
@@ -1020,475 +964,402 @@ Collen, W. A. Cornforth, F. Cuzin, P. Gerngross, B. Haddane, M.
 Hadjeloum, A. Jacobson, A. Jebali, F. Lamarque, D. Mallon, K. Minkowski,
 S. Monfort, B. Ndoassal, J. Newby, B. E. Ngakoutou, B. Niagate, G.
 Purchase, S. Samaïla, A. K. Samna, C. Sillero-Zubiri, A. E. Soultan, M.
-R. Stanley Price, and J. E. M. Baillie. 2012.
-\href{https://doi.org/10.1126/science.336.6087.1379}{Forgotten
-biodiversity in desert ecosystems}. Science 336:1379--1380.
+R. Stanley Price, and J. E. M. Baillie. 2012. Forgotten biodiversity in
+desert ecosystems. Science 336:1379--1380.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Esquerre2017}{}}%
-Esquerré, D., E. Sherratt, and J. S. Keogh. 2017.
-\href{https://doi.org/10.1111/evo.13382}{Evolution of extreme
+\leavevmode\hypertarget{ref-Esquerre2017}{}%
+Esquerré, D., E. Sherratt, and J. S. Keogh. 2017. Evolution of extreme
 ontogenetic allometric diversity and heterochrony in pythons, a clade of
-giant and dwarf snakes}. Evolution 71:2829--2844.
+giant and dwarf snakes. Evolution 71:2829--2844.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Felice2021}{}}%
-Felice, R. N., D. Pol, and A. Goswami. 2021.
-\href{https://doi.org/10.1098/rspb.2021.0919}{Complex macroevolutionary
-dynamics underly the evolution of the crocodyliform skull}. Proceedings
+\leavevmode\hypertarget{ref-Felice2021}{}%
+Felice, R. N., D. Pol, and A. Goswami. 2021. Complex macroevolutionary
+dynamics underly the evolution of the crocodyliform skull. Proceedings
 of the Royal Society B: Biological Sciences 288:20210919.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Felice2018}{}}%
-Felice, R. N., M. Randau, and A. Goswami. 2018.
-\href{https://doi.org/10.1111/evo.13608}{A fly in a tube:
-Macroevolutionary expectations for integrated phenotypes}. Evolution
+\leavevmode\hypertarget{ref-Felice2018}{}%
+Felice, R. N., M. Randau, and A. Goswami. 2018. A fly in a tube:
+Macroevolutionary expectations for integrated phenotypes. Evolution
 72:2580--2594.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Firmat2014}{}}%
+\leavevmode\hypertarget{ref-Firmat2014}{}%
 Firmat, C., I. Lozano-Fernández, J. Agustí, G. H. Bolstad, G.
-Cuenca-Bescós, T. F. Hansen, and C. Pélabon. 2014.
-\href{https://doi.org/10.1098/rstb.2014.0057}{Walk the line: 600000
+Cuenca-Bescós, T. F. Hansen, and C. Pélabon. 2014. Walk the line: 600000
 years of molar evolution constrained by allometry in the fossil rodent
-\emph{{M}imomys savini}}. Philosophical Transactions of the Royal
-Society B: Biological Sciences 369:20140057.
+\emph{Mimomys savini}. Philosophical Transactions of the Royal Society
+B: Biological Sciences 369:20140057.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Foster2018}{}}%
-Foster, K. L., T. Garland, L. Schmitz, and T. E. Higham. 2018.
-\href{https://doi.org/10.1093/biolinnean/bly146}{{Skink ecomorphology:
-Forelimb and hind limb lengths, but not static stability, correlate with
-habitat use and demonstrate multiple solutions}}. Biological Journal of
-the Linnean Society 125:673--692.
+\leavevmode\hypertarget{ref-Foster2018}{}%
+Foster, K. L., T. Garland, L. Schmitz, and T. E. Higham. 2018. Skink
+ecomorphology: Forelimb and hind limb lengths, but not static stability,
+correlate with habitat use and demonstrate multiple solutions.
+Biological Journal of the Linnean Society 125:673--692.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Freedman1983}{}}%
-Freedman, D., and D. Lane. 1983.
-\href{https://doi.org/10.2307/1391660}{A nonstochastic interpretation of
-reported significance levels}. Journal of Business {\&} Economic
-Statistics 1:292--298.
+\leavevmode\hypertarget{ref-Freedman1983}{}%
+Freedman, D., and D. Lane. 1983. A nonstochastic interpretation of
+reported significance levels. Journal of Business \& Economic Statistics
+1:292--298.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Friedman2022}{}}%
+\leavevmode\hypertarget{ref-Friedman2022}{}%
 Friedman, S. T., M. L. Collyer, S. A. Price, and P. C. Wainwright. 2022.
-\href{https://doi.org/10.1093/sysbio/syab080}{{Divergent Processes Drive
-Parallel Evolution in Marine and Freshwater Fishes}}. Systematic biology
-71:1319--1330.
+Divergent Processes Drive Parallel Evolution in Marine and Freshwater
+Fishes. Systematic biology 71:1319--1330.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Fuentes1979}{}}%
-Fuentes, E. R., and J. Cancino. 1979.
-\href{https://doi.org/10.2307/1563330}{Rock-ground patchiness in a
-simple liolaemus lizard community (reptilia, lacertilia, iguanidae)}.
-Journal of Herpetology 13:343.
+\leavevmode\hypertarget{ref-Fuentes1979}{}%
+Fuentes, E. R., and J. Cancino. 1979. Rock-ground patchiness in a simple
+liolaemus lizard community (reptilia, lacertilia, iguanidae). Journal of
+Herpetology 13:343.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Garcia-Porta2017}{}}%
+\leavevmode\hypertarget{ref-Garcia-Porta2017}{}%
 Garcia-Porta, J., M. Simó-Riudalbas, M. Robinson, and S. Carranza. 2017.
-\href{https://doi.org/10.1111/jbi.12929}{Diversification in arid
-mountains: Biogeography and cryptic diversity of \emph{{P}risturus
-rupestris rupestris} in {A}rabia}. Journal of Biogeography
+Diversification in arid mountains: Biogeography and cryptic diversity of
+\emph{Pristurus rupestris rupestris} in Arabia. Journal of Biogeography
 44:1694--1704.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Goodman2008}{}}%
-Goodman, B. A., D. B. Miles, and L. Schwarzkopf. 2008.
-\href{https://doi.org/10.1890/07-2093.1}{{Life on the rocks: Habitat use
-drives morphological and performance evolution in lizards}}. Ecology
-89:3462--3471.
+\leavevmode\hypertarget{ref-Goodman2008}{}%
+Goodman, B. A., D. B. Miles, and L. Schwarzkopf. 2008. Life on the
+rocks: Habitat use drives morphological and performance evolution in
+lizards. Ecology 89:3462--3471.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Goswami2016}{}}%
+\leavevmode\hypertarget{ref-Goswami2016}{}%
 Goswami, A., M. Randau, P. D. Polly, V. Weisbecker, C. Verity Bennett,
-L. Hautier, and M. R. Sánchez-Villagra. 2016.
-\href{https://doi.org/10.1093/icb/icw039}{Do developmental constraints
-and high integration limit the evolution of the marsupial oral
-apparatus?} Integrative and Comparative Biology 56:404--415.
+L. Hautier, and M. R. Sánchez-Villagra. 2016. Do developmental
+constraints and high integration limit the evolution of the marsupial
+oral apparatus? Integrative and Comparative Biology 56:404--415.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Goswami2014}{}}%
-Goswami, A., J. B. Smaers, C. Soligo, and P. D. Polly. 2014.
-\href{https://doi.org/10.1098/rstb.2013.0254}{The macroevolutionary
-consequences of phenotypic integration: From development to deep time}.
-Philosophical Transactions of the Royal Society B: Biological Sciences
-369:20130254.
+\leavevmode\hypertarget{ref-Goswami2014}{}%
+Goswami, A., J. B. Smaers, C. Soligo, and P. D. Polly. 2014. The
+macroevolutionary consequences of phenotypic integration: From
+development to deep time. Philosophical Transactions of the Royal
+Society B: Biological Sciences 369:20130254.
 
-\leavevmode\vadjust pre{\hypertarget{ref-GOULD1966}{}}%
-Gould, S. J. 1966.
-\href{https://doi.org/10.1111/j.1469-185x.1966.tb01624.x}{Allometry and
-size in ontogeny and phylogeny}. Biological Reviews 41:587--638.
+\leavevmode\hypertarget{ref-GOULD1966}{}%
+Gould, S. J. 1966. Allometry and size in ontogeny and phylogeny.
+Biological Reviews 41:587--638.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Grant2006}{}}%
-Grant, P. R., and B. R. Grant. 2006.
-\href{https://doi.org/10.1126/science.1128374}{Evolution of character
-displacement in darwin's finches}. Science 313:224--226.
+\leavevmode\hypertarget{ref-Grant2006}{}%
+Grant, P. R., and B. R. Grant. 2006. Evolution of character displacement
+in darwin's finches. Science 313:224--226.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Hall2012}{}}%
-Hall, M. I., J. M. Kamilar, and E. C. Kirk. 2012.
-\href{https://doi.org/10.1098/rspb.2012.2258}{Eye shape and the
-nocturnal bottleneck of mammals}. Proceedings of the Royal Society B:
+\leavevmode\hypertarget{ref-Hall2012}{}%
+Hall, M. I., J. M. Kamilar, and E. C. Kirk. 2012. Eye shape and the
+nocturnal bottleneck of mammals. Proceedings of the Royal Society B:
 Biological Sciences 279:4962--4968.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Hall2006}{}}%
-Hall, M. I., and C. F. Ross. 2006.
-\href{https://doi.org/10.1111/j.1469-7998.2006.00227.x}{Eye shape and
-activity pattern in birds}. Journal of Zoology 271:437--444.
+\leavevmode\hypertarget{ref-Hall2006}{}%
+Hall, M. I., and C. F. Ross. 2006. Eye shape and activity pattern in
+birds. Journal of Zoology 271:437--444.
 
-\leavevmode\vadjust pre{\hypertarget{ref-HipsleyMuller2017}{}}%
-Hipsley, C. A., and J. Müller. 2017.
-\href{https://doi.org/10.1111/evo.13186}{{Developmental dynamics of
-ecomorphological convergence in a transcontinental lizard radiation}}.
+\leavevmode\hypertarget{ref-HipsleyMuller2017}{}%
+Hipsley, C. A., and J. Müller. 2017. Developmental dynamics of
+ecomorphological convergence in a transcontinental lizard radiation.
 Evolution 71:936--948.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Huey1974}{}}%
-Huey, R. B. 1974.
-\href{https://doi.org/10.1126/science.184.4140.1001}{Behavioral
-thermoregulation in lizards: Importance of associated costs}. Science
-184:1001--1003.
+\leavevmode\hypertarget{ref-Huey1974}{}%
+Huey, R. B. 1974. Behavioral thermoregulation in lizards: Importance of
+associated costs. Science 184:1001--1003.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Huxley1932}{}}%
+\leavevmode\hypertarget{ref-Huxley1932}{}%
 Huxley, J. S. 1932. The problems of relative growth. Johns Hopkins
 University Pres.
 
-\leavevmode\vadjust pre{\hypertarget{ref-James2004}{}}%
-James, S. E., and R. T. M'closkey. 2004.
-\href{https://doi.org/10.1080/11956860.2004.11682820}{Patterns of body
-size and habitat use in a lizard assemblage}. Ecoscience 11:160--167.
+\leavevmode\hypertarget{ref-James2004}{}%
+James, S. E., and R. T. M'closkey. 2004. Patterns of body size and
+habitat use in a lizard assemblage. Ecoscience 11:160--167.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Jastrebski2004}{}}%
+\leavevmode\hypertarget{ref-Jastrebski2004}{}%
 Jastrebski, C. J., and B. W. Robinson. 2004. Natural selection and the
 evolution of replicated trophic polymorphisms in pumpkinseed sunfish
-(\emph{{L}epomis gibbosus}). Evolutionary Ecology Research 6:285--305.
+(\emph{Lepomis gibbosus}). Evolutionary Ecology Research 6:285--305.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Jolicoeur1963}{}}%
-Jolicoeur, P. 1963. \href{https://doi.org/10.2307/2527939}{The
-multivariate generalization of the allometry equation}. Biometrics
-19:497--499.
+\leavevmode\hypertarget{ref-Jolicoeur1963}{}%
+Jolicoeur, P. 1963. The multivariate generalization of the allometry
+equation. Biometrics 19:497--499.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Kaliontzopoulou2015}{}}%
+\leavevmode\hypertarget{ref-Kaliontzopoulou2015}{}%
 Kaliontzopoulou, A., M. A. Carretero, and D. C. Adams. 2015.
-\href{https://doi.org/10.1111/jeb.12540}{Ecomorphological variation in
-male and female wall lizards and the macroevolution of sexual dimorphism
-in relation to habitat use}. Journal of Evolutionary Biology 28:80--94.
+Ecomorphological variation in male and female wall lizards and the
+macroevolution of sexual dimorphism in relation to habitat use. Journal
+of Evolutionary Biology 28:80--94.
 
-\leavevmode\vadjust pre{\hypertarget{ref-KALIONTZOPOULOU2010}{}}%
+\leavevmode\hypertarget{ref-KALIONTZOPOULOU2010}{}%
 Kaliontzopoulou, A., M. A. Carretero, and G. A. Llorente. 2010.
-\href{https://doi.org/10.1111/j.1420-9101.2010.01984.x}{Intraspecific
-ecomorphological variation: Linear and geometric morphometrics reveal
-habitat-related patterns within \emph{{P}odarcis bocagei} wall lizards}.
-Journal of Evolutionary Biology 23:1234--1244.
+Intraspecific ecomorphological variation: Linear and geometric
+morphometrics reveal habitat-related patterns within \emph{Podarcis
+bocagei} wall lizards. Journal of Evolutionary Biology 23:1234--1244.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Kappelman2003}{}}%
+\leavevmode\hypertarget{ref-Kappelman2003}{}%
 Kappelman, J., D. T. Rasmussen, W. J. Sanders, M. Feseha, T. Bown, P.
 Copeland, J. Crabaugh, J. Fleagle, M. Glantz, A. Gordon, B. Jacobs, M.
 Maga, K. Muldoon, A. Pan, L. Pyne, B. Richmond, T. Ryan, E. R. Seiffert,
-S. Sen, L. Todd, M. C. Wiemann, and A. Winkler. 2003.
-\href{https://doi.org/10.1038/nature02102}{Oligocene mammals from
-{Ethiopia} and faunal exchange between {Afro}-{Arabia} and {Eurasia}}.
+S. Sen, L. Todd, M. C. Wiemann, and A. Winkler. 2003. Oligocene mammals
+from Ethiopia and faunal exchange between Afro-Arabia and Eurasia.
 Nature 426:549--552.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Klingenbert1996}{}}%
+\leavevmode\hypertarget{ref-Klingenbert1996}{}%
 Klingenberg, C. P. 1996. Advances in morphometrics. Pp. 23--49 \emph{in}
 L. F. Marcus, M. Corti, A. Loy, and G. J. P. N. D. E. Slice, eds. Plenum
 Press.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Klingenberg2016}{}}%
-Klingenberg, C. P. 2016.
-\href{https://doi.org/10.1007/s00427-016-0539-2}{Size, shape, and form:
-Concepts of allometry in geometric morphometrics}. Development Genes and
-Evolution 226:113--137.
+\leavevmode\hypertarget{ref-Klingenberg2016}{}%
+Klingenberg, C. P. 2016. Size, shape, and form: Concepts of allometry in
+geometric morphometrics. Development Genes and Evolution 226:113--137.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Klingenberg2013}{}}%
-Klingenberg, C. P., and J. Marugán-Lobón. 2013.
-\href{https://doi.org/10.1093/sysbio/syt025}{Evolutionary covariation in
-geometric morphometric data: Analyzing integration, modularity, and
-allometry in a phylogenetic context}. Systematic Biology 62:591--610.
+\leavevmode\hypertarget{ref-Klingenberg2013}{}%
+Klingenberg, C. P., and J. Marugán-Lobón. 2013. Evolutionary covariation
+in geometric morphometric data: Analyzing integration, modularity, and
+allometry in a phylogenetic context. Systematic Biology 62:591--610.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Klingenberg1992}{}}%
-Klingenberg, C. P., and M. Zimmermann. 1992.
-\href{https://doi.org/10.1086/285430}{Static, ontogenetic, and
+\leavevmode\hypertarget{ref-Klingenberg1992}{}%
+Klingenberg, C. P., and M. Zimmermann. 1992. Static, ontogenetic, and
 evolutionary allometry: A multivariate comparison in nine species of
-water striders}. American Naturalist 140:601--620.
+water striders. American Naturalist 140:601--620.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Kolmann2022}{}}%
+\leavevmode\hypertarget{ref-Kolmann2022}{}%
 Kolmann, M. A., F. P. L. Marques, J. C. Weaver, M. N. Dean, J. P.
-Fontenelle, and N. R. Lovejoy. 2022.
-\href{https://doi.org/10.1093/icb/icac019}{Ecological and phenotypic
+Fontenelle, and N. R. Lovejoy. 2022. Ecological and phenotypic
 diversification after a continental invasion in neotropical freshwater
-stingrays}. Integrative and Comparative Biology 62:424--440.
+stingrays. Integrative and Comparative Biology 62:424--440.
 
-\leavevmode\vadjust pre{\hypertarget{ref-LaBarbera1989}{}}%
-LaBarbera, M. 1989.
-\href{https://doi.org/10.1146/annurev.es.20.110189.000525}{Analyzing
-body size as a factor in ecology and evolution}. Annual Review of
-Ecology and Systematics 20:97--117.
+\leavevmode\hypertarget{ref-LaBarbera1989}{}%
+LaBarbera, M. 1989. Analyzing body size as a factor in ecology and
+evolution. Annual Review of Ecology and Systematics 20:97--117.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Lande1979}{}}%
-Lande, R. 1979. \href{https://doi.org/10.2307/2407630}{Quantitative
-genetic analysis of multivariate evolution, applied to brain-body size
-allometry}. Evolution 33:402--416.
+\leavevmode\hypertarget{ref-Lande1979}{}%
+Lande, R. 1979. Quantitative genetic analysis of multivariate evolution,
+applied to brain-body size allometry. Evolution 33:402--416.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Lande1985}{}}%
+\leavevmode\hypertarget{ref-Lande1985}{}%
 Lande, R. 1985. Size and scaling in primate biology. Pp. 21--32
 \emph{in} W. L. Jungers, ed. Plenum Press.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Losos2009}{}}%
+\leavevmode\hypertarget{ref-Losos2009}{}%
 Losos, J. B. 2009. Lizards in an evolutionary tree: Ecology and adaptive
 radiation of anoles. University of California Press.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Losos1992}{}}%
-Losos, J. B. 1992. \href{https://doi.org/10.1093/sysbio/41.4.403}{The
-evolution of convergent structure in {C}aribbean \emph{{A}nolis}
-communities}. Systematic Biology 41:403--420.
+\leavevmode\hypertarget{ref-Losos1992}{}%
+Losos, J. B. 1992. The evolution of convergent structure in Caribbean
+\emph{Anolis} communities. Systematic Biology 41:403--420.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Losos2009b}{}}%
-Losos, J. B., and R. E. Ricklefs. 2009.
-\href{https://doi.org/10.1038/nature07893}{Adaptation and
-diversification on islands}. Nature 457:830--836.
+\leavevmode\hypertarget{ref-Losos2009b}{}%
+Losos, J. B., and R. E. Ricklefs. 2009. Adaptation and diversification
+on islands. Nature 457:830--836.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Mahler2013}{}}%
+\leavevmode\hypertarget{ref-Mahler2013}{}%
 Mahler, D. L., T. Ingram, L. J. Revell, and J. B. Losos. 2013.
-\href{https://doi.org/10.1126/science.1232392}{Exceptional convergence
-on the macroevolutionary landscape in island lizard radiations}. Science
-341:292--295.
+Exceptional convergence on the macroevolutionary landscape in island
+lizard radiations. Science 341:292--295.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Marcy2020}{}}%
+\leavevmode\hypertarget{ref-Marcy2020}{}%
 Marcy, A. E., T. Guillerme, E. Sherratt, K. C. Rowe, M. J. Phillips, and
-V. Weisbecker. 2020. \href{https://doi.org/10.1086/711398}{Australian
-rodents reveal conserved cranial evolutionary allometry across 10
-million years of murid evolution}. The American Naturalist 196:755--768.
+V. Weisbecker. 2020. Australian rodents reveal conserved cranial
+evolutionary allometry across 10 million years of murid evolution. The
+American Naturalist 196:755--768.
 
-\leavevmode\vadjust pre{\hypertarget{ref-MarroigCheverud2005}{}}%
-Marroig, G., and J. M. Cheverud. 2005.
-\href{https://doi.org/10.1111/j.0014-3820.2005.tb01049.x}{Size as a line
-of least evolutionary resistance: Diet and adaptive morphological
-radiation in {N}ew {W}orld monkeys}. Evolution 59:1128--1142.
+\leavevmode\hypertarget{ref-MarroigCheverud2005}{}%
+Marroig, G., and J. M. Cheverud. 2005. Size as a line of least
+evolutionary resistance: Diet and adaptive morphological radiation in
+New World monkeys. Evolution 59:1128--1142.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Martinez2021}{}}%
+\leavevmode\hypertarget{ref-Martinez2021}{}%
 Martinez, C. M., S. T. Friedman, K. A. Corn, O. Larouche, S. A. Price,
-and P. C. Wainwright. 2021. \href{https://doi.org/10.1111/ele.13785}{The
-deep sea is a hot spot of fish body shape evolution}. Ecology Letters
-24:1788--1799.
+and P. C. Wainwright. 2021. The deep sea is a hot spot of fish body
+shape evolution. Ecology Letters 24:1788--1799.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Meiri2008}{}}%
-Meiri, S. 2008.
-\href{https://doi.org/10.1111/j.1466-8238.2008.00414.x}{Evolution and
-ecology of lizard body sizes}. Global Ecology and Biogeography
-17:724--734.
+\leavevmode\hypertarget{ref-Meiri2008}{}%
+Meiri, S. 2008. Evolution and ecology of lizard body sizes. Global
+Ecology and Biogeography 17:724--734.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Mosimann1970}{}}%
-Mosimann, J. E. 1970.
-\href{https://doi.org/10.1080/01621459.1970.10481136}{Size allometry:
-Size and shape variables with characterizations of the lognormal and
-generalized gamma distributions}. Journal of the American Statistical
-Association 65:930--945.
+\leavevmode\hypertarget{ref-Mosimann1970}{}%
+Mosimann, J. E. 1970. Size allometry: Size and shape variables with
+characterizations of the lognormal and generalized gamma distributions.
+Journal of the American Statistical Association 65:930--945.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Navalon2022}{}}%
+\leavevmode\hypertarget{ref-Navalon2022}{}%
 Navalón, G., A. Bjarnason, E. Griffiths, and R. B. J. Benson. 2022.
-\href{https://doi.org/10.1038/s41586-022-05372-y}{{Environmental signal
-in the evolutionary diversification of bird skeletons}}. Nature
-611:306--311.
+Environmental signal in the evolutionary diversification of bird
+skeletons. Nature 611:306--311.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Navalon2020}{}}%
+\leavevmode\hypertarget{ref-Navalon2020}{}%
 Navalón, G., J. Marugán-Lobón, J. A. Bright, C. R. Cooney, and E. J.
-Rayfield. 2020. \href{https://doi.org/10.1038/s41559-019-1092-y}{The
-consequences of craniofacial integration for the adaptive radiations of
-{D}arwin's finches and {H}awaiian honeycreepers}. Nature Ecology \&
-Evolution 4:270--278. Nature Publishing Group.
+Rayfield. 2020. The consequences of craniofacial integration for the
+adaptive radiations of Darwin's finches and Hawaiian honeycreepers.
+Nature Ecology \& Evolution 4:270--278. Nature Publishing Group.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Olson2009}{}}%
+\leavevmode\hypertarget{ref-Olson2009}{}%
 Olson, V. A., R. G. Davies, C. D. L. Orme, G. H. Thomas, S. Meiri, T. M.
-Blackburn, K. J. Gaston, I. P. F. Owens, and P. M. Bennett. 2009.
-\href{https://doi.org/10.1111/j.1461-0248.2009.01281.x}{Global
-biogeography and ecology of body size in birds}. Ecology Letters
+Blackburn, K. J. Gaston, I. P. F. Owens, and P. M. Bennett. 2009. Global
+biogeography and ecology of body size in birds. Ecology Letters
 12:249--259.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Patterson2022}{}}%
+\leavevmode\hypertarget{ref-Patterson2022}{}%
 Patterson, M., A. K. Wolfe, P. A. Fleming, P. W. Bateman, M. L. Martin,
-E. Sherratt, and N. M. Warburton. 2022.
-\href{https://doi.org/10.1007/s10682-022-10164-x}{Ontogenetic shift in
-diet of a large elapid snake is facilitated by allometric change in
-skull morphology}. Evolutionary Ecology 36:489--509.
+E. Sherratt, and N. M. Warburton. 2022. Ontogenetic shift in diet of a
+large elapid snake is facilitated by allometric change in skull
+morphology. Evolutionary Ecology 36:489--509.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Pavlicev2009}{}}%
-Pavlicev, M., J. M. Cheverud, and G. P. Wagner. 2009.
-\href{https://doi.org/10.1007/s11692-008-9042-7}{Measuring morphological
-integration using eigenvalue variance}. Evolutionary Biology
-36:157--170.
+\leavevmode\hypertarget{ref-Pavlicev2009}{}%
+Pavlicev, M., J. M. Cheverud, and G. P. Wagner. 2009. Measuring
+morphological integration using eigenvalue variance. Evolutionary
+Biology 36:157--170.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Pelabon2014}{}}%
-Pélabon, C., G. H. Bolstad, C. K. Egset, J. M. Cheverud, M. Pavlicev,
-and G. Rosenqvist. 2014. \href{https://doi.org/10.1086/668820}{On the
-relationship between ontogenetic and static allometry}. The American
-Naturalist 181:195--212.
-
-\leavevmode\vadjust pre{\hypertarget{ref-Peters1983}{}}%
+\leavevmode\hypertarget{ref-Peters1983}{}%
 Peters, R. H. 1983. The ecological implications of body size. Cambridge
 University Press.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Piras2010}{}}%
+\leavevmode\hypertarget{ref-Pelabon2014}{}%
+Pélabon, C., G. H. Bolstad, C. K. Egset, J. M. Cheverud, M. Pavlicev,
+and G. Rosenqvist. 2014. On the relationship between ontogenetic and
+static allometry. The American Naturalist 181:195--212.
+
+\leavevmode\hypertarget{ref-Piras2010}{}%
 Piras, P., P. Colangelo, D. C. Adams, A. Buscalioni, J. Cubo, T.
-Kotsakis, C. Meloro, and P. Raia. 2010.
-\href{https://doi.org/10.1111/j.1525-142x.2010.00442.x}{The
-gavialis-tomistoma debate: The contribution of skull ontogenetic
-allometry and growth trajectories to the study of crocodylian
-relationships}. Evolution and Development 12:568--579.
+Kotsakis, C. Meloro, and P. Raia. 2010. The gavialis-tomistoma debate:
+The contribution of skull ontogenetic allometry and growth trajectories
+to the study of crocodylian relationships. Evolution and Development
+12:568--579.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Price2015}{}}%
-Price, S. A., S. T. Friedman, and P. C. Wainwright. 2015.
-\href{https://doi.org/10.1098/rspb.2015.1428}{How predation shaped fish:
-The impact of fin spines on body form evolution across teleosts}.
-Proceedings of the Royal Society B: Biological Sciences 282:20151428.
+\leavevmode\hypertarget{ref-Price2015}{}%
+Price, S. A., S. T. Friedman, and P. C. Wainwright. 2015. How predation
+shaped fish: The impact of fin spines on body form evolution across
+teleosts. Proceedings of the Royal Society B: Biological Sciences
+282:20151428.
 
-\leavevmode\vadjust pre{\hypertarget{ref-PYRON2009}{}}%
-Pyron, R. A., and F. T. Burbrink. 2009.
-\href{https://doi.org/10.1111/j.1420-9101.2009.01820.x}{Body size as a
-primary determinant of ecomorphological diversification and the
-evolution of mimicry in the lampropeltinine snakes (serpentes:
-colubridae)}. Journal of Evolutionary Biology 22:2057--2067. Wiley.
+\leavevmode\hypertarget{ref-PYRON2009}{}%
+Pyron, R. A., and F. T. Burbrink. 2009. Body size as a primary
+determinant of ecomorphological diversification and the evolution of
+mimicry in the lampropeltinine snakes (serpentes: Colubridae). Journal
+of Evolutionary Biology 22:2057--2067. Wiley.
 
-\leavevmode\vadjust pre{\hypertarget{ref-RCT}{}}%
-R Core Team. 2022. \href{https://www.R-project.org/}{R: A language and
-environment for statistical computing. Version 4.2.1}. R Foundation for
-Statistical Computing, Vienna, Austria.
+\leavevmode\hypertarget{ref-RCT}{}%
+R Core Team. 2022. R: A language and environment for statistical
+computing. Version 4.2.1. R Foundation for Statistical Computing,
+Vienna, Austria.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Reaney2020}{}}%
+\leavevmode\hypertarget{ref-Reaney2020}{}%
 Reaney, A. M., Y. Bouchenak-Khelladi, J. A. Tobias, and A. Abzhanov.
-2020. \href{https://doi.org/10.1002/ece3.6994}{Ecological and
-morphological determinants of evolutionary diversification in
-{D}arwin{\textquotesingle}s finches and their relatives}. Ecology and
+2020. Ecological and morphological determinants of evolutionary
+diversification in Darwins finches and their relatives. Ecology and
 Evolution 10:14020--14032.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Revell2012}{}}%
-Revell, L. J. 2012.
-\href{https://doi.org/10.1111/j.2041-210X.2011.00169.x}{Phytools: An {R}
-package for phylogenetic comparative biology (and other things)}.
-Methods in Ecology and Evolution 3:217--223.
+\leavevmode\hypertarget{ref-Revell2012}{}%
+Revell, L. J. 2012. Phytools: An R package for phylogenetic comparative
+biology (and other things). Methods in Ecology and Evolution 3:217--223.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Reynolds2016}{}}%
+\leavevmode\hypertarget{ref-Reynolds2016}{}%
 Reynolds, R. G., D. C. Collar, S. A. Pasachnik, M. L. Niemiller, A. R.
-Puente-Rolón, and L. J. Revell. 2016.
-\href{https://doi.org/10.1111/evo.12987}{{Ecological specialization and
-morphological diversification in {G}reater {A}ntillean boas}}. Evolution
+Puente-Rolón, and L. J. Revell. 2016. Ecological specialization and
+morphological diversification in Greater Antillean boas. Evolution
 70:1882--1895.
 
-\leavevmode\vadjust pre{\hypertarget{ref-2007Ross}{}}%
-Ross, C. F., M. I. Hall, and C. P. Heesy. 2007.
-\href{https://doi.org/10.1007/978-0-387-33507-0_7}{Were basal primates
-nocturnal? Evidence from eye and orbit shape}. Pp. 233--256 \emph{in}
-PRIMATE ORIGINS: Adaptations and evolution. Springer.
+\leavevmode\hypertarget{ref-2007Ross}{}%
+Ross, C. F., M. I. Hall, and C. P. Heesy. 2007. Were basal primates
+nocturnal? Evidence from eye and orbit shape. Pp. 233--256 \emph{in}
+PRIMATE origins: Adaptations and evolution. Springer.
 
-\leavevmode\vadjust pre{\hypertarget{ref-SamuelsHopkins2017}{}}%
-Samuels, J. X., and S. S. B. Hopkins. 2017.
-\href{https://doi.org/10.1016/j.gloplacha.2016.12.014}{{The impacts of
-{C}enozoic climate and habitat changes on small mammal diversity of
-{N}orth {A}merica}}. Global and Planetary Change 149:36--52.
+\leavevmode\hypertarget{ref-SamuelsHopkins2017}{}%
+Samuels, J. X., and S. S. B. Hopkins. 2017. The impacts of Cenozoic
+climate and habitat changes on small mammal diversity of North America.
+Global and Planetary Change 149:36--52.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Schluter1996}{}}%
-Schluter, D. 1996.
-\href{https://doi.org/10.1111/j.1558-5646.1996.tb03563.x}{Adaptive
-radiation along genetic lines of least resistance}. Evolution
-50:1766--1774.
+\leavevmode\hypertarget{ref-Schluter1996}{}%
+Schluter, D. 1996. Adaptive radiation along genetic lines of least
+resistance. Evolution 50:1766--1774.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Schluter1984}{}}%
-Schluter, D., and P. R. Grant. 1984.
-\href{https://doi.org/10.1086/284196}{Determinants of morphological
-patterns in communities of {D}arwin{\textquotesingle}s finches}. The
-American Naturalist 123:175--196.
+\leavevmode\hypertarget{ref-Schluter1984}{}%
+Schluter, D., and P. R. Grant. 1984. Determinants of morphological
+patterns in communities of Darwins finches. The American Naturalist
+123:175--196.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Schluter1992}{}}%
-Schluter, D., and J. D. McPhail. 1992.
-\href{https://doi.org/10.1086/285404}{Ecological character displacement
-and speciation in sticklebacks}. The American Naturalist 140:85--108.
+\leavevmode\hypertarget{ref-Schluter1992}{}%
+Schluter, D., and J. D. McPhail. 1992. Ecological character displacement
+and speciation in sticklebacks. The American Naturalist 140:85--108.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Sherratt2014}{}}%
+\leavevmode\hypertarget{ref-Sherratt2014}{}%
 Sherratt, E., D. J. Gower, C. P. Klingenberg, and M. Wilkinson. 2014.
-\href{https://doi.org/10.1007/s11692-014-9287-2}{Evolution of cranial
-shape in caecilians (amphibia: gymnophiona)}. Evolutionary Biology
-41:528--545.
+Evolution of cranial shape in caecilians (amphibia: Gymnophiona).
+Evolutionary Biology 41:528--545.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Sidlauskas2008}{}}%
-Sidlauskas, B. 2008.
-\href{https://doi.org/10.1111/j.1558-5646.2008.00519.x}{Continuous and
-arrested morphological diversification in sister clades of characiform
-fishes: A phylomorphospace approach}. Evolution 62:3135--3156.
+\leavevmode\hypertarget{ref-Sidlauskas2008}{}%
+Sidlauskas, B. 2008. Continuous and arrested morphological
+diversification in sister clades of characiform fishes: A
+phylomorphospace approach. Evolution 62:3135--3156.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Stuart2017}{}}%
+\leavevmode\hypertarget{ref-Stuart2017}{}%
 Stuart, Y. E., T. Veen, J. N. Weber, D. Hanson, M. Ravinet, B. K.
 Lohman, C. J. Thompson, T. Tasneem, A. Doggett, R. Izen, N. Ahmed, R. D.
 H. Barrett, A. P. Hendry, C. L. Peichel, and D. I. Bolnick. 2017.
-\href{https://doi.org/10.1038/s41559-017-0158}{Contrasting effects of
-environment and genetics generate a continuum of parallel evolution}.
-Nature Ecology and Evolution 1:158.
+Contrasting effects of environment and genetics generate a continuum of
+parallel evolution. Nature Ecology and Evolution 1:158.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Tamar2019}{}}%
+\leavevmode\hypertarget{ref-Tamar2019}{}%
 Tamar, K., P. Mitsi, M. Simó-Riudalbas, H. Tejero-Cicuéndez, T.
-Al-Sariri, and S. Carranza. 2019.
-\href{https://doi.org/10.1080/14772000.2019.1614694}{Systematics,
-biogeography, and evolution of \emph{{P}risturus minimus} ({S}quamata,
-{S}phaerodactylidae) with the discovery of the smallest {A}rabian
-vertebrate}. Systematics and Biodiversity 17:349--366.
+Al-Sariri, and S. Carranza. 2019. Systematics, biogeography, and
+evolution of \emph{Pristurus minimus} (Squamata, Sphaerodactylidae) with
+the discovery of the smallest Arabian vertebrate. Systematics and
+Biodiversity 17:349--366.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Tejero-Cicuendez2022}{}}%
+\leavevmode\hypertarget{ref-Tejero-Cicuendez2022}{}%
 Tejero-Cicuéndez, H., A. H. Patton, D. S. Caetano, J. Šmíd, L. J.
 Harmon, and S. Carranza. 2022. Reconstructing squamate biogeography in
-{A}fro-{A}rabia reveals the influence of a complex and dynamic geologic
+Afro-Arabia reveals the influence of a complex and dynamic geologic
 past. Systematic Biology 71:261--272.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Tejero-Cicuendez2021}{}}%
+\leavevmode\hypertarget{ref-Tejero-Cicuendez2021}{}%
 Tejero-Cicuéndez, H., M. Simó-Riudalbas, I. Menéndez, and S. Carranza.
-2021a. \href{https://doi.org/10.1098/rspb.2021.1821}{Ecological
-specialization, rather than the island effect, explains morphological
-diversification in an ancient radiation of geckos}. Proceedings of the
-Royal Society B: Biological Sciences 288:20211821.
+2021a. Ecological specialization, rather than the island effect,
+explains morphological diversification in an ancient radiation of
+geckos. Proceedings of the Royal Society B: Biological Sciences
+288:20211821.
 
-\leavevmode\vadjust pre{\hypertarget{ref-PristurusData}{}}%
+\leavevmode\hypertarget{ref-PristurusData}{}%
 Tejero-Cicuéndez, H., M. Simó-Riudalbas, I. Menéndez, and S. Carranza.
 2021b. Ecological specialization, rather than the island effect,
 explains morphological diversification in an ancient radiation of
 geckos. Dryad digital repository. (Doi:10.5061/dryad.xwdbrv1f6).
 
-\leavevmode\vadjust pre{\hypertarget{ref-Urban2022}{}}%
+\leavevmode\hypertarget{ref-Urban2022}{}%
 Urban, S., J. Gerwin, C. D. Hulsey, A. Meyer, and C. F. Kratochwil.
-2022. \href{https://doi.org/10.1002/ece3.8568}{The repeated evolution of
-stripe patterns is correlated with body morphology in the adaptive
-radiations of {E}ast {A}frican cichlid fishes}. Ecology and Evolution
-12:e8568.
+2022. The repeated evolution of stripe patterns is correlated with body
+morphology in the adaptive radiations of East African cichlid fishes.
+Ecology and Evolution 12:e8568.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Voje2022}{}}%
-Voje, K. L., M. A. Bell, and Y. E. Stuart. 2022.
-\href{https://doi.org/10.1111/jeb.13984}{Evolution of static allometry
-and constraint on evolutionary allometry in a fossil stickleback}.
-Journal of Evolutionary Biology 35:423--438.
+\leavevmode\hypertarget{ref-Voje2022}{}%
+Voje, K. L., M. A. Bell, and Y. E. Stuart. 2022. Evolution of static
+allometry and constraint on evolutionary allometry in a fossil
+stickleback. Journal of Evolutionary Biology 35:423--438.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Voje2014}{}}%
+\leavevmode\hypertarget{ref-Voje2014}{}%
 Voje, K. L., T. F. Hansen, C. K. Egset, G. H. Bolstad, and C. Pélabon.
-2014. \href{https://doi.org/10.1111/evo.12312}{Allometric constraints
-and the evolution of allometry}. Evolution 68:866--885.
+2014. Allometric constraints and the evolution of allometry. Evolution
+68:866--885.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Wagner2011}{}}%
-Wagner, G. P., and J. Zhang. 2011.
-\href{https://doi.org/10.1038/nrg2949}{The pleiotropic structure of the
-genotype{\textendash}phenotype map: The evolvability of complex
-organisms}. Nature Reviews Genetics 12:204--213.
+\leavevmode\hypertarget{ref-Wagner1996}{}%
+Wagner, G., and L. Altenberg. 1996. Perspective: Complex adaptations and
+the evolution of evolvability. Evolution 50:967--976.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Wagner1996}{}}%
-Wagner, G., and L. Altenberg. 1996.
-\href{https://doi.org/10.1111/j.1558-5646.1996.tb02339.x}{Perspective:
-Complex adaptations and the evolution of evolvability}. Evolution
-50:967--976.
+\leavevmode\hypertarget{ref-Wagner2011}{}%
+Wagner, G. P., and J. Zhang. 2011. The pleiotropic structure of the
+genotypephenotype map: The evolvability of complex organisms. Nature
+Reviews Genetics 12:204--213.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Watanabe2019}{}}%
+\leavevmode\hypertarget{ref-Watanabe2019}{}%
 Watanabe, A., A. C. Fabre, R. N. Felice, J. A. Maisano, J. Müller, A.
-Herrel, and A. Goswami. 2019.
-\href{https://doi.org/10.1073/pnas.1820967116}{{Ecomorphological
-diversification in squamates from conserved pattern of cranial
-integration}}. Proceedings of the National Academy of Sciences of the
-United States of America 116:14688--14697.
+Herrel, and A. Goswami. 2019. Ecomorphological diversification in
+squamates from conserved pattern of cranial integration. Proceedings of
+the National Academy of Sciences of the United States of America
+116:14688--14697.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Wickham2019}{}}%
+\leavevmode\hypertarget{ref-Wickham2019}{}%
 Wickham, H., M. Averick, J. Bryan, W. Chang, L. D. McGowan, R. François,
 G. Grolemund, A. Hayes, L. Henry, J. Hester, M. Kuhn, T. L. Pedersen, E.
 Miller, S. M. Bache, K. Müller, J. Ooms, D. Robinson, D. P. Seidel, V.
 Spinu, K. Takahashi, D. Vaughan, C. Wilke, K. Woo, and H. Yutani. 2019.
-\href{https://doi.org/10.21105/joss.01686}{Welcome to the {tidyverse}}.
-Journal of Open Source Software 4:1686.
+Welcome to the tidyverse. Journal of Open Source Software 4:1686.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Zelditch2022}{}}%
-Zelditch, M. L., and D. L. Swiderski. 2022.
-\href{https://doi.org/10.1007/s11692-022-09581-1}{The predictable
-complexity of evolutionary allometry}. Evolutionary Biology 50:56--77.
-
-\end{CSLReferences}
+\leavevmode\hypertarget{ref-Zelditch2022}{}%
+Zelditch, M. L., and D. L. Swiderski. 2022. The predictable complexity
+of evolutionary allometry. Evolutionary Biology 50:56--77.
 
 \newpage
 
