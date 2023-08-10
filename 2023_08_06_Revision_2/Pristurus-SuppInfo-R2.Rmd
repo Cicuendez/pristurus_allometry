@@ -257,7 +257,20 @@ summary(out.shp)
 
 ### Phylomorphospace and Disparity
 
-In the main article we presented a representation of phylomorphospace using size-standardized shape variables. Here we present a test of disparity of the size-standardized data. Additionally, we present a similar plot for the unadjusted species means. In addition, we calculate the phenotypic disparity in among species in each habitat group, and compare these using permutation. 
+In the main article we presented a representation of phylomorphospace using size-standardized shape variables obtained from a non-phylogenetic regression. Here we present the phylomorphospace generated using size-standardized species means obtained from a phylogenetic regression (which shows very similar results) along with a test of disparity of these size-standardized data. Additionally, we present a similar plot for the unadjusted species means. In addition, we calculate the phenotypic disparity among species in each habitat group, and compare these using permutation. 
+
+This is the phylomorphospace with size-corrected species means after a phylogenetic regression (very similar to the one resulting from the non-phylogenetic regression, see Fig. 5 in the main text). 
+
+```{r, eval = TRUE, echo = TRUE}
+shape.res <- residuals(allom.sp)
+pca.w.phylo <- gm.prcomp(shape.res, phy = tree)
+# see main script for the code that generates this figure: 
+```
+
+```{r, fig.align="center",  echo=FALSE, out.width="100%", fig.cap = "Phylomorphospace of \\textit{Pristurus}, based on residuals from a phylogenetic regression of body measurements on size (SVL). Species means are colored by habitat use: ground (beige), rock (dark purple), and tree (magenta). Large and small rock-dwelling and ground-dwelling are highlighted with darker colors to highlight their differentiation and relative positions in morphospace. Point size is proportional to mean species body size. 79\\% of the total variation is displayed in the first two PC axes (PC1 = 62.8\\%; PC2 = 16.3\\%)."}
+
+include_graphics("Figs/old_figures/figure_5_phylomorphospace_large_small.png")
+```
 
 First, we show that in the size-standardized morphospace, morphological disparity does not differ across habitat groups. There are no differences.
 
