@@ -137,6 +137,11 @@ shape.res <- residuals(allom.sp)
 pca.w.phylo <- gm.prcomp(shape.res, phy = tree)
 plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
 
+###### NEW PHYLOMORPHOSPACE: no phylogeny
+allom2.sp <- lm.rrpp(LS.mns~sz.mn)
+shape2.res <- residuals(allom2.sp)
+pca.w.phylo2 <- gm.prcomp(shape2.res, phy = tree)
+plot(pca.w.phylo2, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
 
 ##################################### FOR SI ----
 # 4b: phylomorphospace of linear measures ----
