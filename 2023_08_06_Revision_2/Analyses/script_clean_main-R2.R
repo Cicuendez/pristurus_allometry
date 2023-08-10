@@ -118,6 +118,39 @@ plot(head.slp,limb.slp)
 
 contMap(tree = tree, x = head.slp, outline = FALSE)
 cm.limb <- contMap(tree = tree, x = limb.slp, outline = FALSE)
+
+# ALTERNATIVE TO CONTMAPS: SCATTERPLOT WITH PHYLOGENY ----
+slope.dat <- list()
+slope.dat$x <- cbind(head.slp,limb.slp)
+slope.dat$alignment = "principal"
+slope.dat$transform = FALSE
+slope.dat$GLS = FALSE
+slope.dat$phy <- tree
+class(slope.dat) <- "ordinate"
+
+par(mar = c(5,5,2,2))
+pdf('../Figs/scatterplot_slopes.pdf')
+P2 <- plot(slope.dat, phylo = TRUE, pch = 21, 
+           phylo.par = list(node.labels = FALSE), 
+           bg = hab.colors[hab.mn[rownames(slope.dat$x)]],
+           col = 'black', 
+           cex = 1.7, 
+           #xlim = c(0, 3), ylim = c(0, 3),
+           xlab = 'head slope', ylab = 'limb slope')
+add.tree(P2, tree, edge.col = 'black')
+text(slope.dat$x[,1], slope.dat$x[,2], labels = rownames(slope.dat$x), 
+     #col = hab.colors[hab.mn[rownames(slope.dat$x)]], 
+     col = 'black',
+     cex = 0.7)
+dev.off()
+
+
+slope.dat$x
+
+
+
+
+
 ################################
 
 
