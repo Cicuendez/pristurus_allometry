@@ -129,7 +129,7 @@ slope.dat$phy <- tree
 class(slope.dat) <- "ordinate"
 
 par(mar = c(5,5,2,2))
-pdf('../Figs/scatterplot_slopes.pdf')
+png('../Figs/scatterplot_slopes.png')
 P2 <- plot(slope.dat, phylo = TRUE, pch = 21, 
            phylo.par = list(node.labels = FALSE), 
            bg = hab.colors[hab.mn[rownames(slope.dat$x)]],

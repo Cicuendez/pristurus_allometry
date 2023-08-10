@@ -235,6 +235,14 @@ Briefly, these plots show that changes in allometry were not concentrated to par
 include_graphics("Figs/contmap_slopes.png")
 ```
 
+Additionally, we show here a complementary visualization to that of Figure 3 in the main text. Instead of mapping the slope values of head and limb proportions on the branches of the phylogeny, here we present a scatter plot of head slope vs limb slope values, with the points connected according to the phylogenetic relationships between the species. 
+
+```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="100%", fig.cap= "Scatterplot showing head and limb slopes of the species along with their phylogenetic relationships."}
+
+include_graphics("Figs/scatterplot_slopes.png")
+
+```
+
 \newpage 
 
 ### Morphological Integration
