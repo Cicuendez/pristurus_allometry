@@ -1,0 +1,593 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Supplementary Material: Evolution along allometric lines of least resistance: Morphological differentiation in Pristurus geckos},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Supplementary Material: Evolution along allometric lines of least
+resistance: Morphological differentiation in \emph{Pristurus} geckos}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{r-script-for-article-computations-and-flow-of-allometry-operations}{%
+\section{1: R-script for Article Computations and Flow of Allometry
+Operations}\label{r-script-for-article-computations-and-flow-of-allometry-operations}}
+
+Below is an R-script that may be used to reproduce all statistical
+analyses found in the paper. The data are found on DRYAD:
+(\url{doi:10.5061/dryad.xwdbrv1f6} (Tejero-Cicuéndez et al. 2021)).
+Additional scripts used to generate publication-ready plots, and scripts
+for the additional plots, are found below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{libs }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}geomorph\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}RRPP\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}phytools\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}geiger\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tidyverse\textquotesingle{}}\NormalTok{)}
+\NormalTok{easypackages}\SpecialCharTok{::}\FunctionTok{libraries}\NormalTok{(libs)}
+
+\CommentTok{\# 0: Data Prep}
+\NormalTok{data0 }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\StringTok{\textquotesingle{}Analyses/data/morpho/morpho\_pristurus.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{sep =} \StringTok{\textquotesingle{};\textquotesingle{}}\NormalTok{, }
+               \AttributeTok{dec =} \StringTok{\textquotesingle{}.\textquotesingle{}}\NormalTok{, }\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{stringsAsFactors =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  sp.to.keep }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(}\FunctionTok{which}\NormalTok{(}\FunctionTok{table}\NormalTok{(data0}\SpecialCharTok{$}\NormalTok{species) }\SpecialCharTok{\textgreater{}=} \DecValTok{5}\NormalTok{))}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ data0[data0}\SpecialCharTok{$}\NormalTok{species }\SpecialCharTok{\%in\%}\NormalTok{ sp.to.keep, ]}
+\NormalTok{  data}\SpecialCharTok{$}\NormalTok{species }\OtherTok{\textless{}{-}} \FunctionTok{droplevels}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{species)}
+\NormalTok{  data}\SpecialCharTok{$}\NormalTok{SVL }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{SVL)}
+\NormalTok{shape }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(}\FunctionTok{log}\NormalTok{(data[, }\DecValTok{8}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(data)]))}
+\NormalTok{rdf }\OtherTok{\textless{}{-}} \FunctionTok{rrpp.data.frame}\NormalTok{(}\AttributeTok{svl =}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{SVL, }\AttributeTok{shape =}\NormalTok{ shape, }
+           \AttributeTok{habitat =}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{habitat\_broad, }\AttributeTok{species =}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{species)}
+\NormalTok{tree0 }\OtherTok{\textless{}{-}} \FunctionTok{read.nexus}\NormalTok{(}\StringTok{\textquotesingle{}Analyses/data/phylogeny/pristurus\_tree\_final.nex\textquotesingle{}}\NormalTok{)}
+\NormalTok{LS.mns }\OtherTok{\textless{}{-}} \FunctionTok{pairwise}\NormalTok{(}\FunctionTok{lm.rrpp}\NormalTok{(shape}\SpecialCharTok{\textasciitilde{}}\NormalTok{species, }\AttributeTok{data =}\NormalTok{ rdf, }\AttributeTok{iter=}\DecValTok{0}\NormalTok{),}
+                   \AttributeTok{groups =}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{species)}\SpecialCharTok{$}\NormalTok{LS.means[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{sz.mn }\OtherTok{\textless{}{-}} \FunctionTok{tapply}\NormalTok{(rdf}\SpecialCharTok{$}\NormalTok{svl,rdf}\SpecialCharTok{$}\NormalTok{species,mean)}
+\NormalTok{hab.mn }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{by}\NormalTok{(rdf}\SpecialCharTok{$}\NormalTok{habitat,rdf}\SpecialCharTok{$}\NormalTok{species,unique))}
+\FunctionTok{levels}\NormalTok{(hab.mn) }\OtherTok{\textless{}{-}} \FunctionTok{levels}\NormalTok{(rdf}\SpecialCharTok{$}\NormalTok{habitat)}
+\NormalTok{tree }\OtherTok{\textless{}{-}} \FunctionTok{treedata}\NormalTok{(}\AttributeTok{phy =}\NormalTok{ tree0, }\AttributeTok{data =}\NormalTok{ LS.mns)}\SpecialCharTok{$}\NormalTok{phy}
+\NormalTok{C }\OtherTok{\textless{}{-}} \FunctionTok{vcv.phylo}\NormalTok{(tree)}
+
+\NormalTok{SVL.resid }\OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(}\FunctionTok{lm}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{SVL}\SpecialCharTok{\textasciitilde{}}\NormalTok{data}\SpecialCharTok{$}\NormalTok{species))}
+\NormalTok{shape.resid }\OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(}\FunctionTok{lm}\NormalTok{(shape}\SpecialCharTok{\textasciitilde{}}\NormalTok{data}\SpecialCharTok{$}\NormalTok{species))}
+
+\NormalTok{rdf2 }\OtherTok{\textless{}{-}} \FunctionTok{rrpp.data.frame}\NormalTok{(}\AttributeTok{svl =}\NormalTok{ SVL.resid, }\AttributeTok{shape =}\NormalTok{ shape.resid, }
+                        \AttributeTok{habitat =}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{habitat\_broad, }
+                        \AttributeTok{species =}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{species)}
+
+\CommentTok{\# 1: Evolutionary Allometry \& Static Allometry}
+\NormalTok{allom.sp }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(LS.mns}\SpecialCharTok{\textasciitilde{}}\NormalTok{sz.mn, }\AttributeTok{Cov =}\NormalTok{ C)}
+\NormalTok{allom.ind }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(shape}\SpecialCharTok{\textasciitilde{}}\NormalTok{svl, }\AttributeTok{data =}\NormalTok{ rdf2)}
+\FunctionTok{anova}\NormalTok{(allom.sp)}
+\FunctionTok{anova}\NormalTok{(allom.ind)}
+
+\NormalTok{M }\OtherTok{\textless{}{-}}\FunctionTok{rbind}\NormalTok{(coef.sp }\OtherTok{\textless{}{-}}\NormalTok{ allom.sp}\SpecialCharTok{$}\NormalTok{LM}\SpecialCharTok{$}\NormalTok{gls.coefficients[}\DecValTok{2}\NormalTok{,],}
+\NormalTok{        coef.ind }\OtherTok{\textless{}{-}}\NormalTok{ allom.ind}\SpecialCharTok{$}\NormalTok{LM}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{,])}
+
+\FunctionTok{acos}\NormalTok{(RRPP}\SpecialCharTok{:::}\FunctionTok{vec.cor.matrix}\NormalTok{(M))}\SpecialCharTok{*}\DecValTok{180}\SpecialCharTok{/}\NormalTok{pi  }
+
+\CommentTok{\# 2: Comparison of multivariate allometry among habitat types}
+\NormalTok{fit.hab }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(shape}\SpecialCharTok{\textasciitilde{}}\NormalTok{svl}\SpecialCharTok{*}\NormalTok{habitat, }\AttributeTok{data =}\NormalTok{ rdf2)}
+  \FunctionTok{anova}\NormalTok{(fit.hab)}
+
+\CommentTok{\# 2A: Compare habitat vectors versus isometry and to each other}
+  \CommentTok{\#H\_0: isometry as common slope model}
+\NormalTok{mn.sz }\OtherTok{\textless{}{-}} \FunctionTok{tapply}\NormalTok{(rdf2}\SpecialCharTok{$}\NormalTok{svl,rdf2}\SpecialCharTok{$}\NormalTok{habitat,mean)}
+\NormalTok{mn.shape }\OtherTok{\textless{}{-}} \FunctionTok{rowsum}\NormalTok{(rdf2}\SpecialCharTok{$}\NormalTok{shape, rdf2}\SpecialCharTok{$}\NormalTok{habitat)}\SpecialCharTok{/}\FunctionTok{as.vector}\NormalTok{(}\FunctionTok{table}\NormalTok{(rdf2}\SpecialCharTok{$}\NormalTok{habitat)) }
+\NormalTok{coef.iso }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\NormalTok{intercepts }\OtherTok{\textless{}{-}}\NormalTok{ mn.shape }\SpecialCharTok{{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{tcrossprod}\NormalTok{(coef.iso,mn.sz))}
+\NormalTok{X }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{rdf2}\SpecialCharTok{$}\NormalTok{svl}\SpecialCharTok{+}\NormalTok{rdf2}\SpecialCharTok{$}\NormalTok{habitat)}
+\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(intercepts[}\DecValTok{1}\NormalTok{,],coef.iso,intercepts[}\DecValTok{2}\NormalTok{,]}\SpecialCharTok{{-}}\NormalTok{intercepts[}\DecValTok{1}\NormalTok{,],}
+\NormalTok{           intercepts[}\DecValTok{3}\NormalTok{,]}\SpecialCharTok{{-}}\NormalTok{intercepts[}\DecValTok{1}\NormalTok{,])}
+\NormalTok{preds }\OtherTok{\textless{}{-}}\NormalTok{ X}\SpecialCharTok{\%*\%}\NormalTok{b}
+\NormalTok{E.iso }\OtherTok{\textless{}{-}}\NormalTok{ rdf2}\SpecialCharTok{$}\NormalTok{shape }\SpecialCharTok{{-}}\NormalTok{ preds }
+\NormalTok{perms }\OtherTok{\textless{}{-}}\NormalTok{ RRPP}\SpecialCharTok{:::}\FunctionTok{perm.index}\NormalTok{(}\AttributeTok{n =}\NormalTok{ fit.hab}\SpecialCharTok{$}\NormalTok{LM}\SpecialCharTok{$}\NormalTok{n, }\AttributeTok{iter =} \DecValTok{999}\NormalTok{)}
+\NormalTok{slopes }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{)\{ }
+\NormalTok{  slopes[[j]] }\OtherTok{\textless{}{-}} \FunctionTok{pairwise}\NormalTok{(}\FunctionTok{lm.rrpp}\NormalTok{((preds}\SpecialCharTok{+}\NormalTok{E.iso[perms[[j]],]) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ rdf2}\SpecialCharTok{$}\NormalTok{svl}\SpecialCharTok{*}\NormalTok{rdf2}\SpecialCharTok{$}\NormalTok{habitat, }
+          \AttributeTok{iter=}\DecValTok{0}\NormalTok{), }\AttributeTok{groups =}\NormalTok{ rdf2}\SpecialCharTok{$}\NormalTok{habitat,}\AttributeTok{covariate =}\NormalTok{ rdf2}\SpecialCharTok{$}\NormalTok{svl)}\SpecialCharTok{$}\NormalTok{slopes[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{\}  }
+\NormalTok{slp.ang }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(j) }
+      \FunctionTok{acos}\NormalTok{(RRPP}\SpecialCharTok{:::}\FunctionTok{vec.cor.matrix}\NormalTok{(}\FunctionTok{rbind}\NormalTok{(slopes[[j]],coef.iso)))}\SpecialCharTok{*}\DecValTok{180}\SpecialCharTok{/}\NormalTok{pi)  }
+  
+\NormalTok{slp.hab.obs }\OtherTok{\textless{}{-}}\NormalTok{ slp.ang[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{slp.Z }\OtherTok{\textless{}{-}}\NormalTok{ RRPP}\SpecialCharTok{:::}\FunctionTok{effect.list}\NormalTok{(slp.ang)}
+\NormalTok{slp.P }\OtherTok{\textless{}{-}}\NormalTok{ RRPP}\SpecialCharTok{:::}\FunctionTok{Pval.list}\NormalTok{(slp.ang)}
+
+\NormalTok{slp.hab.obs}
+\NormalTok{slp.Z}
+\NormalTok{slp.P  }
+
+\CommentTok{\# 2B: Compare evolutionary and static (habitat) allometry }
+  \CommentTok{\#H\_0: common slope isometry}
+\NormalTok{slp.ang.ev }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(j)}
+   \FunctionTok{acos}\NormalTok{(RRPP}\SpecialCharTok{:::}\FunctionTok{vec.cor.matrix}\NormalTok{(}\FunctionTok{rbind}\NormalTok{(coef.evol,slopes[[j]])))}\SpecialCharTok{*}\DecValTok{180}\SpecialCharTok{/}\NormalTok{pi)}
+
+\NormalTok{slp.hab.ev.obs }\OtherTok{\textless{}{-}}\NormalTok{ slp.ang.ev[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{slp.Z.ev }\OtherTok{\textless{}{-}}\NormalTok{ RRPP}\SpecialCharTok{:::}\FunctionTok{effect.list}\NormalTok{(slp.ang.ev)}
+\NormalTok{slp.P.ev }\OtherTok{\textless{}{-}}\NormalTok{ RRPP}\SpecialCharTok{:::}\FunctionTok{Pval.list}\NormalTok{(slp.ang.ev)}
+
+\NormalTok{slp.hab.ev.obs}
+\NormalTok{slp.Z.ev}
+\NormalTok{slp.P.ev }
+
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(slp.hab.ev.obs[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],slp.Z.ev[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],slp.P.ev[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{])}
+\FunctionTok{colnames}\NormalTok{(res) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Angle"}\NormalTok{,}\StringTok{"Effect Size"}\NormalTok{, }\StringTok{"P{-}value"}\NormalTok{)}
+\FunctionTok{rownames}\NormalTok{(res) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Ev vs. Ground"}\NormalTok{, }\StringTok{"Ev vs. Rock"}\NormalTok{, }\StringTok{"Ev vs. Tree"}\NormalTok{)}
+\NormalTok{res}
+
+\CommentTok{\# 3: Map allometry slopes on phylogeny}
+\NormalTok{head.scores }\OtherTok{\textless{}{-}} \FunctionTok{plot}\NormalTok{(}\FunctionTok{lm.rrpp}\NormalTok{(shape[, }\FunctionTok{c}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)]}\SpecialCharTok{\textasciitilde{}}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl), }
+      \AttributeTok{type =} \StringTok{"regression"}\NormalTok{, }\AttributeTok{predictor =}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl, }\AttributeTok{reg.type =} \StringTok{"RegScore"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{RegScore}
+
+\NormalTok{limb.scores }\OtherTok{\textless{}{-}} \FunctionTok{plot}\NormalTok{(}\FunctionTok{lm.rrpp}\NormalTok{(shape[, }\FunctionTok{c}\NormalTok{(}\DecValTok{5}\SpecialCharTok{:}\DecValTok{8}\NormalTok{)]}\SpecialCharTok{\textasciitilde{}}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl), }
+      \AttributeTok{type =} \StringTok{"regression"}\NormalTok{, }\AttributeTok{predictor =}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl, }\AttributeTok{reg.type =} \StringTok{"RegScore"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{RegScore}
+
+\NormalTok{coef.head }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(head.scores }\SpecialCharTok{\textasciitilde{}}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl}\SpecialCharTok{*}\NormalTok{rdf}\SpecialCharTok{$}\NormalTok{species)}\SpecialCharTok{$}\NormalTok{LM}\SpecialCharTok{$}\NormalTok{coefficients}
+\NormalTok{coef.limb }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(limb.scores }\SpecialCharTok{\textasciitilde{}}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl}\SpecialCharTok{*}\NormalTok{rdf}\SpecialCharTok{$}\NormalTok{species)}\SpecialCharTok{$}\NormalTok{LM}\SpecialCharTok{$}\NormalTok{coefficients}
+
+\NormalTok{head.slp }\OtherTok{\textless{}{-}}\NormalTok{ coef.head[}\FunctionTok{grep}\NormalTok{(}\StringTok{\textquotesingle{}svl\textquotesingle{}}\NormalTok{, }\FunctionTok{rownames}\NormalTok{(coef.head)), ]}
+\NormalTok{  head.slp[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ head.slp[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ head.slp[}\DecValTok{1}\NormalTok{]}
+\NormalTok{limb.slp }\OtherTok{\textless{}{-}}\NormalTok{ coef.limb[}\FunctionTok{grep}\NormalTok{(}\StringTok{\textquotesingle{}svl\textquotesingle{}}\NormalTok{, }\FunctionTok{rownames}\NormalTok{(coef.limb)), ]}
+\NormalTok{  limb.slp[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ limb.slp[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ limb.slp[}\DecValTok{1}\NormalTok{]}
+\FunctionTok{names}\NormalTok{(limb.slp) }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(head.slp) }\OtherTok{\textless{}{-}} \FunctionTok{levels}\NormalTok{(rdf}\SpecialCharTok{$}\NormalTok{species)}
+
+\FunctionTok{cor}\NormalTok{(head.slp,limb.slp)}
+\FunctionTok{plot}\NormalTok{(head.slp,limb.slp)}
+
+\FunctionTok{contMap}\NormalTok{(}\AttributeTok{tree =}\NormalTok{ tree, }\AttributeTok{x =}\NormalTok{ head.slp, }\AttributeTok{outline =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{cm.limb }\OtherTok{\textless{}{-}} \FunctionTok{contMap}\NormalTok{(}\AttributeTok{tree =}\NormalTok{ tree, }\AttributeTok{x =}\NormalTok{ limb.slp, }\AttributeTok{outline =} \ConstantTok{FALSE}\NormalTok{)}
+
+\CommentTok{\# 4: Compare Integration}
+\NormalTok{lindims.gp }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{( }\FunctionTok{split}\NormalTok{( shape.resid[,}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(shape.resid)], }
+\NormalTok{                rdf}\SpecialCharTok{$}\NormalTok{habitat), matrix, }\AttributeTok{ncol=}\FunctionTok{ncol}\NormalTok{(shape.resid))}
+\NormalTok{Vrel.gp }\OtherTok{\textless{}{-}} \FunctionTok{Map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{integration.Vrel}\NormalTok{(x), lindims.gp) }
+\FunctionTok{c}\NormalTok{(Vrel.gp}\SpecialCharTok{$}\NormalTok{ground}\SpecialCharTok{$}\NormalTok{ZR,Vrel.gp}\SpecialCharTok{$}\NormalTok{rock}\SpecialCharTok{$}\NormalTok{ZR,Vrel.gp}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{ZR)}
+\NormalTok{out }\OtherTok{\textless{}{-}} \FunctionTok{compare.ZVrel}\NormalTok{(Vrel.gp}\SpecialCharTok{$}\NormalTok{ground, Vrel.gp}\SpecialCharTok{$}\NormalTok{rock, Vrel.gp}\SpecialCharTok{$}\NormalTok{tree)}
+\FunctionTok{summary}\NormalTok{(out)}
+
+\CommentTok{\# 5: phylomorphospace of size{-}standardized data (residuals)}
+\NormalTok{shape.res }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(allom.sp)}
+\NormalTok{pca.w.phylo }\OtherTok{\textless{}{-}} \FunctionTok{gm.prcomp}\NormalTok{(shape.res, }\AttributeTok{phy =}\NormalTok{ tree)}
+\FunctionTok{plot}\NormalTok{(pca.w.phylo, }\AttributeTok{phylo =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{bg =} \StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{phylo.par =} \FunctionTok{list}\NormalTok{(}\AttributeTok{node.labels =} \ConstantTok{FALSE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.9\linewidth]{Figs/figure_sup_allometries_ill} 
+
+}
+
+\caption{Visual depiction of flow of operations for interrogating levels of allometry. Colors designate the different habitat groups.}\label{fig:unnamed-chunk-2}
+\end{figure}
+
+\newpage
+
+\hypertarget{additional-analyses-and-visualizations}{%
+\section{2: Additional Analyses and
+Visualizations}\label{additional-analyses-and-visualizations}}
+
+Here we provide additional analyses which complement those found in the
+article.
+
+\hypertarget{inspection-of-regression-coefficients-slopes}{%
+\subsubsection{Inspection of Regression Coefficients
+(Slopes)}\label{inspection-of-regression-coefficients-slopes}}
+
+Here are the regression slopes for each habitat group, found from our
+linear model. These display differences in allometry among groups,
+variable by variable.
+
+\begin{verbatim}
+## Warning in treedata(phy = tree0, data = LS.mns): The following tips were not found in 'data' and were dropped from 'phy':
+##  Pristurus_adrarensis
+##  Pristurus_flavipunctatus
+##  Pristurus_sp12
+##  Pristurus_sp4
+##  Pristurus_sp9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.hab }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(shape}\SpecialCharTok{\textasciitilde{}}\NormalTok{svl}\SpecialCharTok{*}\NormalTok{habitat, }\AttributeTok{data =}\NormalTok{ rdf2)}
+\NormalTok{pw.hab1 }\OtherTok{\textless{}{-}} \FunctionTok{pairwise}\NormalTok{(fit.hab, }\AttributeTok{groups =}\NormalTok{ rdf2}\SpecialCharTok{$}\NormalTok{habitat, }\AttributeTok{covariate =}\NormalTok{ rdf2}\SpecialCharTok{$}\NormalTok{svl)}
+\NormalTok{  slp.hab }\OtherTok{\textless{}{-}}\NormalTok{ pw.hab1}\SpecialCharTok{$}\NormalTok{slopes[[}\DecValTok{1}\NormalTok{]] }\CommentTok{\#slopes by habitat}
+\NormalTok{slp.hab  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             TrL        HL        HW        HH       Lhu       Lun       Lfe
+## ground 1.106798 0.7871177 0.8312497 0.8447515 0.8925517 0.8899040 0.9737474
+## rock   1.103346 0.7551718 0.7883580 0.6385472 1.0113416 0.9793085 0.9503882
+## tree   1.099800 0.7296915 0.8185439 0.7595467 1.1163738 1.0655536 0.9351170
+##             Ltb
+## ground 0.893884
+## rock   1.009734
+## tree   1.012326
+\end{verbatim}
+
+\newpage
+
+\hypertarget{traitgrams-of-individual-trait-allometry}{%
+\subsubsection{Traitgrams of Individual Trait
+Allometry}\label{traitgrams-of-individual-trait-allometry}}
+
+In the main article we provided traitgrams of allometric slopes for
+composites of head traits (Figure 3A) and limb traits (Figure 3B). Here
+we provide traitgrams for the allometric relationship of each body trait
+separately. As in the main article, traitgrams are visualized from an
+evolutionary mapping of body size (SVL), and the color represents
+changes in the allometric slope for each phenotypic trait, found from an
+evolutionary mapping of the species-level slopes under a Brownian motion
+model of evolution.
+
+Here we see that there are differential allometric dynamics for some
+morphological variables. Most notably, large species inhabiting rocky
+habitats show an increase in the allometric slope for the length of the
+tibia (Ltb), while the rest of the limb segments (Lhu, Lun, and Lfe)
+have a decreasing trend. Conversely, these species show virtually
+identical trends for the head shape variables (HL, HW, and HH), where
+the size increase has occurred together with a reduction of the
+allometric slope. Overall, large ground-dwelling species show opposite
+allometric trends to those of the large rock dwellers in most variables.
+However, it might be interesting to notice that one of these large
+ground species, \emph{Pristurus ornithocephalus} (the fourth largest
+species of the genus, and the second largest ground species) presents
+unique allometric tendencies relative to the other large ground species,
+both for all head variables and some of the limb variables (e.g., Lhu
+and Lfe). This might be reflecting species-specific ecological dynamics,
+and more detailed data and analyses (e.g., geometric morphometrics)
+could shed light on this morphological pattern.
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=0.9\linewidth]{Figs/figure_sup_phenograms_slope_variables} 
+
+}
+
+\caption{Traitgrams of regression slopes for each phenotypic variable. Colors at the tips designate habitat groups.}\label{fig:unnamed-chunk-5}
+\end{figure}
+
+\newpage
+
+\hypertarget{evolutionary-mapping-of-head-limb-allometry}{%
+\subsubsection{Evolutionary Mapping of Head \& Limb
+Allometry}\label{evolutionary-mapping-of-head-limb-allometry}}
+
+In the main article, allometric trends in both head dimensions were
+mapped onto the phylogeny under a Brownian motion model of evolution to
+discern macroevolutionary changes across the phylogeny. These were
+visualized on traitgrams, where body size differences were optimized
+(main article: Fig. 3). Here we present evolutionary mappings of
+allometric trends individually, so that increases and decreases in
+allometric slopes across the phylogeny are more readily interpreted. A
+summary of these patterns was described in the main article.
+
+Briefly, these plots show that changes in allometry were not
+concentrated to particular regions of the phylogeny, but rather
+displayed both increases and decreases in allometry of both the head
+traits and the limb traits occurred repeatedly in this group.
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Figs/contmap_slopes} 
+
+}
+
+\caption{Evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size.}\label{fig:unnamed-chunk-6}
+\end{figure}
+
+\newpage
+
+\hypertarget{morphological-integration}{%
+\subsubsection{Morphological
+Integration}\label{morphological-integration}}
+
+In the main article, we performed analyses of morphological integration
+on the set of body traits representing body form. Here we perform the
+same analysis, using size-standardized data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{shape}\FloatTok{.2} \OtherTok{\textless{}{-}}\NormalTok{ shape }\SpecialCharTok{{-}}\NormalTok{ rdf}\SpecialCharTok{$}\NormalTok{svl}
+\NormalTok{shape}\FloatTok{.2} \OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(}\FunctionTok{lm}\NormalTok{(shape}\FloatTok{.2}\SpecialCharTok{\textasciitilde{}}\NormalTok{data}\SpecialCharTok{$}\NormalTok{species))}
+\NormalTok{shape.gp }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{( }\FunctionTok{split}\NormalTok{( shape}\FloatTok{.2}\NormalTok{[,}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(shape}\FloatTok{.2}\NormalTok{)], rdf}\SpecialCharTok{$}\NormalTok{habitat), }
+\NormalTok{                    matrix, }\AttributeTok{ncol=}\FunctionTok{ncol}\NormalTok{(shape}\FloatTok{.2}\NormalTok{))}
+\NormalTok{Vrel.gp.shp }\OtherTok{\textless{}{-}} \FunctionTok{Map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{integration.Vrel}\NormalTok{(x), shape.gp) }
+\FunctionTok{c}\NormalTok{(Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{ground}\SpecialCharTok{$}\NormalTok{ZR,Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{rock}\SpecialCharTok{$}\NormalTok{ZR,Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{tree}\SpecialCharTok{$}\NormalTok{ZR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.626647 1.599207 1.042223
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{out.shp }\OtherTok{\textless{}{-}} \FunctionTok{compare.ZVrel}\NormalTok{(Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{ground, Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{rock, Vrel.gp.shp}\SpecialCharTok{$}\NormalTok{tree)}
+\FunctionTok{summary}\NormalTok{(out.shp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Effect sizes
+## 
+## Vrel.gp.shp$ground   Vrel.gp.shp$rock   Vrel.gp.shp$tree 
+##         -0.9232867         -1.2658429         -1.1016353 
+## 
+## Effect sizes for pairwise differences in rel.eig effect size
+## 
+##                    Vrel.gp.shp$ground Vrel.gp.shp$rock Vrel.gp.shp$tree
+## Vrel.gp.shp$ground           0.000000         3.953883         1.409394
+## Vrel.gp.shp$rock             3.953883         0.000000         1.402138
+## Vrel.gp.shp$tree             1.409394         1.402138         0.000000
+## 
+## P-values
+## 
+##                    Vrel.gp.shp$ground Vrel.gp.shp$rock Vrel.gp.shp$tree
+## Vrel.gp.shp$ground       1.000000e+00     7.689287e-05        0.1587186
+## Vrel.gp.shp$rock         7.689287e-05     1.000000e+00        0.1608740
+## Vrel.gp.shp$tree         1.587186e-01     1.608740e-01        1.0000000
+\end{verbatim}
+
+\hypertarget{phylomorphospace-and-disparity}{%
+\subsubsection{Phylomorphospace and
+Disparity}\label{phylomorphospace-and-disparity}}
+
+In the main article we presented a representation of phylomorphospace
+using size-standardized shape variables. Here we present a test of
+disparity of the size-standardized data. Additionally, we present a
+similar plot for the unadjusted species means. In addition, we calculate
+the phenotypic disparity in among species in each habitat group, and
+compare these using permutation.
+
+First, we show that in the size-standardized morphospace, morphological
+disparity does not differ across habitat groups. There are no
+differences.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.lm }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(shape.res}\SpecialCharTok{\textasciitilde{}}\NormalTok{hab.mn, }\AttributeTok{Cov =}\NormalTok{C)}
+\NormalTok{PW.lm }\OtherTok{\textless{}{-}} \FunctionTok{pairwise}\NormalTok{(fit.lm,}\AttributeTok{groups =}\NormalTok{ hab.mn)}
+\FunctionTok{summary}\NormalTok{(PW.lm, }\AttributeTok{test.type =} \StringTok{"var"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Pairwise comparisons
+## 
+## Groups: ground rock tree 
+## 
+## RRPP: 1000 permutations
+## 
+## 
+## Observed variances by group
+## 
+##    ground      rock      tree 
+## 0.2938297 0.3015873 0.2260537 
+## 
+## Pairwise distances between variances, plus statistics
+##                       d UCL (95%)          Z Pr > d
+## ground:rock 0.007757614 0.1477325 -1.4732960  0.921
+## ground:tree 0.067776058 0.1503602  0.2855938  0.421
+## rock:tree   0.075533672 0.1020809  1.0336714  0.158
+\end{verbatim}
+
+Next we generate a phylomorphospace for the unadusted species means. Not
+surprisingly, PC1 of the morphospace represents size, and in fact scores
+on PC1 are highly correlated with SVL (\(\rho=0.987\)).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca.w.phylo2 }\OtherTok{\textless{}{-}} \FunctionTok{gm.prcomp}\NormalTok{(LS.mns, }\AttributeTok{phy =}\NormalTok{ tree)}
+\FunctionTok{cor}\NormalTok{(sz.mn,}\SpecialCharTok{{-}}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pca.w.phylo2}\SpecialCharTok{$}\NormalTok{x[,}\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9879806
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(pca.w.phylo2, }\AttributeTok{phylo =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{bg =} \StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{phylo.par =} \FunctionTok{list}\NormalTok{(}\AttributeTok{node.labels =} \ConstantTok{FALSE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Pristurus-SuppInfo-R1_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+Disparity was estimated from a phylogenetic anova, obtained using
+\texttt{RRPP}. Here we observed that the ground-dwelling species display
+greater disparity then do the other two habitat groups.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.lm }\OtherTok{\textless{}{-}} \FunctionTok{lm.rrpp}\NormalTok{(LS.mns}\SpecialCharTok{\textasciitilde{}}\NormalTok{hab.mn, }\AttributeTok{Cov =}\NormalTok{C)}
+\NormalTok{PW.lm }\OtherTok{\textless{}{-}} \FunctionTok{pairwise}\NormalTok{(fit.lm,}\AttributeTok{groups =}\NormalTok{ hab.mn)}
+\FunctionTok{summary}\NormalTok{(PW.lm, }\AttributeTok{test.type =} \StringTok{"var"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Pairwise comparisons
+## 
+## Groups: ground rock tree 
+## 
+## RRPP: 1000 permutations
+## 
+## 
+## Observed variances by group
+## 
+##    ground      rock      tree 
+## 18.385078  7.666641  5.635931 
+## 
+## Pairwise distances between variances, plus statistics
+##                    d UCL (95%)           Z Pr > d
+## ground:rock 10.71844  7.924989  2.12714952  0.013
+## ground:tree 12.74915  8.616215  2.41223861  0.002
+## rock:tree    2.03071  5.745950 -0.03422601  0.521
+\end{verbatim}
+
+\newpage
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\setlength{\parindent}{-0.25in} \setlength{\leftskip}{0.25in}
+\setlength{\parskip}{8pt} \noindent
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-PristurusData}{}}%
+Tejero-Cicuéndez, H., M. Simó-Riudalbas, I. Menéndez, and S. Carranza.
+2021. Ecological specialization, rather than the island effect, explains
+morphological diversification in an ancient radiation of geckos. Dryad
+digital repository. (Doi:10.5061/dryad.xwdbrv1f6).
+
+\end{CSLReferences}
+
+\newpage
+
+\end{document}

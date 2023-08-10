@@ -1,0 +1,300 @@
+---
+title: "Supplementary Material: Evolution along allometric lines of least resistance: Morphological differentiation in *Pristurus* geckos"
+author: ""
+output:
+  pdf_document:
+    fig_caption: yes
+    keep_tex: TRUE
+    pandoc_args:
+
+fontsize: 11pt
+
+csl:  evolution.csl
+bibliography: Pristurus-Refs.bib
+---
+
+```{r setup, include=FALSE}
+  library(knitr)
+  library(kableExtra)
+library(RRPP)
+library(geomorph)
+library(tidyverse)
+library(geiger)
+  knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1: R-script for Article Computations and Flow of Allometry Operations
+
+Below is an R-script that may be used to reproduce all statistical analyses found in the paper. The data are found on DRYAD: (doi:10.5061/dryad.xwdbrv1f6 [@PristurusData]). Additional scripts used to generate publication-ready plots, and scripts for the additional plots, are found below.
+
+```{r, eval=FALSE, echo = TRUE}
+libs <- c('geomorph', 'RRPP', 'phytools', 'geiger', 'tidyverse')
+easypackages::libraries(libs)
+
+# 0: Data Prep
+data0 <- read.table('Analyses/data/morpho/morpho_pristurus.csv', sep = ';', 
+               dec = '.', header = TRUE, stringsAsFactors = TRUE)
+  sp.to.keep <- names(which(table(data0$species) >= 5))
+data <- data0[data0$species %in% sp.to.keep, ]
+  data$species <- droplevels(data$species)
+  data$SVL <- log(data$SVL)
+shape <- as.matrix(log(data[, 8:ncol(data)]))
+rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, 
+           habitat = data$habitat_broad, species = data$species)
+tree0 <- read.nexus('Analyses/data/phylogeny/pristurus_tree_final.nex')
+LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0),
+                   groups = rdf$species)$LS.means[[1]]
+sz.mn <- tapply(rdf$svl,rdf$species,mean)
+hab.mn <- as.factor(by(rdf$habitat,rdf$species,unique))
+levels(hab.mn) <- levels(rdf$habitat)
+tree <- treedata(phy = tree0, data = LS.mns)$phy
+C <- vcv.phylo(tree)
+
+SVL.resid <- resid(lm(data$SVL~data$species))
+shape.resid <- resid(lm(shape~data$species))
+
+rdf2 <- rrpp.data.frame(svl = SVL.resid, shape = shape.resid, 
+                        habitat = data$habitat_broad, 
+                        species = data$species)
+
+# 1: Evolutionary Allometry & Static Allometry
+allom.sp <- lm.rrpp(LS.mns~sz.mn, Cov = C)
+allom.ind <- lm.rrpp(shape~svl, data = rdf2)
+anova(allom.sp)
+anova(allom.ind)
+
+M <-rbind(coef.sp <- allom.sp$LM$gls.coefficients[2,],
+        coef.ind <- allom.ind$LM$coefficients[2,])
+
+acos(RRPP:::vec.cor.matrix(M))*180/pi  
+
+# 2: Comparison of multivariate allometry among habitat types
+fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf2)
+  anova(fit.hab)
+
+# 2A: Compare habitat vectors versus isometry and to each other
+  #H_0: isometry as common slope model
+mn.sz <- tapply(rdf2$svl,rdf2$habitat,mean)
+mn.shape <- rowsum(rdf2$shape, rdf2$habitat)/as.vector(table(rdf2$habitat)) 
+coef.iso <- c(1,1,1,1,1,1,1,1)
+intercepts <- mn.shape - t(tcrossprod(coef.iso,mn.sz))
+X <- model.matrix(~rdf2$svl+rdf2$habitat)
+b <- rbind(intercepts[1,],coef.iso,intercepts[2,]-intercepts[1,],
+           intercepts[3,]-intercepts[1,])
+preds <- X%*%b
+E.iso <- rdf2$shape - preds 
+perms <- RRPP:::perm.index(n = fit.hab$LM$n, iter = 999)
+slopes <- list()
+for(j in 1:1000){ 
+  slopes[[j]] <- pairwise(lm.rrpp((preds+E.iso[perms[[j]],]) ~ rdf2$svl*rdf2$habitat, 
+          iter=0), groups = rdf2$habitat,covariate = rdf2$svl)$slopes[[1]]
+}  
+slp.ang <- lapply(1:1000, function(j) 
+      acos(RRPP:::vec.cor.matrix(rbind(slopes[[j]],coef.iso)))*180/pi)  
+  
+slp.hab.obs <- slp.ang[[1]]
+slp.Z <- RRPP:::effect.list(slp.ang)
+slp.P <- RRPP:::Pval.list(slp.ang)
+
+slp.hab.obs
+slp.Z
+slp.P  
+
+# 2B: Compare evolutionary and static (habitat) allometry 
+  #H_0: common slope isometry
+slp.ang.ev <- lapply(1:1000, function(j)
+   acos(RRPP:::vec.cor.matrix(rbind(coef.evol,slopes[[j]])))*180/pi)
+
+slp.hab.ev.obs <- slp.ang.ev[[1]]
+slp.Z.ev <- RRPP:::effect.list(slp.ang.ev)
+slp.P.ev <- RRPP:::Pval.list(slp.ang.ev)
+
+slp.hab.ev.obs
+slp.Z.ev
+slp.P.ev 
+
+res <- cbind(slp.hab.ev.obs[-1,1],slp.Z.ev[-1,1],slp.P.ev[-1,1])
+colnames(res) <- c("Angle","Effect Size", "P-value")
+rownames(res) <- c("Ev vs. Ground", "Ev vs. Rock", "Ev vs. Tree")
+res
+
+# 3: Map allometry slopes on phylogeny
+head.scores <- plot(lm.rrpp(shape[, c(2:4)]~ rdf$svl), 
+      type = "regression", predictor = rdf$svl, reg.type = "RegScore")$RegScore
+
+limb.scores <- plot(lm.rrpp(shape[, c(5:8)]~ rdf$svl), 
+      type = "regression", predictor = rdf$svl, reg.type = "RegScore")$RegScore
+
+coef.head <- lm.rrpp(head.scores ~ rdf$svl*rdf$species)$LM$coefficients
+coef.limb <- lm.rrpp(limb.scores ~ rdf$svl*rdf$species)$LM$coefficients
+
+head.slp <- coef.head[grep('svl', rownames(coef.head)), ]
+  head.slp[-1] <- head.slp[-1] + head.slp[1]
+limb.slp <- coef.limb[grep('svl', rownames(coef.limb)), ]
+  limb.slp[-1] <- limb.slp[-1] + limb.slp[1]
+names(limb.slp) <- names(head.slp) <- levels(rdf$species)
+
+cor(head.slp,limb.slp)
+plot(head.slp,limb.slp)
+
+contMap(tree = tree, x = head.slp, outline = FALSE)
+cm.limb <- contMap(tree = tree, x = limb.slp, outline = FALSE)
+
+# 4: Compare Integration
+lindims.gp <- lapply( split( shape.resid[,1:ncol(shape.resid)], 
+                rdf$habitat), matrix, ncol=ncol(shape.resid))
+Vrel.gp <- Map(function(x) integration.Vrel(x), lindims.gp) 
+c(Vrel.gp$ground$ZR,Vrel.gp$rock$ZR,Vrel.gp$tree$ZR)
+out <- compare.ZVrel(Vrel.gp$ground, Vrel.gp$rock, Vrel.gp$tree)
+summary(out)
+
+# 5: phylomorphospace of size-standardized data (residuals)
+shape.res <- residuals(allom.sp)
+pca.w.phylo <- gm.prcomp(shape.res, phy = tree)
+plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black', 
+     phylo.par = list(node.labels = FALSE))
+
+```
+
+```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="90%", fig.cap= "Visual depiction of flow of operations for interrogating levels of allometry. Colors designate the different habitat groups."}
+
+include_graphics("Figs/figure_sup_allometries_ill.png")
+```
+
+
+\newpage
+
+# 2: Additional Analyses and Visualizations
+
+Here we provide additional analyses which complement those found in the article.
+
+### Inspection of Regression Coefficients (Slopes)
+
+Here are the regression slopes for each habitat group, found from our linear model. These display differences in allometry among groups, variable by variable.
+
+```{r, eval=TRUE, echo = FALSE}
+# 0: Data Prep
+data0 <- read.table('Analyses/data/morpho/morpho_pristurus.csv', sep = ';', dec = '.',
+                    header = TRUE, stringsAsFactors = TRUE)
+  sp.to.keep <- names(which(table(data0$species) >= 5))
+data <- data0[data0$species %in% sp.to.keep, ]
+  data$species <- droplevels(data$species)
+  data$SVL <- log(data$SVL)
+shape <- as.matrix(log(data[, 8:ncol(data)]))
+rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad,
+                       species = data$species)
+LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
+hab.mn <- as.factor(by(rdf$habitat,rdf$species,unique))
+sz.mn <- tapply(rdf$svl,rdf$species,mean)
+levels(hab.mn) <- levels(rdf$habitat)
+tree0 <- read.nexus('Analyses/data/phylogeny/pristurus_tree_final.nex')
+tree <- treedata(phy = tree0, data = LS.mns)$phy
+C <- vcv.phylo(tree)
+
+SVL.resid <- resid(lm(data$SVL~data$species))
+shape.resid <- resid(lm(shape~data$species))
+
+rdf2 <- rrpp.data.frame(svl = SVL.resid, shape = shape.resid, 
+                        habitat = data$habitat_broad, 
+                        species = data$species)
+
+allom.sp <- lm.rrpp(LS.mns~sz.mn, Cov = C)
+shape.res <- residuals(allom.sp)
+
+```
+
+```{r, eval = TRUE, echo = TRUE}
+fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf2)
+pw.hab1 <- pairwise(fit.hab, groups = rdf2$habitat, covariate = rdf2$svl)
+  slp.hab <- pw.hab1$slopes[[1]] #slopes by habitat
+slp.hab  
+```
+\newpage
+
+### Traitgrams of Individual Trait Allometry
+
+In the main article we provided traitgrams of allometric slopes for composites of head traits (Figure 3A) and limb traits (Figure 3B). Here we provide traitgrams for the allometric relationship of each body trait separately. As in the main article, traitgrams are visualized from an evolutionary mapping of body size (SVL), and the color represents changes in the allometric slope for each phenotypic trait, found from an evolutionary mapping of the species-level slopes under a Brownian motion model of evolution.
+
+Here we see that there are differential allometric dynamics for some morphological variables. Most notably, large species inhabiting rocky habitats show an increase in the allometric slope for the length of the tibia (Ltb), while the rest of the limb segments (Lhu, Lun, and Lfe) have a decreasing trend. Conversely, these species show virtually identical trends for the head shape variables (HL, HW, and HH), where the size increase has occurred together with a reduction of the allometric slope. Overall, large ground-dwelling species show opposite allometric trends to those of the large rock dwellers in most variables. However, it might be interesting to notice that one of these large ground species, *Pristurus ornithocephalus* (the fourth largest species of the genus, and the second largest ground species) presents unique allometric tendencies relative to the other large ground species, both for all head variables and some of the limb variables (e.g., Lhu and Lfe). This might be reflecting species-specific ecological dynamics, and more detailed data and analyses (e.g., geometric morphometrics) could shed light on this morphological pattern. 
+
+```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="90%", fig.cap= "Traitgrams of regression slopes for each phenotypic variable. Colors at the tips designate habitat groups."}
+
+include_graphics("Figs/figure_sup_phenograms_slope_variables.png")
+```
+
+\newpage
+
+### Evolutionary Mapping of Head & Limb Allometry
+
+In the main article, allometric trends in both head dimensions were mapped onto the phylogeny under a Brownian motion model of evolution to discern macroevolutionary changes across the phylogeny. These were visualized on traitgrams, where body size differences were optimized (main article: Fig. 3). Here we present evolutionary mappings of allometric trends individually, so that increases and decreases in allometric slopes across the phylogeny are more readily interpreted. A summary of these patterns was described in the main article.
+
+Briefly, these plots show that changes in allometry were not concentrated to particular regions of the phylogeny, but rather displayed both increases and decreases in allometry of both the head traits and the limb traits occurred repeatedly in this group.
+
+```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="100%", fig.cap= "Evolutionary mapping of regression slopes describing the relationship of (A) head morphology versus body size, and (B) limb proportions versus body size."}
+
+include_graphics("Figs/contmap_slopes.png")
+```
+
+\newpage 
+
+### Morphological Integration
+
+In the main article, we performed analyses of morphological integration on the set of body traits representing body form. Here we perform the same analysis, using size-standardized data.
+
+```{r, eval = TRUE, echo = TRUE}
+shape.2 <- shape - rdf$svl
+shape.2 <- resid(lm(shape.2~data$species))
+shape.gp <- lapply( split( shape.2[,1:ncol(shape.2)], rdf$habitat), 
+                    matrix, ncol=ncol(shape.2))
+Vrel.gp.shp <- Map(function(x) integration.Vrel(x), shape.gp) 
+c(Vrel.gp.shp$ground$ZR,Vrel.gp.shp$rock$ZR,Vrel.gp.shp$tree$ZR)
+
+out.shp <- compare.ZVrel(Vrel.gp.shp$ground, Vrel.gp.shp$rock, Vrel.gp.shp$tree)
+summary(out.shp)
+
+```
+
+
+### Phylomorphospace and Disparity
+
+In the main article we presented a representation of phylomorphospace using size-standardized shape variables. Here we present a test of disparity of the size-standardized data. Additionally, we present a similar plot for the unadjusted species means. In addition, we calculate the phenotypic disparity in among species in each habitat group, and compare these using permutation. 
+
+First, we show that in the size-standardized morphospace, morphological disparity does not differ across habitat groups. There are no differences.
+
+```{r, eval = TRUE, echo = TRUE}
+fit.lm <- lm.rrpp(shape.res~hab.mn, Cov =C)
+PW.lm <- pairwise(fit.lm,groups = hab.mn)
+summary(PW.lm, test.type = "var")
+```
+
+Next we generate a phylomorphospace for the unadusted species means. Not surprisingly, PC1 of the morphospace represents size, and in fact scores on PC1 are highly correlated with SVL ($\rho=0.987$).
+
+```{r, eval = TRUE, echo = TRUE}
+pca.w.phylo2 <- gm.prcomp(LS.mns, phy = tree)
+cor(sz.mn,-1*pca.w.phylo2$x[,1])
+plot(pca.w.phylo2, phylo = TRUE, pch = 21, bg = 'black', 
+     phylo.par = list(node.labels = FALSE))
+```
+
+Disparity was estimated from a phylogenetic anova, obtained using `RRPP`. Here we observed that the ground-dwelling species display greater disparity then do the other two habitat groups. 
+
+```{r, eval = TRUE, echo = TRUE}
+fit.lm <- lm.rrpp(LS.mns~hab.mn, Cov =C)
+PW.lm <- pairwise(fit.lm,groups = hab.mn)
+summary(PW.lm, test.type = "var")
+```
+
+
+
+\newpage
+
+# References {-}
+
+ \setlength{\parindent}{-0.25in}
+ \setlength{\leftskip}{0.25in}
+ \setlength{\parskip}{8pt}
+ \noindent
+
+<div id="refs"></div>
+
+\newpage
