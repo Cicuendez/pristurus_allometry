@@ -239,15 +239,14 @@ ggsave('../Figs/new_phylomorphospace.png',
 
 
 
-
 ##################################### FOR SI ----
 # 4b: phylomorphospace of linear measures ----
-pca.w.phylo2 <- gm.prcomp(LS.mns, phy = tree)
-plot(pca.w.phylo2, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
+pca.w.phylo3 <- gm.prcomp(LS.mns, phy = tree)
+plot(pca.w.phylo3, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
 
 #PC1 is size*-1
-plot(sz.mn,pca.w.phylo2$x[,1])
-cor(sz.mn,pca.w.phylo2$x[,1]) #-0.987
+plot(sz.mn,pca.w.phylo3$x[,1])
+cor(sz.mn,pca.w.phylo3$x[,1]) #-0.987
 #size drives the show
 
 # Disparity among habitat groups
