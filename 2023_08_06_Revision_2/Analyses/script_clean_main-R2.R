@@ -137,11 +137,108 @@ shape.res <- residuals(allom.sp)
 pca.w.phylo <- gm.prcomp(shape.res, phy = tree)
 plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
 
-###### NEW PHYLOMORPHOSPACE: no phylogeny
+###### NEW PHYLOMORPHOSPACE: no phylogeny ----
 allom2.sp <- lm.rrpp(LS.mns~sz.mn)
 shape2.res <- residuals(allom2.sp)
 pca.w.phylo2 <- gm.prcomp(shape2.res, phy = tree)
 plot(pca.w.phylo2, phylo = TRUE, pch = 21, bg = 'black', phylo.par = list(node.labels = FALSE))
+
+###### NEW PLOT PHYLOMORPHOSPACE ----
+# a) Source the function and the customized theme for the plot
+source('function_ggphylomorpho_size.R')
+source('function_theme_clean.R')
+
+# b) Prepare data
+pca.w.phylo2
+x <- rownames_to_column(as.data.frame(pca.w.phylo2$x), 
+                        var = 'species')
+
+identical(x$species, names(sz.mn))
+
+x$size <- sz.mn
+dat.ggphylo <- cbind(x, hab.mn)
+
+dat.ggphylo <- dat.ggphylo %>% 
+  mutate(PC1 = Comp1) %>% 
+  mutate(PC2 = Comp2) %>% 
+  mutate(taxon = species) %>%
+  mutate(group = hab.mn) %>%
+  select(taxon, PC1, PC2, group, size)
+
+rownames(dat.ggphylo) <- dat.ggphylo$taxon
+
+# c) Set habitat colors
+hab.colors <- c(ground = "#F1B670", rock = "#683B5E", tree = "#E93F7B")
+
+# define new colors by adding transparency (to highlight only certain species)
+hab.colors.faded <- c(ground = "#F1B670", rock = "#683B5E", 
+                      tree = "#E93F7B", 
+                      tree_faded = '#E93F7B40', 
+                      ground_faded = '#F1B67040', 
+                      rock_faded = '#683B5E40')
+
+# d) Set large and small species from rock and ground habitats 
+'%nin%' <- Negate('%in%')
+large.sp.rock <- c('Pristurus_insignis', 'Pristurus_insignoides')
+large.sp.ground <- c('Pristurus_carteri', 'Pristurus_ornithocephalus', 
+                     'Pristurus_collaris')
+large.sp <- c(large.sp.rock, large.sp.ground)
+
+small.sp.rock <- c('Pristurus_sp5', 'Pristurus_sp1', 'Pristurus_rupestris', 
+                   'Pristurus_sp3', 'Pristurus_sp2')
+small.sp.ground <- c('Pristurus_masirahensis', 'Pristurus_minimus')
+small.sp <- c(small.sp.rock, small.sp.ground)
+
+large_small.rock <- c(large.sp.rock, small.sp.rock)
+large_small.ground <- c(large.sp.ground, small.sp.ground)
+large_small.sp <- c(large.sp, small.sp)
+
+dat.ggphylo.large_small <- dat.ggphylo %>% 
+  mutate(group_ls = case_when(group == 'rock' & taxon %in% large_small.sp ~ 'rock',
+                              group == 'rock' & taxon %nin% large_small.sp ~ 'rock_faded',
+                              group == 'tree' ~ 'tree_faded', 
+                              group == 'ground' & taxon %in% large_small.sp ~ 'ground', 
+                              group == 'ground' & taxon %nin% large_small.sp ~ 'ground_faded')) %>% 
+  mutate(splabel = case_when(taxon %in% large_small.sp ~ taxon, TRUE ~ '')) %>% 
+  mutate(splabel = gsub('Pristurus_', 'P. ', .$splabel))
+
+
+# e) Plot
+phymor.plot.ls <- ggphylomorpho_size_HTC(tree = tree, 
+                                         tipinfo = dat.ggphylo.large_small, 
+                                         taxa = taxon, 
+                                         xvar = PC1, 
+                                         yvar = PC2, 
+                                         point.size = size,
+                                         factorvar = group_ls, 
+                                         labelvar = splabel, 
+                                         title.plot = "Phylomorphospace", 
+                                         label.x.axis = "PC1", 
+                                         label.y.axis = "PC2", 
+                                         repel = TRUE, 
+                                         edge.width = 0.1, 
+                                         fontface = "italic", 
+                                         tree.alpha = 0.7)
+
+large_small.phylomorpho.plot <- phymor.plot.ls + 
+  scale_color_manual(values = hab.colors.faded, 
+                     name = 'habitat', 
+                     breaks = c('ground', 'rock', 'tree_faded'), 
+                     labels = c('ground', 'rock', 'tree')) +
+  guides(size = 'none') +
+  coord_fixed() +
+  labs(title = 'Phylomorphospace', 
+       subtitle = '(largest and smallest species highlighted)') +
+  theme.clean() + 
+  theme(legend.title = element_blank())
+
+ggsave('../Figs/new_phylomorphospace.pdf', 
+       plot = large_small.phylomorpho.plot)
+ggsave('../Figs/new_phylomorphospace.png', 
+       plot = large_small.phylomorpho.plot)
+
+
+
 
 ##################################### FOR SI ----
 # 4b: phylomorphospace of linear measures ----
