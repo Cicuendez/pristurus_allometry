@@ -91,13 +91,13 @@ Finally, to relate within-species allometric trends with patterns of phenotypic 
 
 # 3. Results
 
-Using phylogenetic regression, we found significant evolutionary allometry in body form across species ($N_{sp}=25$; $F = 217.9$; $Z =5.53$; $P < 0.001$). Likewise, when static allometry in body form was examined across individuals, a similar pattern was observed ($N_{ind}=687$; $F = 1176.9$; $Z =8.24$; $P < 0.001$). Further, the vectors of regression coefficients between the two analyses were oriented in a similar direction and were nearly parallel in morphospace ($\theta = 5.64^\circ$). This revealed that the pattern of multivariate allometry across individuals was largely concordant with macroevolutionary trends of interspecific static allometry among species of *Pristurus* across the phylogeny. \hfill\break
+Using phylogenetic regression, we found significant evolutionary allometry in body form across species ($N_{sp}=25$; $F = 217.9$; $Z =5.53$; $P < 0.001$). Likewise, when static allometry in body form was examined across individuals, a similar pattern was observed ($N_{ind}=687$; $F = 1176.9$; $Z =8.24$; $P < 0.001$). Further, the vectors of regression coefficients between the two analyses were oriented in a similar direction and were nearly parallel in morphospace ($\theta = 5.64^\circ$; Table 1). This revealed that the pattern of multivariate allometry across individuals was largely concordant with macroevolutionary trends of interspecific static allometry among species of *Pristurus* across the phylogeny. \hfill\break
 
-Our analyses also exposed significant differences in the allometry of body form among *Pristurus* utilizing distinct habitats (Table 1). Further, pairwise comparisons of multivariate allometric vectors revealed that patterns of static allometry in each habitat differed significantly from isometry, indicating the presence of multivariate allometry in each (Table 2). Additionally, comparisons identified that ground-dwelling *Pristurus* displayed the most distinct allometric trend as compared with *Pristurus* occupying both the rock and tree habitats (Table 2; Figure 2). Here, regression coefficients of each trait *versus* size (Supplementary Material) revealed that ground-dwelling *Pristurus* exhibited higher coefficents for head traits as compared with rock-dwelling and tree-dwelling taxa ($\beta_{ground}>\beta_{rock}$; $\beta_{ground}>\beta_{tree}$). By contrast, coefficients for limb traits were somewhat smaller for ground-dwelling *Pristurus* as compared with other taxa ($\beta_{ground}<\beta_{rock}$; $\beta_{ground}<\beta_{tree}$). Thus, these findings implied that within species, larger individuals of ground-dwelling *Pristurus* displayed proportionately larger heads and slightly smaller limbs as compared with large individuals in taxa utilizing other habitat types. Visualizations of the allometric trends (Figure 2) confirmed these statistical findings, and indicated that the allometric trajectory in ground-dwelling *Pristurus* was more extreme as compared with either rock- or tree-dwelling *Pristurus*. \hfill\break
+Our analyses also exposed significant differences in the allometry of body form among *Pristurus* utilizing distinct habitats (Tables 1 and 2). Further, pairwise comparisons of multivariate allometric vectors revealed that patterns of static allometry in each habitat differed significantly from isometry, indicating the presence of multivariate allometry in each (Table 3). Additionally, comparisons identified that ground-dwelling *Pristurus* displayed the most distinct allometric trend as compared with *Pristurus* occupying both the rock and tree habitats (Table 3; Figure 2). Here, regression coefficients of each trait *versus* size (Supplementary Material) revealed that ground-dwelling *Pristurus* exhibited higher coefficents for head traits as compared with rock-dwelling and tree-dwelling taxa ($\beta_{ground}>\beta_{rock}$; $\beta_{ground}>\beta_{tree}$). By contrast, coefficients for limb traits were somewhat smaller for ground-dwelling *Pristurus* as compared with other taxa ($\beta_{ground}<\beta_{rock}$; $\beta_{ground}<\beta_{tree}$). Thus, these findings implied that within species, larger individuals of ground-dwelling *Pristurus* displayed proportionately larger heads and slightly smaller limbs as compared with large individuals in taxa utilizing other habitat types. Visualizations of the allometric trends (Figure 2) confirmed these statistical findings, and indicated that the allometric trajectory in ground-dwelling *Pristurus* was more extreme as compared with either rock- or tree-dwelling *Pristurus*. \hfill\break
 
 Examination of patterns of trait covariation for the pooled within-species data revealed strong levels of morphological integration in the ground and tree ecotypes, with lower levels of integration displayed in the rock habitat. Subsequent two-sample tests revealed that the strength of morphological integration was significantly greater in both ground-dwelling and tree-dwelling *Pristurus* than in those utilizing rock ($Z_{ground-rock}=6.05$; $P << 0.001$; $Z_{tree-rock}=4.07$; $P << 0.001$). Levels of morphological integration did not differ between ground and tree-dwelling *Pristurus* ($Z_{tree-rock}=0.38$; $P = 0.702$). Finally, when body size was taken into account, levels of integration dropped considerably, though the overall pattern and differences among habitat groups remained the same (Supplementary Material). \hfill\break
 
-Comparisons of evolutionary allometry with static allometry in each habitat revealed substantial concordance between allometric trends across these levels. Here, vectors of regression coefficients representing static allometry within habitat groups were oriented in very similar directions with the regression vector representing evolutionary allometry, with small pairwise angles between them ($\theta: 5.8^\circ\rightarrow7.2^\circ$). Subsequent permutation tests indicated no differences in direction between the regression vector representing evolutionary allometry and the static allometry vectors for *Pristurus* in both the ground or tree habitats, indicating strong congruence between them (Table 3). By contrast, rock-dwelling *Pristurus* differed most in their static allometry trend relative to patterns of evolutionary allometry. Notably, static allometry in ground-dwelling *Pristurus* was most similar to trends of evolutionary allometry, displaying the smallest angular difference in direction when compared to evolutionary allometry. Overall, these findings implied that phenotypic evolution across species aligned closely with directions of allometric variation within habitat groups at the individual level, describing a trend where larger individuals -- and larger ground-dwelling species -- exhibited disproportionately larger heads and limbs, while smaller individuals -- and smaller ground-dwelling species -- displayed disproportionately smaller heads and limbs. \hfill\break
+Comparisons of evolutionary allometry with static allometry in each habitat revealed substantial concordance between allometric trends across these levels. Here, vectors of regression coefficients representing static allometry within habitat groups were oriented in very similar directions with the regression vector representing evolutionary allometry, with small pairwise angles between them ($\theta: 5.8^\circ\rightarrow7.2^\circ$). Subsequent permutation tests indicated no differences in direction between the regression vector representing evolutionary allometry and the static allometry vectors for *Pristurus* in both the ground or tree habitats, indicating strong congruence between them (Table 4). By contrast, rock-dwelling *Pristurus* differed most in their static allometry trend relative to patterns of evolutionary allometry. Notably, static allometry in ground-dwelling *Pristurus* was most similar to trends of evolutionary allometry, displaying the smallest angular difference in direction when compared to evolutionary allometry. Overall, these findings implied that phenotypic evolution across species aligned closely with directions of allometric variation within habitat groups at the individual level, describing a trend where larger individuals -- and larger ground-dwelling species -- exhibited disproportionately larger heads and limbs, while smaller individuals -- and smaller ground-dwelling species -- displayed disproportionately smaller heads and limbs. \hfill\break
 
 Mapping the residuals of phylogenetic regression onto the phylogeny showed that large ground-dwelling species displayed greater head proportions than large rock-dwelling species, who exhibited smaller heads relative to body size (Figure 3A). Conversely, the opposite pattern was observed when comparing small species utilizing these habitats: ground-dwelling species showed small relative head proportions while rock-dwelling species displayed generally larger head proportions. In contrast, limb shape showed more variable patterns. Although all large ground-dwelling species consistently displayed large relative limb proportions, large rock-dwelling species were more variable in this trait, with *P. insignis* exhibiting large and *P. insignoides* small limb proportions. For small species, shifts in relative limb proportions seemed more independent of habitat utilization, since there were differences in limb residuals both within rock- and ground-dwelling species (Figure 3B). Likeweise, static allometry trends within species revealed that ground-dwelling species generally displayed steeper allometric patterns in head proportions as compared with rock-dwelling species (Figure 4). Overall, there was general concordance across taxa in terms of trends of multivariate allometry, affirming that the association between evolutionary allometry and habitat-based static allometry was robust. \hfill\break
 
@@ -109,7 +109,7 @@ Finally, when representative specimens were scaled to a similar body size (Figur
 
 Elucidating the selective forces that generate patterns of phenotypic diversity is a major goal in evolutionary biology. For species that utilize distinct habitats, disentangling the causes of phenotypic differentiation across those habitats is essential for our understanding of how natural selection operates and how evolution proceeds. In this study, we evaluated the role of potential drivers of body form differentiation in the geckos of the genus *Pristurus*. To this end, we compared allometric trends and levels of integration among *Pristurus* occupying distinct habitats, interrogated allometric patterns at both the static and evolutionary levels, and related these trends to diversification in body form. Our findings have several important implications for how ecological specialization, phenotypic integration, and body form evolution along allometric trajectories relate to patterns of phenotypic diversity generally, and the evolution of phenotypic diversification in *Pristurus* in particular. \hfill\break
 
-First, our analyses revealed that patterns of allometry in body form and morphological integration are relatively distinct in ground-dwelling *Pristurus* lizards, as compared with *Pristurus* occupying other habitats. Specifically, we found that multivariate vectors of regression coefficients differed significantly from what was expected under isometry (Table 2) for taxa utilizing all habitat types (ground, rock, tree), indicating that in *Pristurus*, allometric scaling patterns predominate. Further, our interrogation of allometric trends revealed differences between habitat types, where ground-dwelling *Pristurus* displayed steeper allometric slopes for head traits as compared with rock and tree-dwelling taxa. Biologically, these patterns revealed that not only does shape differ between large and small *Pristurus*, but this pattern also differs across habitat types. Specifically, large ground-dwelling *Pristurus* present disproportionately larger heads relative to large individuals in other habitats, while small ground-dwelling *Pristurus* exhibit disproportionately smaller heads (Figure 3). These findings are consistent with previous work at the macroevolutionary level [@Tejero-Cicuendez2021], where large ground species were also found to display disproportionately large heads. \hfill\break
+First, our analyses revealed that patterns of allometry in body form and morphological integration are relatively distinct in ground-dwelling *Pristurus* lizards, as compared with *Pristurus* occupying other habitats. Specifically, we found that multivariate vectors of regression coefficients differed significantly from what was expected under isometry (Table 3) for taxa utilizing all habitat types (ground, rock, tree), indicating that in *Pristurus*, allometric scaling patterns predominate. Further, our interrogation of allometric trends revealed differences between habitat types, where ground-dwelling *Pristurus* displayed steeper allometric slopes for head traits as compared with rock and tree-dwelling taxa. Biologically, these patterns revealed that not only does shape differ between large and small *Pristurus*, but this pattern also differs across habitat types. Specifically, large ground-dwelling *Pristurus* present disproportionately larger heads relative to large individuals in other habitats, while small ground-dwelling *Pristurus* exhibit disproportionately smaller heads (Figure 3). These findings are consistent with previous work at the macroevolutionary level [@Tejero-Cicuendez2021], where large ground species were also found to display disproportionately large heads. \hfill\break
 
 Second, our findings revealed that, within species, rock-dwelling *Pristurus* show a converse pattern, where smaller individuals displayed relatively larger heads, while larger individuals have smaller heads relative to their body size. These allometric patterns also corresponded with findings at macroevolutionary scales [@Tejero-Cicuendez2021], where similar patterns at the species level were observed. Regarding relative limb proportions, we found a high variability among small rock-dwelling species rather than a common pattern (Figure 3B). Indeed, earlier work in the subclade comprising several of these species (the *P. rupestris* species complex) found two well-differentiated phenotypes in populations of these lineages segregated by elevation [@Garcia-Porta2017]. These two ecotypes, defined as 'slender' and 'robust', differed in their head and limb characteristics. Our work is consistent with this, and extends these patterns to the allometric realm. Tejero-Cicuéndez et al. [-@Tejero-Cicuendez2021] also performed habitat ancestral estimation, finding that the rock habitat was the most likely ancestral condition in the group, with subsequent colonization by *Pristurus* of ground habitats. When patterns of allometry are viewed through this lens, it suggests the hypothesis that habitat shifts from rock-dwelling to ground-dwelling incurred a concomitant evolutionary shift in allometric trajectories as well [@AdamsNistri2010]. Indeed, our analyses are consistent with this hypothesis, as allometric trends are inferred to be more rock-like towards the root of the *Pristurus* phylogeny (Figure 3), with subsequent shifts along branches leading to ground-dwelling species. This further suggests that the segregation in body size and shape through differential allometric relationships across habitats responds to adaptive dynamics concerning the colonization of new habitats. Thus, in *Pristurus*, there is support for the hypothesis that colonization of ground habitats has been a trigger for morphological change [@Tejero-Cicuendez2021], as there appears to be a link between shifts in allometric trajectories as a result of habitat-induced selection, and differential patterns of body form observed across taxa. Similar patterns have been observed in other taxa, where differences in allometric trajectories are associated with ecological differences across species [@Patterson2022; @Chatterji2022; @Esquerre2017]. More broadly, these findings are consistent with prior discoveries in other lizards, where the differential selective pressures imposed by rocky and ground habitats have resulted in the differentiation of head and limb morphology [@KALIONTZOPOULOU2010; @Goodman2008; @Garcia-Porta2017; @Foster2018]. Indeed, such phenotypic differences resulting from the effects of habitat-based ecological selection have been extensively documented in reptiles as well as in other vertebrates [@Losos2009; @Busschau2022; @HipsleyMuller2017; @Watanabe2019; @Reynolds2016; @Navalon2022; @SamuelsHopkins2017; @Friedman2022], and our work in *Pristurus* thus contributes to this growing body of literature. Nonetheless, because the ecological shift to ground-dwelling habitats occurred only once on the phylogeny, it is also possible that some unmeasured feature that evolved on the same branch could have affected the observed patterns. Thus, some caution in interpreting the causal direction of this trend is warranted. \hfill\break
 
@@ -146,15 +146,18 @@ Finally, interpreting the observed patterns of phenotypic integration and allome
 
 \newpage
 
+# Tables
+
 ```{r echo=FALSE, eval = TRUE}
 data0 <- read.table('Analyses/data/morpho/morpho_pristurus.csv', sep = ';', dec = '.', header = TRUE, stringsAsFactors = TRUE)
+tree0 <- read.nexus('Analyses/data/phylogeny/pristurus_tree_final.nex')
   sp.to.keep <- names(which(table(data0$species) >= 5))
 data <- data0[data0$species %in% sp.to.keep, ]
   data$species <- droplevels(data$species)
   data$habitat_broad <- as.factor(data$habitat_broad)
   data$SVL <- log(data$SVL)
 shape <- as.matrix(log(data[, 8:ncol(data)]))
-rdf <- rrpp.data.frame(SVL = data$SVL, shape = shape, habitat = data$habitat_broad,
+rdf <- rrpp.data.frame(svl = data$SVL, shape = shape, habitat = data$habitat_broad,
                        species = data$species)
 
 SVL.resid <- resid(lm(data$SVL~data$species))
@@ -166,15 +169,47 @@ rdf2 <- rrpp.data.frame(svl = SVL.resid, shape = shape.resid,
 
 # Comparison of multivariate allometry among habitat types
 fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf2)
-tb1 <- anova(fit.hab)$table
-tb1[2,6:7] <- NA #for the habitat term
+tb2 <- anova(fit.hab)$table
+tb2[2,6:7] <- NA #for the habitat term
 
-options(knitr.kable.NA = '')
-kbl(tb1,align = "llllll", digits = c(0, 2, 2, 2, 2, 2, 3), "latex", booktabs=TRUE,caption ="Multivariate analysis of covariance describing variation in body form in \\textit{Pristurus}. Note that there is no variation explained by the 'habitat' term, as the pooled-within species data are mean-centered.", escape = FALSE) %>%
-    kable_styling(latex_options = "HOLD_position")
+# evolutionary vs instraspecific
+LS.mns <- pairwise(lm.rrpp(rdf$shape~rdf$species, iter=0), groups = rdf$species)$LS.means[[1]]
+sz.mn <- tapply(rdf$svl, rdf$species, FUN = mean)
+tree <- treedata(phy = tree0, data = LS.mns)$phy
+C <- vcv.phylo(tree)
+
+allom.sp <- lm.rrpp(LS.mns~sz.mn, Cov = C)
+allom.ind <- lm.rrpp(shape~svl, data = rdf2)  #CHANGED 3/22/2023
+
+M <-rbind(coef.evol <- allom.sp$LM$gls.coefficients[2,],
+        coef.ind <- allom.ind$LM$coefficients[2,])
+rownames(M) <- c('Evolutionary', 'Intraspecific')
+
+# habitat comparison
+fit.hab <- lm.rrpp(shape~svl*habitat, data = rdf2)
+pw.hab1 <- pairwise(fit.hab, groups = rdf2$habitat, covariate = rdf2$svl)
+  slp.hab <- pw.hab1$slopes[[1]] #slopes by habitat
+
+tb1 <- rbind(M, slp.hab)
+
+kbl(tb1, align = "cccccccc", "latex", digits = rep(2, 8), booktabs = TRUE, caption = "Regression coefficients showing, for each morphological variable, the comparison between evolutionary and intraspecific allometry, as well as between each habitat category. TrL: trunk length; HL: head length; HW: head width; HH: head height; Lhu: humerus length; Lun: ulna length; Lfe: femur length; Ltb: tibia length.", escape = FALSE) %>%
+#  pack_rows(group_label = '', start_row = 1, end_row = 2) %>%
+#  pack_rows("", 3, 5) %>%
+  row_spec(row = 2, hline_after = TRUE) %>%
+  kable_styling(latex_options = "HOLD_position")
+
 ```
 
 \newpage
+
+
+```{r echo=FALSE, eval = TRUE}
+options(knitr.kable.NA = '')
+kbl(tb2,align = "llllll", digits = c(0, 2, 2, 2, 2, 2, 3), "latex", booktabs=TRUE,caption ="Multivariate analysis of covariance describing variation in body form in \\textit{Pristurus}. Note that there is no variation explained by the 'habitat' term, as the pooled-within species data are mean-centered.", escape = FALSE) %>%
+    kable_styling(latex_options = "HOLD_position")
+
+```
+
 
 ```{r echo=FALSE, eval = TRUE}
 # 2A: Compare habitat vectors *versus* isometry and to each other
@@ -211,9 +246,9 @@ rownames(slp.hab.obs) <- colnames(slp.hab.obs) <-
   rownames(slp.P) <- colnames(slp.P) <-
   c("Ground", "Rock", "Tree", "Isometry")
 
-tb2 <- rbind(slp.hab.obs,slp.Z,slp.P)
+tb3 <- rbind(slp.hab.obs,slp.Z,slp.P)
 
-kbl(tb2, align = "cccc","latex", booktabs=TRUE,caption ="Pairwise comparisons of multivariate static allometry for each habitat group. Comparisons with the vector of multivariate isometry are included. Displayed are: pairwise angular differences ($\\theta_{12}$), their associated effect sizes ($Z_{\\theta_{12}}$), and significance levels obtained via permutation (RRPP).", escape = FALSE) %>%
+kbl(tb3, align = "cccc","latex", booktabs=TRUE,caption ="Pairwise comparisons of multivariate static allometry for each habitat group. Comparisons with the vector of multivariate isometry are included. Displayed are: pairwise angular differences ($\\theta_{12}$), their associated effect sizes ($Z_{\\theta_{12}}$), and significance levels obtained via permutation (RRPP).", escape = FALSE) %>%
     pack_rows("Angle", 1, 4) %>%
   pack_rows("Effect Size", 5, 8) %>%
   pack_rows("P-value", 9, 12) %>%
@@ -227,7 +262,7 @@ kbl(tb2, align = "cccc","latex", booktabs=TRUE,caption ="Pairwise comparisons of
 ```{r echo=FALSE, eval=TRUE}
 tree0 <- read.nexus('Analyses/data/phylogeny/pristurus_tree_final.nex')
 LS.mns <- pairwise(lm.rrpp(shape~species, data = rdf, iter=0), groups = rdf$species)$LS.means[[1]]
-sz.mn <- tapply(rdf$SVL,rdf$species,mean)
+sz.mn <- tapply(rdf$svl,rdf$species,mean)
 hab.mn <- as.factor(by(rdf$habitat,rdf$species,unique))
 levels(hab.mn) <- levels(rdf$habitat)
 tree <- treedata(phy = tree0, data = LS.mns)$phy
