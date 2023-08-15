@@ -56,7 +56,7 @@ gg_ind <- ggplot(data = gg_df_ind, aes(x = SVL)) +
   geom_point(aes(y = RegScore),
              color = 'gray60', size = 1, pch = 16, alpha = 0.7) +
   geom_line(aes(y = pred), color = 'black', size = 0.8) +
-  labs(title = 'Static allometry', x = 'size', y = 'shape') +
+  labs(title = 'Individual allometry', x = 'size', y = 'shape') +
   theme_classic() +
   theme(plot.title = element_text(hjust = 0.5, face = 'bold', size = title_sz))
 
@@ -84,7 +84,7 @@ gg_evol_hab <- ggplot(data = gg_df_evol_hab, aes(x = SVL)) +
         legend.position = 'none')
 
 
-# Static allometry -- Habitat ----
+# Intraspecific allometry -- Habitat ----
 allom.ind.hab <- lm.rrpp(shape~svl*habitat, data = rdf)
 allom.ind.hab.plot <- plot(allom.ind.hab, predictor = rdf$svl, 
                            type = 'regression', pch = 16, 
@@ -100,12 +100,12 @@ gg_ind_hab <- ggplot(data = gg_df_ind_hab, aes(x = SVL)) +
              size = 1, pch = 16, alpha = 0.7) +
   geom_line(aes(y = pred, color = habitat), size = 1) +
   scale_color_manual(values = hab.colors) +
-  labs(title = 'Habitat-based static allometry', x = 'size', y = 'shape') +
+  labs(title = 'Habitat-based individual allometry', x = 'size', y = 'shape') +
   theme_classic() +
   theme(plot.title = element_text(hjust = 0.5, face = 'bold', size = title_sz), 
         legend.position = 'none')
 
-# Static allometry -- Species ----
+# Intraspecific allometry -- Species ----
 allom.ind.sp <- lm.rrpp(shape~svl*species, data = rdf)
 allom.ind.sp.plot <- plot(allom.ind.sp, predictor = rdf$svl, 
                            type = 'regression', pch = 16, 
@@ -122,7 +122,7 @@ gg_ind_sp <- ggplot(data = gg_df_ind_sp, aes(x = SVL)) +
   geom_line(aes(y = pred, color = habitat, group = species), 
             size = 1) +
   scale_color_manual(values = hab.colors) +
-  labs(title = 'Intraspecific static allometry', 
+  labs(title = 'Intraspecific allometry', 
        subtitle = '(colored by habitat)', x = 'size', y = 'shape') +
   theme_classic() +
   theme(plot.title = element_text(hjust = 0.5, face = 'bold', size = title_sz), 
