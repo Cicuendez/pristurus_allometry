@@ -158,7 +158,7 @@ plot(pca.w.phylo, phylo = TRUE, pch = 21, bg = 'black',
 
 ```{r, fig.pos="H", fig.align="center",echo=FALSE, out.width="90%", fig.cap= "Visual depiction of flow of operations for interrogating levels of allometry. Colors designate the different habitat groups."}
 
-include_graphics("Figs/figure_sup_allometries_ill.png")
+include_graphics("Figs/figure_sup_allometries_ill_v2.png")
 ```
 
 
