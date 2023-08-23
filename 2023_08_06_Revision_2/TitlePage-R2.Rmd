@@ -1,0 +1,50 @@
+---
+title: 'Evolution along allometric lines of least resistance: Morphological differentiation
+  in *Pristurus* geckos'
+author: ''
+output:
+  #  word_document: default
+  pdf_document:
+  fig_caption: yes
+number_sections: no
+keep_tex: yes
+pandoc_args: null
+csl: evolution.csl
+header-includes:
+- \usepackage{setspace}\doublespacing
+- \usepackage{lineno}\linenumbers
+- \usepackage[utf8]{inputenc}
+- \usepackage[T1]{fontenc}
+- \usepackage{biblatex}
+fontsize: 11pt
+---
+
+\begin{center}Running title: Allometric patterns in {\textit{Pristurus}}\end{center}
+
+\begin{center}
+\textbf{H{\'{e}}ctor Tejero-Cicu{\'{e}}ndez$^{1,2,*}$,  Iris Men{\'{e}}ndez$^{3}$, Adri{\'{a}}n Talavera$^{2}$, Gabriel Riaño$^{2}$, Bernat Burriel-Carranza$^{2}$, Marc Sim{\'{o}}-Riudalbas$^{2}$, Salvador Carranza$^{2}$, and Dean C. Adams$^{4}$}
+\end{center}
+
+\begin{center}`r format(Sys.time(), '%d %B, %Y')`\end{center}
+
+$^{1}$Evolution and Conservation Biology research Group, Department of Biodiversity, Ecology and Evolution. Faculty of Biology. Universidad Complutense de Madrid, 28040, Madrid, Spain
+
+$^{2}$Institute of Evolutionary Biology (CSIC-Universitat Pompeu Fabra), Passeig Marítim de la Barceloneta 37-49, Barcelona 08003, Spain
+
+$^{3}$Museum für Naturkunde, Leibniz Institute for Evolution and Biodiversity Science, Berlin, Germany
+
+$^{4}$Department of Ecology, Evolution, and Organismal Biology, Iowa State University, Ames, Iowa, 50010 USA
+
+$^{*}$Correspondence: Héctor Tejero-Cicuéndez cicuendez93@gmail.com
+
+**Author contributions**: Conceptualization: HT-C, IM, and DCA. Supervision: DCA. Project Administration: HT-C and DCA. Investigation: HT-C, IM, and DCA. Formal Analysis: HT-C, IM, and DCA. Software: HT-C, IM, and DCA. Methodology: HT-C, IM, and DCA. Validation: HT-C, IM, AT, GR, BB-C, MS-R, SC, and DCA. Data Curation: HT-C, IM, MS-R, SC, and DCA. Resources: HT-C, IM, AT, SC, and DCA. Funding Acquisition: HT-C, IM, AT, GR, BB-C, SC, and DCA. Writing - Original Draft Preparation: HT-C, IM, and DCA. Writing - Review & Editing: HT-C, IM, AT, GR, BB-C, MS-R, SC, and DCA. Visualization: HT-C, IM, and AT.
+
+**Acknowledgments**: We are very grateful to J. Roca, M. Metallinou, K. Tamar, J. Šmíd, R. Vasconcelos, R. Sindaco, F. Amat, Ph. de Pous, L. Machado, J. Garcia-Porta, J. Els, T. Mazuch, T. Papenfuss, and all the people from the Environment Authority, Oman, for their help in different aspects of the work.
+
+**Funding Statement**: This work was funded in part by PGC2018-098290-B-I00 (MCIU/AEI/FEDER, UE) and PID2021-128901NB-I00 (MCIN/AEI/10.13039/501100011033 and by ERDF, A way of making Europe), Spain to SC. HT-C is supported by a "Juan de la Cierva - Formación" postdoctoral fellowship (FJC2021-046832-I). IM was funded by the Alexander von Humboldt Foundation through a Humboldt Research Fellowship, and partially funded by the project PID2022-138275NB-I00 granted by FEDER/ Ministerio de Ciencia, Innovación y Universidades-Agencia Estatal de Investigación. AT is supported by the "la Caixa" doctoral fellowship programme (LCF/BQ/DR20/11790007). GR was funded by an FPI grant from the Ministerio de Ciencia, Innovación y Universidades, Spain (PRE2019-088729). BB-C was funded by FPU grant from Ministerio de Ciencia, Innovación y Universidades, Spain  (FPU18/04742).  DCA was funded in part by National Science Foundation Grant DBI-1902511.
+
+**Data availability statement**: All the data used in this study are available on DRYAD from a previous study: https://doi.org/10.5061/dryad.xwdbrv1f6. The scripts for implementing all analyses and generating the figures in this manuscript can be found in the Supplementary Material and in a GitHub repository (and on DRYAD upon acceptance).
+
+**Competing interests**: The authors declare no competing interests.
+
+\newpage
